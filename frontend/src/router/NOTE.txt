@@ -1,0 +1,71 @@
+ROUTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT THIS FOLDER IS:
+This folder owns navigation. It decides which page should render for each URL and which routes are public or protected.
+
+WHAT THIS FOLDER IS:
+This folder is the navigation brain of Tradevo. This folder owns the navigation.
+AppRouter.jsx defines every URL in the app and which page (i.e. component) should show when a user visits or clicks that link (like from the navbar).
+ProtectedRoute.jsx is a guard that blocks unauthenticated users.
+
+
+WHY createBrowserRouter INSTEAD OF <BrowserRouter>?
+
+In older React Router (v5) you wrapped everything in <BrowserRouter>:
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </BrowserRouter>
+
+In v6.4+, createBrowserRouter is the modern way:
+  const router = createBrowserRouter([...])
+  <RouterProvider router={router} />
+
+Why v6.4+ is better 
+1. Data loading - routes can have loader functions that fetch data before the component renders (no more loading spinners in components)
+2. Error handling - If a page breaks, only that page shows an error—not the whole app.
+3. Better for big apps - Each route clearly defines its URL and what should happen in one place.
+
+We use createBrowserRouter for Tradevo because this is how production apps work.
+
+WHY WE BUILT IT THIS WAY:
+A serious commerce app grows quickly and If routing logic is scattered around buttons and components, the app becomes hard to reason about. 
+
+
+HOW IT CONNECTS TO THE REST OF THE APP:
+- App.jsx renders AppRouter
+- ProtectedRoute reads AuthContext
+- Dashboard uses nested routes so one shared shell can render different child pages
+- Login uses location state to send the user back where they came from
+
+NOTE: For Nested
+React Router chooses ONE child route based on the URL, and renders it inside the parent.
+Or we cn say children are possible pages, and React Router renders only the one that matches the current URL inside the parent layout
+
+WE HAVE THIS
+{
+  path: '/',
+  element: <AppLayout />,
+  children: [...]
+}
+
+CASE 1: User visits /
+  Router matches ---> /
+  Renders AppLayout
+  Finds index: true
+
+Result:
+  <AppLayout>
+    <HomePage />
+  </AppLayout>
+
+CASE 2: User clicks /shop
+  Router matches ---> / (i.e. parent)
+  Then matches shop (i.e. child)
+
+Result:
+  <AppLayout>
+    <ShopPage />
+  </AppLayout>
