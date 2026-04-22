@@ -35,10 +35,10 @@ function RootLayout() {
       <Navbar />
       <main className="page-content">
         <Suspense fallback={<PageLoader />}>
-          <Outlet />
+          {/* <Outlet /> */}
         </Suspense>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

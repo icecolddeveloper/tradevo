@@ -1,0 +1,69 @@
+/* ============================================================
+   TRADEVO — Navbar.module.css
+   All styles scoped to the Navbar component.
+   Uses CSS Modules → class names are automatically unique.
+   ============================================================ */
+
+/* ───────── Base navbar shell ─────────  */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  height: var(--navbar-height);
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* ───────── Inner layout ─────────  */
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1536px) {
+  .navbar__inner {
+    padding-inline: var(--space-16);
+  }
+}
+
+/* ───────── Logo ─────────  */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: var(--weight-extrabold);
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.navbar__logo__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-brand-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  font-size: var(--text-lg);
+  margin-right: var(--space-2);
+  transition: transform var(--transition-bounce);
+}
+
+.navbar__logo:hover .navbar__logo__mark {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+.navbar__logo__word {
+  color: var(--color-text-primary);
+}
