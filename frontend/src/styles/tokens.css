@@ -2,7 +2,7 @@
    TRADEVO — DESIGN TOKENS
    The single source of truth for every visual decision.
    Every color, size, shadow, and radius used across the app
-   lives here as a CSS custom property (CSS variable).  
+   lives here as a CSS custom property (CSS variable).
    ============================================================ */
 
 /* ── LIGHT MODE (default) ─────────────────────────────────── */
@@ -138,49 +138,53 @@
 
 /* ── DARK MODE ────────────────────────────────────────────── */
 [data-theme='dark'] {
-  /* Background Layers */
-  --color-bg-base: #0d1b2a;
-  --color-bg-surface: #152336;
-  --color-bg-subtle: #1c2f42;
-  --color-bg-muted: #243547;
-  --color-bg-inverse: #f3f2ef;
+  /* Background Layers — rich near-black zinc palette */
+  --color-bg-base: #0e0e10;       /* Page bg — near black, slight warmth */
+  --color-bg-surface: #18181b;    /* Cards, modals, navbar */
+  --color-bg-subtle: #27272a;     /* Input fields, sidebars, code blocks */
+  --color-bg-muted: #3f3f46;      /* Dividers, skeleton shimmer */
+  --color-bg-inverse: #f4f4f5;    /* Dark-on-light surfaces */
 
-  /* Text Colors */
-  --color-text-primary: #eef2f6;
-  --color-text-secondary: #252526;
-  --color-text-muted: #5e7a91;
-  --color-text-inverse: #0f1f30;
-  --color-text-brand: #e8735a;
-  --color-text-link: #e8735a;
+  /* Text Colors — warm whites, not cold */
+  --color-text-primary: #fafafa;    /* Headlines — near white */
+  --color-text-secondary: #a1a1aa;  /* Body text — zinc-400 */
+  --color-text-muted: #71717a;      /* Placeholders — zinc-500 */
+  --color-text-inverse: #09090b;    /* Text on light surfaces */
+  --color-text-brand: #f87171;      /* Brand coral — brighter in dark */
+  --color-text-link: #f87171;
 
-  /* Brand (slightly lighter in dark) */
-  --color-brand-primary: #e8735a;
-  --color-brand-primary-hover: #f0896e;
-  --color-brand-primary-light: #2a1a16;
-  --color-brand-secondary: #4a8ab5;
-  --color-brand-accent: #f0b840;
-  --color-brand-accent-light: #2a2010;
+  /* Brand — coral pops better on dark backgrounds */
+  --color-brand-primary: #f26b4e;       /* Brighter coral-red */
+  --color-brand-primary-hover: #ff7d62; /* Even brighter on hover */
+  --color-brand-primary-light: #1f1210; /* Very dark tint for badges */
+  --color-brand-secondary: #6366f1;     /* Indigo — modern, premium feel */
+  --color-brand-accent: #fbbf24;        /* Amber — unchanged */
+  --color-brand-accent-light: #1c1710;
 
-  /* Border Colors */
-  --color-border-light: #1e3248;
-  --color-border-default: #274158;
-  --color-border-strong: #3a5870;
-  --color-border-brand: #e8735a;
+  /* Border Colors — subtle, not blue */
+  --color-border-light: #27272a;    /* Almost invisible — structural */
+  --color-border-default: #3f3f46;  /* Normal input borders */
+  --color-border-strong: #52525b;   /* Emphasized / hover state */
+  --color-border-brand: #f26b4e;
 
   /* Semantic */
-  --color-success: #34d399;
-  --color-success-bg: #0d2a1f;
+  --color-success: #4ade80;
+  --color-success-bg: #052e16;
   --color-warning: #fbbf24;
-  --color-warning-bg: #2a1f0a;
+  --color-warning-bg: #1c1204;
   --color-error: #f87171;
-  --color-error-bg: #2a0f0f;
-  --color-info: #191a1b;
-  --color-info-bg: #0f1f3a;
+  --color-error-bg: #1f0808;
+  --color-info: #818cf8;
+  --color-info-bg: #0f0e1f;
 
-  /* Shadows — darker/deeper in dark mode */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.6);
-  --shadow-brand: 0 4px 16px rgba(232, 115, 90, 0.3);
+  /* Star Rating */
+  --color-star-filled: #fbbf24;
+  --color-star-empty: #3f3f46;
+
+  /* Shadows — deeper, more dramatic in dark */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.8);
+  --shadow-brand: 0 4px 20px rgba(242, 107, 78, 0.35);
 }
