@@ -20,11 +20,11 @@
 .navbar__inner {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  height: 100%;
-  max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: var(--space-6);
+  padding-inline: var(--space-4);
+  max-width: var(--container-max);
+  height: 100%;
+  gap: var(--space-4);
 }
 
 @media (min-width: 1536px) {
@@ -40,23 +40,23 @@
   flex-shrink: 0;
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: var(--weight-extrabold);
-  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lg);
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0em;
 }
 
 .navbar__logo__mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   background: var(--color-brand-primary);
   color: white;
   border-radius: var(--radius-md);
   font-size: var(--text-lg);
-  margin-right: var(--space-2);
+  margin-right: var(--space-1);
   transition: transform var(--transition-bounce);
 }
 
@@ -66,4 +66,115 @@
 
 .navbar__logo__word {
   color: var(--color-text-primary);
+}
+
+/* ── Desktop nav links ─────── */
+.navbar__nav {
+  display: none;
+  align-items: center;
+  margin-left: var(--space-4);
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .navbar__nav {
+    display: flex;
+  }
+}
+
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  font-weight: (--weight-medium);
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
+  border: none;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.navbar__link:hover {
+  color: var(--color-brand-primary);
+  background: var(--color-brand-primary-light);
+}
+
+.navbar__link__active {
+  color: var(--color-brand-primary);
+  background: var(--color-brand-primary-light);
+}
+
+/* ── Categories (mega menu trigger) ────── */
+.navbar__categories {
+  position: relative;
+}
+
+.chevron {
+  margin-left: 4px;
+  transition: transform 2s;
+}
+
+.chevron__open {
+  transform: rotate(180deg);
+}
+
+/* ── Search bar ───────────── */
+.navbar__search {
+  display: none;
+  align-items: center;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-full);
+  padding-inline: var(--space-4);
+  flex: 1;
+  min-width: 0;
+  max-width: 400px;
+  height: 40px;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .navbar__search {
+    display: flex;
+  }
+}
+
+.navbar__search__focused {
+  border: 1.5px solid var(--color-brand-primary);
+  background: var(--color-bg-surface);
+  /* box-shadow: 0 0 0 3px var(--color-brand-primary-light); */
+}
+
+.navbar__search__input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.navbar__search__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ── Right action area ──────────────────────────────────────── */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  gap: var(--space-2);
+}
+
+.navbar__icon_btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }

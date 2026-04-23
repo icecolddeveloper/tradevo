@@ -3,9 +3,14 @@ import { useState } from 'react';
 import { CATEGORIES } from '../../../data/mockProducts';
 import styles from './Navbar.module.css';
 import MegaMenu from './MegaMenu';
+import SearchIcon from '../../../ui/icons/navigation/SearchIcon';
+import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
+import ThemeToggle from '../../../ui/ThemeToggle/ThemeToggle';
+import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
+import CartIcon from '../../../ui/icons/navigation/CartIcon';
 
 function Navbar() {
-  const [megaMenuOpen, setMegaMenuOpen] = useState(true);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState('Martins');
@@ -38,7 +43,10 @@ function Navbar() {
             <button
               className={`${styles.navbar__link} ${megaMenuOpen ? styles.navbar__link__active : ''}`}
             >
-              Categories {/* svg here */}
+              Categories
+              <ChevronDownIcon
+                className={`${styles.chevron} ${megaMenuOpen ? styles.chevron__open : ''}`}
+              />
             </button>
 
             {/* Dropdown menu */}
@@ -66,25 +74,28 @@ function Navbar() {
         <form
           className={`${styles.navbar__search} ${searchFocused ? styles.navbar__search__focused : ''}`}
         >
-          {/* svg here */}
           <input
             type="text"
             placeholder="Search products..."
             className={styles.navbar__search__input}
           />
+
+          <SearchIcon className={styles.navbar__search__icon} />
         </form>
 
         {/* Right Icons */}
         <div className={styles.navbar__actions}>
           {/* Theme toggle */}
+          <ThemeToggle />
 
           {/* Wishlist */}
           <Link
             to="/dashboard/wishlist"
-            className={styles.navbar__icon__btn}
+            className={styles.navbar__icon_btn}
             aria-label="Wishlist"
           >
             {/* svg here */}
+            <HeartIcon />
 
             {[].length > 0 &&
               {
@@ -95,22 +106,23 @@ function Navbar() {
           {/* Cart */}
           <Link
             to="/cart"
-            className={styles.navbar__icon__btn}
+            className={styles.navbar__icon_btn}
             aria-label="Shopping cart"
           >
             {/* svg here */}
+            <CartIcon />
           </Link>
 
           {/* Auth */}
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <Link to="/dashboard" className={styles.navbar__avatar}>
-              {user?.name?.charAt(0).toUpperCase() || 'U'}
+              {user?.name?.charAt(0).toUpperCase() || 'M'}
             </Link>
           ) : (
             <Link to="/login" className={styles.navbar__auth_btn}>
               Sign in
             </Link>
-          )}
+          )} */}
 
           {/* Mobile Hamburger */}
         </div>

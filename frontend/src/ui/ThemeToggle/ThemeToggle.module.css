@@ -1,0 +1,22 @@
+.theme__toggle {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-primary);
+    gap: var(--space-2);
+}
+
+.theme__icon {
+    color: var(--color-text-primary);
+}
+
+.theme__label {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+/* hide on mobile */
+@media (max-width: 768px) {
+  .theme__label {
+    display: none;
+  }
+}
