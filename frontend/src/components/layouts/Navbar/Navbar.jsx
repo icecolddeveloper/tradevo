@@ -19,17 +19,17 @@ function Navbar() {
 
   return (
     <header className={styles.navbar}>
-      {/* Navbar Inner */}
+      {/* ---- Navbar Inner ---------------------------------- */}
       <div className={styles.navbar__inner}>
-        {/* Logo */}
+        {/* ---- Logo ------- */}
         <Link to="/" className={styles.navbar__logo}>
           <span className={styles.navbar__logo__mark}>T</span>
           <span className={styles.navbar__logo__word}>radevo</span>
         </Link>
 
-        {/* ----------- Desktop Links ----------------------- */}
+        {/* ----  Desktop Links  ---------------------------------- */}
         <nav className={styles.navbar__nav}>
-          {/* Home */}
+          {/* ---- Home ---- */}
           <NavLink
             to="/"
             end
@@ -40,7 +40,7 @@ function Navbar() {
             Home
           </NavLink>
 
-          {/* Categories with mega menu */}
+          {/* ---- Categories with mega menu --------- */}
           <div className={styles.navbar__categories}>
             <button
               className={`${styles.navbar__link} ${megaMenuOpen ? styles.navbar__link__active : ''}`}
@@ -51,7 +51,7 @@ function Navbar() {
               />
             </button>
 
-            {/* Dropdown menu */}
+            {/* ---- Dropdown menu --------- */}
             {megaMenuOpen && (
               <MegaMenu
                 categories={CATEGORIES.filter(
@@ -61,7 +61,7 @@ function Navbar() {
             )}
           </div>
 
-          {/* Shop */}
+          {/* ---- Shop ------------------- */}
           <NavLink
             to="/shop"
             className={({ isActive }) =>
@@ -72,7 +72,7 @@ function Navbar() {
           </NavLink>
         </nav>
 
-        {/* Search Bar */}
+        {/* ---- Search Bar --------------- */}
         <form
           className={`${styles.navbar__search} ${searchFocused ? styles.navbar__search__focused : ''}`}
         >
@@ -85,12 +85,12 @@ function Navbar() {
           <SearchIcon className={styles.navbar__search__icon} />
         </form>
 
-        {/* ------- Right Icons -------------------------- */}
+        {/* ----  Right Icons  -------- */}
         <div className={styles.navbar__actions}>
-          {/* Theme toggle */}
+          {/* ---- Theme toggle ------- */}
           <ThemeToggle showLabel={false} />
 
-          {/* Wishlist */}
+          {/* ---- Wishlist ----------- */}
           <Link
             to="/dashboard/wishlist"
             className={styles.navbar__icon_btn}
@@ -99,27 +99,26 @@ function Navbar() {
             <HeartIcon />
 
             {[1].length > 0 && (
-              /* WishlistCount*/
+              /* ---- WishlistCount----- */
               <span className={styles.navbar__badge}>{wishListCount}</span>
             )}
           </Link>
 
-          {/* Cart */}
+          {/* ---- Cart ---------------- */}
           <Link
             to="/cart"
             className={styles.navbar__icon_btn}
             aria-label="Shopping cart"
           >
-            {/* svg here */}
             <CartIcon />
 
             {[1].length > 0 && (
-              /* CartCount*/
+              /* ---- CartCount-----  */
               <span className={styles.navbar__badge}>{wishListCount}</span>
             )}
           </Link>
 
-          {/* Auth */}
+          {/* ---- Auth ------------------ */}
           {isAuthenticated ? (
             <Link to="/dashboard" className={styles.navbar__avatar}>
               {user?.name?.charAt(0).toUpperCase() || 'M'}
@@ -130,7 +129,7 @@ function Navbar() {
             </Link>
           )}
 
-          {/* Mobile Hamburger */}
+          {/* ---- Mobile Hamburger ----------------------- */}
           <button className={styles.navbar__hamburger} aria-label="Open menu">
             <span></span>
             <span></span>
