@@ -15,6 +15,8 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState('Martins');
 
+  const wishListCount = 10;
+
   return (
     <header className={styles.navbar}>
       {/* Navbar Inner */}
@@ -25,7 +27,7 @@ function Navbar() {
           <span className={styles.navbar__logo__word}>radevo</span>
         </Link>
 
-        {/* Desktop Links */}
+        {/* ----------- Desktop Links ----------------------- */}
         <nav className={styles.navbar__nav}>
           {/* Home */}
           <NavLink
@@ -83,10 +85,10 @@ function Navbar() {
           <SearchIcon className={styles.navbar__search__icon} />
         </form>
 
-        {/* Right Icons */}
+        {/* ------- Right Icons -------------------------- */}
         <div className={styles.navbar__actions}>
           {/* Theme toggle */}
-          <ThemeToggle />
+          <ThemeToggle showLabel={false} />
 
           {/* Wishlist */}
           <Link
@@ -94,13 +96,12 @@ function Navbar() {
             className={styles.navbar__icon_btn}
             aria-label="Wishlist"
           >
-            {/* svg here */}
             <HeartIcon />
 
-            {[].length > 0 &&
-              {
-                /* WishlistCount*/
-              }}
+            {[1].length > 0 && (
+              /* WishlistCount*/
+              <span className={styles.navbar__badge}>{wishListCount}</span>
+            )}
           </Link>
 
           {/* Cart */}
@@ -111,10 +112,15 @@ function Navbar() {
           >
             {/* svg here */}
             <CartIcon />
+
+            {[1].length > 0 && (
+              /* CartCount*/
+              <span className={styles.navbar__badge}>{wishListCount}</span>
+            )}
           </Link>
 
           {/* Auth */}
-          {/* {isAuthenticated ? (
+          {isAuthenticated ? (
             <Link to="/dashboard" className={styles.navbar__avatar}>
               {user?.name?.charAt(0).toUpperCase() || 'M'}
             </Link>
@@ -122,9 +128,14 @@ function Navbar() {
             <Link to="/login" className={styles.navbar__auth_btn}>
               Sign in
             </Link>
-          )} */}
+          )}
 
           {/* Mobile Hamburger */}
+          <button className={styles.navbar__hamburger} aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </header>

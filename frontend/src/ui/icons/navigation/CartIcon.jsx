@@ -1,4 +1,4 @@
-function CartIcon({ size = 20, ...props }) {
+function CartIcon({ size = 25, ...props }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="none" {...props}>
       <path

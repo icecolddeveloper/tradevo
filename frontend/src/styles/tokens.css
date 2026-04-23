@@ -118,7 +118,7 @@
   --container-max: 1700px;             /* Max width on 32-inch screens */
 
   /* Navbar */
-  --navbar-height: 70px;
+  --navbar-height: 65px;
   --navbar-height-scrolled: 58px;
 
   /* Transitions */

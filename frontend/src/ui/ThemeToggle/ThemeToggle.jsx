@@ -6,7 +6,7 @@ import styles from './ThemeToggle.module.css';
 
 const THEMES = ['light', 'system', 'dark'];
 
-function ThemeToggle() {
+function ThemeToggle({ showLabel = false }) {
   const [theme, setTheme] = useState('dark');
 
   function cycleTheme() {
@@ -16,14 +16,18 @@ function ThemeToggle() {
   }
 
   return (
-    <button onClick={cycleTheme} className={styles.theme__toggle} aria-label={`Current theme: ${theme}`}>
+    <button
+      onClick={cycleTheme}
+      className={styles.theme__toggle}
+      aria-label={`Current theme: ${theme}`}
+    >
       {/* Only one icon is rendered */}
       {theme === 'light' && <LightIcon className={styles.theme__icon} />}
       {theme === 'dark' && <DarkIcon className={styles.theme__icon} />}
       {theme === 'system' && <SystemIcon className={styles.theme__icon} />}
 
       {/* Label */}
-      {/* <span className={styles.theme__label}>{theme}</span> */}
+      {showLabel && <span className={styles.theme__label}>{theme}</span>}
     </button>
   );
 }

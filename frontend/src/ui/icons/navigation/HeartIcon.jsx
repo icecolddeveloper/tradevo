@@ -1,4 +1,4 @@
-function HeartIcon({ size = 20, ...props }) {
+function HeartIcon({ size = 22, ...props }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="none" {...props}>
       <path

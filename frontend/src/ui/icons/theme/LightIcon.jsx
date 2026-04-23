@@ -1,4 +1,4 @@
-function LightIcon({ size = 20, ...props }) {
+function LightIcon({ size = 22, ...props }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="none" {...props}>
       <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />

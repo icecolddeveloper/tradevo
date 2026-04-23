@@ -3,8 +3,13 @@ import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], // enable React support (JSX, fast refresh)
+
   server: {
-    host: true,
+    host: true, // allow access from network (e.g. phone, other devices)
+  },
+
+  css: {
+    devSourcemap: true, // show original CSS file + line in DevTools instead of <style>
   },
 });
