@@ -11,10 +11,14 @@ http://localhost:8000/api/
 - Use proper HTTP methods (GET, POST, PATCH, DELETE)
 - Errors will include meaningful messages
 
-## Upcoming Endpoints
+## Available Endpoints
 
+- GET /categories/
 - GET /products/
 - GET /products/:id/
+
+## Planned Next Endpoints
+
 - POST /cart/
 - POST /orders/
 
