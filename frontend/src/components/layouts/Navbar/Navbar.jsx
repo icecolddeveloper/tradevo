@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CATEGORIES } from '../../../data/mockProducts';
 import styles from './Navbar.module.css';
 import MegaMenu from './MegaMenu';
@@ -15,7 +15,23 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState('Martins');
 
+  const megaTimerRef = useRef(null);
+
+  console.log(megaTimerRef.current);
+
   const wishListCount = 10;
+
+  function handleCategoryEnter() {
+    //clear the timeout so the fnc that runs after timeout delay dosent affect the current state
+
+    setMegaMenuOpen(true);
+  }
+
+  function handleCategoryLeave() {
+    setTimeout(() => {
+      setMegaMenuOpen(false); // after 3s the fnc is called and by then the opened megamenu is closed
+    }, 3000);
+  }
 
   return (
     <header className={styles.navbar}>
@@ -41,7 +57,12 @@ function Navbar() {
           </NavLink>
 
           {/* ---- Categories with mega menu --------- */}
-          <div className={styles.navbar__categories}>
+          <div
+            className={styles.navbar__categories}
+            onMouseEnter={handleCategoryEnter}
+            onMouseLeave={handleCategoryLeave}
+            ref={megaTimerRef}
+          >
             <button
               className={`${styles.navbar__link} ${megaMenuOpen ? styles.navbar__link__active : ''}`}
             >
@@ -57,6 +78,8 @@ function Navbar() {
                 categories={CATEGORIES.filter(
                   (categoryObj) => categoryObj.id !== 'all',
                 )}
+                onMouseEnter={handleCategoryEnter}
+                onMouseLeave={handleCategoryLeave}
               />
             )}
           </div>
