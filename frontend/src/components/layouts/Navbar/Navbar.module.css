@@ -192,9 +192,22 @@
     background var(--transition-fast);
 }
 
+@media (max-width: 768px) {
+  .navbar__icon_btn {
+    color: var(--color-text-primary);
+  }
+}
+
 .navbar__icon_btn:hover {
   color: var(--color-text-primary);
   background: var(--color-bg-subtle);
+}
+
+@media (max-width: 768px) {
+  .navbar__icon_btn:hover {
+    color: var(--color-text-primary);
+    background: inherit;
+  }
 }
 
 /* ── Badge (cart count & wishlist count) ───── */
@@ -268,6 +281,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-left: 10px;
   width: 24px;
   height: 18px;
   background: none;
@@ -276,7 +290,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1020px) {
   .navbar__hamburger {
     display: flex;
   }

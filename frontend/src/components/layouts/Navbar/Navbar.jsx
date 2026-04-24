@@ -17,25 +17,22 @@ function Navbar() {
 
   const megaTimerRef = useRef(null);
 
-  console.log(megaTimerRef.current);
-
   const wishListCount = 10;
 
   function handleCategoryEnter() {
-    //clear the timeout so the fnc that runs after timeout delay dosent affect the current state
-
+    clearTimeout(megaTimerRef.current);
     setMegaMenuOpen(true);
   }
 
   function handleCategoryLeave() {
-    setTimeout(() => {
-      setMegaMenuOpen(false); // after 3s the fnc is called and by then the opened megamenu is closed
-    }, 3000);
+    megaTimerRef.current = setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, 200);
   }
 
   return (
     <header className={styles.navbar}>
-      {/* ---- Navbar Inner ---------------------------------- */}
+      {/* ---- Navbar Inner (Relative Horizontal) ------ */}
       <div className={styles.navbar__inner}>
         {/* ---- Logo ------- */}
         <Link to="/" className={styles.navbar__logo}>
@@ -80,6 +77,7 @@ function Navbar() {
                 )}
                 onMouseEnter={handleCategoryEnter}
                 onMouseLeave={handleCategoryLeave}
+                onClose={() => setMegaMenuOpen(false)}
               />
             )}
           </div>
@@ -160,6 +158,9 @@ function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* ---- Mobile Menu (Absolute Vertical) --------- */}
+      
     </header>
   );
 }
