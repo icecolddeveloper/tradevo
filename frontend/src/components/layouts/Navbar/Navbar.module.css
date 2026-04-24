@@ -20,7 +20,7 @@
 .navbar__inner {
   display: flex;
   align-items: center;
-  margin-inline: auto;
+  margin: 0 auto;
   padding-inline: var(--space-4);
   max-width: var(--container-max);
   height: 100%;
@@ -98,7 +98,7 @@
 }
 
 .navbar__link:hover {
-  color: var(--color-brand-primary);
+  color: var(--color-text-primary);
   background: var(--color-brand-primary-light);
 }
 
@@ -107,14 +107,14 @@
   background: var(--color-brand-primary-light);
 }
 
-/* ── Categories (mega menu trigger) ────── */
+/* ── Categories (position megamenu dropdown) ── */
 .navbar__categories {
   position: relative;
 }
 
 .chevron {
   margin-left: 4px;
-  transition: transform 2s;
+  transition: transform 0.3s;
 }
 
 .chevron__open {
@@ -192,9 +192,22 @@
     background var(--transition-fast);
 }
 
+@media (max-width: 768px) {
+  .navbar__icon_btn {
+    color: var(--color-text-primary);
+  }
+}
+
 .navbar__icon_btn:hover {
   color: var(--color-text-primary);
   background: var(--color-bg-subtle);
+}
+
+@media (max-width: 768px) {
+  .navbar__icon_btn:hover {
+    color: var(--color-text-primary);
+    background: inherit;
+  }
 }
 
 /* ── Badge (cart count & wishlist count) ───── */
@@ -263,18 +276,24 @@
   transform: translateY(-1px);
 }
 
-/* ── Hamburger button (mobile only) ────────── */
 .navbar__hamburger {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-left: 10px;
   width: 24px;
   height: 18px;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+}
+
+@media (max-width: 1020px) {
+  .navbar__hamburger {
+    display: flex;
+  }
 }
 
 .navbar__hamburger span {
