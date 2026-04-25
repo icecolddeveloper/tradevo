@@ -4,8 +4,8 @@ import CloseIcon from '../../../ui/icons/navigation/CloseIcon';
 import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import SignOutIcon from '../../../ui/icons/navigation/SignOutIcon';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -30,6 +30,18 @@ const drawerVariant = {
   },
 };
 
+const itemVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: (idx) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.1 + idx * 0.2,
+      duration: 0.25,
+    },
+  }),
+};
+
 function MobileMenu({
   categories,
   onClose,
@@ -47,175 +59,198 @@ function MobileMenu({
   }
 
   return (
-    isOpen && (
-      <>
-        {/* Backdrop/Overlay */}
-        <div className={styles.overlay} />
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop/Overlay */}
+          <div className={styles.overlay} />
 
-        {/* Drawer */}
-        <motion.div
-          className={styles.drawer}
-          variants={drawerVariant}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {/* Header */}
-          <div className={styles.drawer__header}>
-            <span className={styles.drawer__logo}>Tradevo</span>
+          {/* Drawer */}
+          <motion.div
+            className={styles.drawer}
+            variants={drawerVariant}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {/* Header */}
+            <div className={styles.drawer__header}>
+              <span className={styles.drawer__logo}>Tradevo</span>
 
-            <button
-              className={styles.drawer__close}
-              onClick={handleClose}
-              aria-label="Close menu"
-            >
-              {/* Close drawer SVG */}
-              <CloseIcon />
-            </button>
-          </div>
-
-          {/* Auth row */}
-          {isAuthenticated ? (
-            <div className={styles.drawer__user}>
-              <div className={styles.drawer__user__avatar}>
-                {user?.charAt(0).toUpperCase()}
-              </div>
-
-              <div className={styles.drawer__user__info}>
-                <p className={styles.drawer__user__name}>{user}</p>
-                <p className={styles.drawer__user__mail}>matt@email.com</p>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.drawer__auth__btns}>
-              {/* Sign In */}
-              <Link
-                to="/login"
-                className={styles.drawer__btn_primary}
-                onClick={handleClose}
-              >
-                Sign in
-              </Link>
-
-              <Link
-                to="/register"
-                className={styles.drawer__btn_ghost}
-                onClick={handleClose}
-              >
-                Register
-              </Link>
-            </div>
-          )}
-
-          {/* Nav Items */}
-          <nav className={styles.drawer__nav}>
-            {/* Home & Shop */}
-            {navItems.map((navItemObj) => (
-              <NavItem
-                key={navItemObj.to}
-                navItemObj={navItemObj}
-                onClose={onClose}
-              />
-            ))}
-
-            {/* Categories */}
-            <div>
               <button
-                className={styles.drawer__accordion_trigger}
-                onClick={() => setCategoriesExpanded(!categoriesExpanded)}
+                className={styles.drawer__close}
+                onClick={handleClose}
+                aria-label="Close menu"
               >
-                {/* Label */}
-                <span>Categories</span>
-
-                {/* Chevron icon */}
-                <ChevronDownIcon />
+                {/* Close drawer SVG */}
+                <CloseIcon />
               </button>
-
-              {/* Mega menu dropdown */}
-              {categoriesExpanded && (
-                <div>
-                  <div className={styles.drawer__categories__container}>
-                    {categories.map((categoryObj) => (
-                      <CategoriesItem
-                        key={categoryObj.id}
-                        categoryObj={categoryObj}
-                        onClose={handleClose}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Available for authenticated */}
-            {isAuthenticated && (
-              <div className={styles.my__account__actions}>
-                {/* My Account */}
-                <div>
-                  <NavLink
-                    to="/dashboard"
-                    end
-                    className={({ isActive }) =>
-                      `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
-                    }
-                    onClick={handleClose}
-                  >
-                    My Account
-                  </NavLink>
+            {/* Auth row */}
+            {isAuthenticated ? (
+              <div className={styles.drawer__user}>
+                <div className={styles.drawer__user__avatar}>
+                  {user?.charAt(0).toUpperCase()}
                 </div>
 
-                {/* My Orders */}
-                <div>
-                  <NavLink
-                    to="/dashboard/orders"
-                    end
-                    className={({ isActive }) =>
-                      `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
-                    }
-                    onClick={handleClose}
-                  >
-                    My Orders
-                  </NavLink>
+                <div className={styles.drawer__user__info}>
+                  <p className={styles.drawer__user__name}>{user}</p>
+                  <p className={styles.drawer__user__mail}>matt@email.com</p>
                 </div>
+              </div>
+            ) : (
+              <div className={styles.drawer__auth__btns}>
+                {/* Sign In */}
+                <Link
+                  to="/login"
+                  className={styles.drawer__btn_primary}
+                  onClick={handleClose}
+                >
+                  Sign in
+                </Link>
+
+                <Link
+                  to="/register"
+                  className={styles.drawer__btn_ghost}
+                  onClick={handleClose}
+                >
+                  Register
+                </Link>
               </div>
             )}
 
-            {/* Footer */}
-            <div className={styles.drawer__footer}>
-              {/* View Cart */}
-              <Link
-                to="/cart"
-                className={styles.drawer__cart_btn}
-                onClick={handleClose}
-              >
-                <CartIcon size={20} />
-                View Cart
-                {[].length > 0 && (
-                  <span className={styles.drawer__cart_badge}>{5}</span>
-                )}
-              </Link>
+            {/* Nav Items */}
+            <nav className={styles.drawer__nav}>
+              {/* Home & Shop */}
+              {navItems.map((navItemObj, i) => (
+                <NavItem
+                  idx={i}
+                  key={navItemObj.to}
+                  navItemObj={navItemObj}
+                  onClose={onClose}
+                />
+              ))}
 
-              {/* Sign Out */}
-              {isAuthenticated && (
+              {/* Categories */}
+              <motion.div
+                variants={itemVariants}
+                custom={2}
+                initial="hidden"
+                animate="visible"
+              >
                 <button
-                  className={styles.drawer__logout_btn}
+                  className={styles.drawer__accordion_trigger}
+                  onClick={() => setCategoriesExpanded(!categoriesExpanded)}
+                >
+                  {/* Label */}
+                  <span>Categories</span>
+
+                  {/* Chevron icon */}
+                  <ChevronDownIcon />
+                </button>
+
+                {/* Mega menu dropdown */}
+                {categoriesExpanded && (
+                  <div>
+                    <div className={styles.drawer__categories__container}>
+                      {categories.map((categoryObj) => (
+                        <CategoriesItem
+                          key={categoryObj.id}
+                          categoryObj={categoryObj}
+                          onClose={handleClose}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Available for authenticated */}
+              {isAuthenticated && (
+                <div className={styles.my__account__actions}>
+                  {/* My Account */}
+                  <motion.div
+                    variants={itemVariants}
+                    custom={3}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <NavLink
+                      to="/dashboard"
+                      end
+                      className={({ isActive }) =>
+                        `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
+                      }
+                      onClick={handleClose}
+                    >
+                      My Account
+                    </NavLink>
+                  </motion.div>
+
+                  {/* My Orders */}
+                  <motion.div
+                    variants={itemVariants}
+                    custom={4}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <NavLink
+                      to="/dashboard/orders"
+                      end
+                      className={({ isActive }) =>
+                        `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
+                      }
+                      onClick={handleClose}
+                    >
+                      My Orders
+                    </NavLink>
+                  </motion.div>
+                </div>
+              )}
+
+              {/* Footer */}
+              <div className={styles.drawer__footer}>
+                {/* View Cart */}
+                <Link
+                  to="/cart"
+                  className={styles.drawer__cart_btn}
                   onClick={handleClose}
                 >
-                  <SignOutIcon size={20} />
-                  Sign Out
-                </button>
-              )}
-            </div>
-          </nav>
-        </motion.div>
-      </>
-    )
+                  <CartIcon size={20} />
+                  View Cart
+                  {[].length > 0 && (
+                    <span className={styles.drawer__cart_badge}>{5}</span>
+                  )}
+                </Link>
+
+                {/* Sign Out */}
+                {isAuthenticated && (
+                  <button
+                    className={styles.drawer__logout_btn}
+                    onClick={handleClose}
+                  >
+                    <SignOutIcon size={20} />
+                    Sign Out
+                  </button>
+                )}
+              </div>
+            </nav>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
 
-function NavItem({ navItemObj, onClose }) {
+function NavItem({ idx, navItemObj, onClose }) {
   return (
-    <div>
+    <motion.div
+      variants={itemVariants}
+      custom={idx}
+      initial="hidden"
+      animate="visible"
+    >
       <NavLink
         to={navItemObj.to}
         end={navItemObj.to === '/'}
@@ -226,7 +261,7 @@ function NavItem({ navItemObj, onClose }) {
       >
         {navItemObj.label}
       </NavLink>
-    </div>
+    </motion.div>
   );
 }
 
