@@ -1,46 +1,24 @@
-import { Link, NavLink } from 'react-router-dom';
-import styles from './MobileMenu.module.css';
-import CloseIcon from '../../../ui/icons/navigation/CloseIcon';
-import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
-import CartIcon from '../../../ui/icons/navigation/CartIcon';
-import SignOutIcon from '../../../ui/icons/navigation/SignOutIcon';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
+
+import { drawerVariant } from './DrawerVariants';
+import { itemVariants } from './DrawerVariants';
+import { expandedVariants } from './DrawerVariants';
+
+import styles from './MobileMenu.module.css';
+
+import CloseIcon from '../../../../ui/icons/navigation/CloseIcon';
+import ChevronDownIcon from '../../../../ui/icons/navigation/ChevronDownIcon';
+import CartIcon from '../../../../ui/icons/navigation/CartIcon';
+import SignOutIcon from '../../../../ui/icons/navigation/SignOutIcon';
+import CategoriesItem from './CategoriesItem';
+import NavItem from './NavItem';
 
 const navItems = [
   { label: 'Home', to: '/' },
   { label: 'Shop', to: '/shop' },
 ];
-
-const drawerVariant = {
-  hidden: { x: '100%' } /* From: 0(start) - 100%(end) */,
-  visible: {
-    x: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-  exit: {
-    x: '100%',
-    transition: {
-      duration: 0.3,
-      ease: 'easeIn',
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: (idx) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: 0.1 + idx * 0.2,
-      duration: 0.25,
-    },
-  }),
-};
 
 function MobileMenu({
   categories,
@@ -54,7 +32,7 @@ function MobileMenu({
 
   // Handle Close
   function handleClose() {
-    categoriesExpanded && setCategoriesExpanded(!categoriesExpanded);
+    categoriesExpanded && setCategoriesExpanded(false);
     onClose();
   }
 
@@ -151,19 +129,26 @@ function MobileMenu({
                 </button>
 
                 {/* Mega menu dropdown */}
-                {categoriesExpanded && (
-                  <div>
-                    <div className={styles.drawer__categories__container}>
-                      {categories.map((categoryObj) => (
-                        <CategoriesItem
-                          key={categoryObj.id}
-                          categoryObj={categoryObj}
-                          onClose={handleClose}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {categoriesExpanded && (
+                    <motion.div
+                      variants={expandedVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      <div className={styles.drawer__categories__container}>
+                        {categories.map((categoryObj) => (
+                          <CategoriesItem
+                            key={categoryObj.id}
+                            categoryObj={categoryObj}
+                            handleClose={handleClose}
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
 
               {/* Available for authenticated */}
@@ -240,41 +225,6 @@ function MobileMenu({
         </>
       )}
     </AnimatePresence>
-  );
-}
-
-function NavItem({ idx, navItemObj, onClose }) {
-  return (
-    <motion.div
-      variants={itemVariants}
-      custom={idx}
-      initial="hidden"
-      animate="visible"
-    >
-      <NavLink
-        to={navItemObj.to}
-        end={navItemObj.to === '/'}
-        className={({ isActive }) =>
-          `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
-        }
-        onClick={() => onClose()}
-      >
-        {navItemObj.label}
-      </NavLink>
-    </motion.div>
-  );
-}
-
-function CategoriesItem({ categoryObj, onClose }) {
-  return (
-    <Link
-      to={categoryObj.id === 'all' ? '/shop' : `/shop/${categoryObj.id}`}
-      className={styles.drawer__category_link}
-      onClick={() => onClose()}
-    >
-      <span>{categoryObj.icon}</span>
-      <span>{categoryObj.label}</span>
-    </Link>
   );
 }
 

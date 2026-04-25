@@ -8,7 +8,8 @@ import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
 import ThemeToggle from '../../../ui/ThemeToggle/ThemeToggle';
 import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
-import MobileMenu from './MobileMenu';
+import MobileMenu from './MobileMenu/MobileMenu';
+import { AnimatePresence } from 'framer-motion';
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
@@ -73,16 +74,18 @@ function Navbar() {
             </button>
 
             {/* ---- Dropdown menu --------- */}
-            {megaMenuOpen && (
-              <MegaMenu
-                categories={CATEGORIES.filter(
-                  (categoryObj) => categoryObj.id !== 'all',
-                )}
-                onMouseEnter={handleCategoryEnter}
-                onMouseLeave={handleCategoryLeave}
-                onClose={() => setMegaMenuOpen(false)}
-              />
-            )}
+            <AnimatePresence>
+              {megaMenuOpen && (
+                <MegaMenu
+                  categories={CATEGORIES.filter(
+                    (categoryObj) => categoryObj.id !== 'all',
+                  )}
+                  onMouseEnter={handleCategoryEnter}
+                  onMouseLeave={handleCategoryLeave}
+                  onClose={() => setMegaMenuOpen(false)}
+                />
+              )}
+            </AnimatePresence>
           </div>
 
           {/* ---- Shop ------------------- */}
