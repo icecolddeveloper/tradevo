@@ -16,6 +16,7 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState('Martins');
 
+  // Actual State
   const [mobileOpen, setMobileOpen] = useState(false);
   const megaTimerRef = useRef(null);
 

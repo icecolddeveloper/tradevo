@@ -191,6 +191,7 @@
 }
 
 .drawer__cart_btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,6 +210,22 @@
 .drawer__cart_btn:hover {
   background: var(--color-brand-primary-hover);
   transform: translateY(-1px);
+}
+
+.drawer__cart_badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -6px;
+  right: 0px;
+  min-width: 19px;
+  height: 19px;
+  background: var(--color-brand-accent);
+  color: var(--color-text-inverse);
+  font-size: 13px;
+  /* font-weight: var(--weight-bold); */
+  border-radius: var(--radius-full);
 }
 
 .drawer__logout_btn {
