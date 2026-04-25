@@ -8,6 +8,7 @@ import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
 import ThemeToggle from '../../../ui/ThemeToggle/ThemeToggle';
 import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
+import MobileMenu from './MobileMenu';
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
@@ -15,6 +16,7 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState('Martins');
 
+  const [mobileOpen, setMobileOpen] = useState(false);
   const megaTimerRef = useRef(null);
 
   const wishListCount = 10;
@@ -151,7 +153,11 @@ function Navbar() {
           )}
 
           {/* ---- Mobile Hamburger ----------------------- */}
-          <button className={styles.navbar__hamburger} aria-label="Open menu">
+          <button
+            className={styles.navbar__hamburger}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Open menu"
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -160,7 +166,11 @@ function Navbar() {
       </div>
 
       {/* ---- Mobile Menu (Absolute Vertical) --------- */}
-      
+      <MobileMenu
+        categories={CATEGORIES}
+        onClose={() => setMobileOpen(!mobileOpen)}
+        isOpen={mobileOpen}
+      />
     </header>
   );
 }
