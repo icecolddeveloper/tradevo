@@ -4,19 +4,47 @@ import CloseIcon from '../../../ui/icons/navigation/CloseIcon';
 import ChevronDownIcon from '../../../ui/icons/navigation/ChevronDownIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import SignOutIcon from '../../../ui/icons/navigation/SignOutIcon';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'Shop', to: '/shop' },
+];
+
+const drawerVariant = {
+  hidden: { x: '100%' } /* From: 0(start) - 100%(end) */,
+  visible: {
+    x: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    x: '100%',
+    transition: {
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
+};
 
 function MobileMenu({
   categories,
   onClose,
   user = 'Martins Jay',
-  isOpen = true,
+  isOpen,
   isAuthenticated = true,
-  categoriesExpanded = true,
 }) {
-  const navItems = [
-    { label: 'Home', to: '/' },
-    { label: 'Shop', to: '/shop' },
-  ];
+  // Actual state
+  const [categoriesExpanded, setCategoriesExpanded] = useState(false);
+
+  // Handle Close
+  function handleClose() {
+    categoriesExpanded && setCategoriesExpanded(!categoriesExpanded);
+    onClose();
+  }
 
   return (
     isOpen && (
@@ -24,15 +52,21 @@ function MobileMenu({
         {/* Backdrop/Overlay */}
         <div className={styles.overlay} />
 
-        {/* Drawer Menu */}
-        <div className={styles.drawer}>
+        {/* Drawer */}
+        <motion.div
+          className={styles.drawer}
+          variants={drawerVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           {/* Header */}
           <div className={styles.drawer__header}>
             <span className={styles.drawer__logo}>Tradevo</span>
 
             <button
               className={styles.drawer__close}
-              onClick={onClose}
+              onClick={handleClose}
               aria-label="Close menu"
             >
               {/* Close drawer SVG */}
@@ -55,26 +89,41 @@ function MobileMenu({
           ) : (
             <div className={styles.drawer__auth__btns}>
               {/* Sign In */}
-              <Link to="/login" className={styles.drawer__btn_primary}>
+              <Link
+                to="/login"
+                className={styles.drawer__btn_primary}
+                onClick={handleClose}
+              >
                 Sign in
               </Link>
 
-              <Link to="/register" className={styles.drawer__btn_ghost}>
+              <Link
+                to="/register"
+                className={styles.drawer__btn_ghost}
+                onClick={handleClose}
+              >
                 Register
               </Link>
             </div>
           )}
 
-          {/* Categories accordion */}
+          {/* Nav Items */}
           <nav className={styles.drawer__nav}>
             {/* Home & Shop */}
             {navItems.map((navItemObj) => (
-              <NavItem key={navItemObj.to} navItemObj={navItemObj} />
+              <NavItem
+                key={navItemObj.to}
+                navItemObj={navItemObj}
+                onClose={onClose}
+              />
             ))}
 
             {/* Categories */}
             <div>
-              <button className={styles.drawer__accordion_trigger}>
+              <button
+                className={styles.drawer__accordion_trigger}
+                onClick={() => setCategoriesExpanded(!categoriesExpanded)}
+              >
                 {/* Label */}
                 <span>Categories</span>
 
@@ -90,6 +139,7 @@ function MobileMenu({
                       <CategoriesItem
                         key={categoryObj.id}
                         categoryObj={categoryObj}
+                        onClose={handleClose}
                       />
                     ))}
                   </div>
@@ -108,6 +158,7 @@ function MobileMenu({
                     className={({ isActive }) =>
                       `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
                     }
+                    onClick={handleClose}
                   >
                     My Account
                   </NavLink>
@@ -121,6 +172,7 @@ function MobileMenu({
                     className={({ isActive }) =>
                       `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
                     }
+                    onClick={handleClose}
                   >
                     My Orders
                   </NavLink>
@@ -131,27 +183,37 @@ function MobileMenu({
             {/* Footer */}
             <div className={styles.drawer__footer}>
               {/* View Cart */}
-              <Link to="/cart"  className={styles.drawer__cart_btn}>
-                <CartIcon size={20}/>
+              <Link
+                to="/cart"
+                className={styles.drawer__cart_btn}
+                onClick={handleClose}
+              >
+                <CartIcon size={20} />
                 View Cart
+                {[].length > 0 && (
+                  <span className={styles.drawer__cart_badge}>{5}</span>
+                )}
               </Link>
 
               {/* Sign Out */}
               {isAuthenticated && (
-                <button className={styles.drawer__logout_btn}>
-                  <SignOutIcon size={20}/>
+                <button
+                  className={styles.drawer__logout_btn}
+                  onClick={handleClose}
+                >
+                  <SignOutIcon size={20} />
                   Sign Out
                 </button>
               )}
             </div>
           </nav>
-        </div>
+        </motion.div>
       </>
     )
   );
 }
 
-function NavItem({ navItemObj }) {
+function NavItem({ navItemObj, onClose }) {
   return (
     <div>
       <NavLink
@@ -160,6 +222,7 @@ function NavItem({ navItemObj }) {
         className={({ isActive }) =>
           `${styles.drawer__link} ${isActive ? styles.drawer__link__active : ''}`
         }
+        onClick={() => onClose()}
       >
         {navItemObj.label}
       </NavLink>
@@ -167,11 +230,12 @@ function NavItem({ navItemObj }) {
   );
 }
 
-function CategoriesItem({ categoryObj }) {
+function CategoriesItem({ categoryObj, onClose }) {
   return (
     <Link
       to={categoryObj.id === 'all' ? '/shop' : `/shop/${categoryObj.id}`}
       className={styles.drawer__category_link}
+      onClick={() => onClose()}
     >
       <span>{categoryObj.icon}</span>
       <span>{categoryObj.label}</span>
