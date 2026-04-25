@@ -1,5 +1,5 @@
 function Home() {
-  return <div>Home</div>;
+  return <div style={{ margin: '5rem 1rem' }}>Home</div>;
 }
 
 export default Home;

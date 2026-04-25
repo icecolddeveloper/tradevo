@@ -30,7 +30,6 @@ function MegaMenu({ categories, onClose }) {
 }
 
 function MegaMenuItem({ categoryObj, onClose }) {
-  console.log(categoryObj.id);
   return (
     <Link
       to={`/shop/${categoryObj.id}`}
