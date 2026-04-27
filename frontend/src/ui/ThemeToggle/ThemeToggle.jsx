@@ -9,7 +9,7 @@ const THEMES = ['light', 'system', 'dark'];
 function ThemeToggle({ showLabel = false }) {
   const [theme, setTheme] = useState('dark');
 
-  function cycleTheme() {
+  function handleNextTheme() {
     if (theme === 'light') setTheme('dark');
     else if (theme === 'dark') setTheme('system');
     else setTheme('light');
@@ -17,7 +17,7 @@ function ThemeToggle({ showLabel = false }) {
 
   return (
     <button
-      onClick={cycleTheme}
+      onClick={handleNextTheme}
       className={styles.theme__toggle}
       aria-label={`Current theme: ${theme}`}
     >

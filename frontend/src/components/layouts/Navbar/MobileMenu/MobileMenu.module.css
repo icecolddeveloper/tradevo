@@ -15,7 +15,10 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 90%;
+  width: min(
+    380px,
+    100vw
+  ); /* if user's screen < 380px use full width, if it exceeds 380px stick to 380px */
   background: var(--color-bg-surface);
   z-index: calc(var(--z-navbar) + 2);
 }

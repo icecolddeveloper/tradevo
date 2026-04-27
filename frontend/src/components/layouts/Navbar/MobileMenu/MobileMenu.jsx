@@ -41,7 +41,7 @@ function MobileMenu({
       {isOpen && (
         <>
           {/* Backdrop/Overlay */}
-          <div className={styles.overlay} />
+          <div className={styles.overlay} onClick={handleClose} />
 
           {/* Drawer */}
           <motion.div
