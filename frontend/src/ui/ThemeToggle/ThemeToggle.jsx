@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 import DarkIcon from '../icons/theme/DarkIcon';
 import LightIcon from '../icons/theme/LightIcon';
 import SystemIcon from '../icons/theme/SystemIcon';
@@ -7,18 +8,19 @@ import styles from './ThemeToggle.module.css';
 const THEMES = ['light', 'system', 'dark'];
 
 function ThemeToggle({ showLabel = false }) {
-  const [theme, setTheme] = useState('dark');
+  const { theme, dispatch } = useTheme();
 
-  function handleNextTheme() {
-    if (theme === 'light') setTheme('dark');
-    else if (theme === 'dark') setTheme('system');
-    else setTheme('light');
+  function cycleTheme() {
+    if (theme === 'light') dispatch({ type: 'SET_THEME', payload: 'dark' });
+    else if (theme === 'dark')
+      dispatch({ type: 'SET_THEME', payload: 'system' });
+    else dispatch({ type: 'SET_THEME', payload: 'light' });
   }
 
   return (
     <button
-      onClick={handleNextTheme}
       className={styles.theme__toggle}
+      onClick={cycleTheme}
       aria-label={`Current theme: ${theme}`}
     >
       {/* Only one icon is rendered */}

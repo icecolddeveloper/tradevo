@@ -1,8 +1,13 @@
+import { ThemeProvider } from './context/ThemeContext';
 import AppRouter from './router/AppRouter';
-import './styles/global.css'
+import './styles/global.css';
 
 function App() {
-  return <AppRouter />;
+  return (
+    <ThemeProvider>
+      <AppRouter />
+    </ThemeProvider>
+  );
 }
 
 export default App;
