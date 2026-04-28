@@ -14,7 +14,7 @@ import { AnimatePresence } from 'framer-motion';
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState('Martins');
 
   // Actual State

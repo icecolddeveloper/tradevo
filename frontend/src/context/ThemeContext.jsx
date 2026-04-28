@@ -58,6 +58,26 @@ function ThemeProvider({ children }) {
     [theme],
   );
 
+  useEffect(
+    function () {
+      if (theme !== 'system') return; // only proceed if theme === 'system'
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      console.log(mediaQuery);
+
+      function handleAutoChange(e) {
+        const htmlRoot = document.documentElement;
+
+        htmlRoot.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      }
+
+      mediaQuery.addEventListener('change', handleAutoChange);
+
+      return () => mediaQuery.removeEventListener('change', handleAutoChange);
+    },
+    [theme],
+  );
+
   return (
     <ThemeContext.Provider value={{ theme, dispatch }}>
       {children}
@@ -72,58 +92,3 @@ function useTheme() {
 }
 
 export { ThemeProvider, useTheme };
-
-{
-  /*
-  1) Component initalizes & theme has an initial value e.g. 'light'
-      const [state, dispatch] = useReducer(themeReducer, initialState);
-      const { theme } = state;
-
-  2) React runs effects after render 
-      useEffect(..., [theme]) ----> runs immediately
-
-  3) First Effect executes (apply theme)
-      Flow inside:
-
-      i.    Take current theme
-      ii.   If "system" → check OS
-      iii.  Decide actual theme (applied)
-      iv.   Apply to DOM (data-theme)
-      v.    Save to localStorage
-
-      
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  */
-}
