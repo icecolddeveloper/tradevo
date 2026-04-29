@@ -10,6 +10,7 @@ import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import MobileMenu from './MobileMenu/MobileMenu';
 import { AnimatePresence } from 'framer-motion';
+import Logo from '../../Reusables/Logo/Logo';
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
@@ -39,10 +40,7 @@ function Navbar() {
       {/* ---- Navbar Inner (Relative Horizontal) ------ */}
       <div className={styles.navbar__inner}>
         {/* ---- Logo ------- */}
-        <Link to="/" className={styles.navbar__logo}>
-          <span className={styles.navbar__logo__mark}>T</span>
-          <span className={styles.navbar__logo__word}>radevo</span>
-        </Link>
+        <Logo />
 
         {/* ----  Desktop Links  ---------------------------------- */}
         <nav className={styles.navbar__nav}>
