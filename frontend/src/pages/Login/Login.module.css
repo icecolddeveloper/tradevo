@@ -124,10 +124,11 @@
   color: var(--color-error);
 }
 
-.eye__icon {
+.eye__icon__wrapper {
   position: absolute;
+  display: inline-flex;
   color: var(--color-text-muted);
-  pointer-events: none;
+  cursor: pointer;
   top: 30%;
   right: 14px;
 }
@@ -171,7 +172,7 @@
 .footer_link {
   color: var(--color-brand-primary);
   font-weight: var(--weight-semibold);
-    font-size: var(--text-sm);
+  font-size: var(--text-sm);
   text-decoration: none;
 }
 

@@ -3,13 +3,20 @@ import styles from './Login.module.css';
 import { useState } from 'react';
 import EmailIcon from '../../ui/icons/Auth/EmailIcon';
 import LockIcon from '../../ui/icons/Auth/LockIcon';
-import EyeIcon from '../../ui/icons/Auth/EyeIcon';
+import EyeOpenIcon from '../../ui/icons/Auth/EyeOpenIcon';
+import EyeCloseIcon from '../../ui/icons/Auth/EyeCloseIcon';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ password: false, email: false });
   // const [errors, setErrors] = useState({ password: true, email: true });
+  const [showPassword, setShowPassword] = useState(false);
+
+  function handleIconToggle(e) {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  }
 
   return (
     <div className={styles.page__container}>
@@ -70,7 +77,7 @@ function Login() {
               {/* Password */}
               <input
                 id="password"
-                type="password"
+                type={`${showPassword ? 'text' : 'password'}`}
                 className={`${styles.input} ${errors.password ? styles.input__error : ''}`}
                 placeholder="••••••••"
                 value={password}
@@ -78,7 +85,17 @@ function Login() {
               />
 
               {/* Eye icon */}
-              <EyeIcon className={styles.eye__icon} />
+              <button
+                type="button"
+                className={styles.eye__icon__wrapper}
+                onClick={handleIconToggle}
+              >
+                {showPassword ? (
+                  <EyeCloseIcon size={20} />
+                ) : (
+                  <EyeOpenIcon size={20} />
+                )}
+              </button>
             </div>
 
             {/* Error */}
