@@ -6,11 +6,12 @@ import AppLayout from '../components/layouts/AppLayout/AppLayout';
 /* ============
   Lazy imports
 ============= */
-const Home = lazy(() => import('../pages/Home'));
-const Shop = lazy(() => import('../pages/Shop'));
-const Cart = lazy(() => import('../pages/Cart'));
-const Dashboard = lazy(() => import('../pages/Dashboard'));
-const NotFound = lazy(() => import('../pages/NotFound'));
+const Home = lazy(() => import('../pages/Home/Home'));
+const Shop = lazy(() => import('../pages/Shop/Shop'));
+const Cart = lazy(() => import('../pages/Cart/Cart'));
+const Login = lazy(() => import('../pages/Login/Login'))
+const Dashboard = lazy(() => import('../pages/Dashboard/Dashboard'));
+const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 /* =====================
   CREATE BROWSER ROUTER
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: 'shop', element: <Shop /> },
       { path: 'shop/:categories', element: <Shop /> },
       { path: 'cart', element: <Cart /> },
+      {path: 'login', element: <Login />},
       { path: 'dashboard', element: <Dashboard /> },
       { path: '*', element: <NotFound /> },
     ],

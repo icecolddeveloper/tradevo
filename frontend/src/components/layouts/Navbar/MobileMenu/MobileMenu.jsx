@@ -25,7 +25,7 @@ function MobileMenu({
   onClose,
   user = 'Martins Jay',
   isOpen,
-  isAuthenticated = true,
+  isAuthenticated = false,
 }) {
   // Actual state
   const [categoriesExpanded, setCategoriesExpanded] = useState(false);
