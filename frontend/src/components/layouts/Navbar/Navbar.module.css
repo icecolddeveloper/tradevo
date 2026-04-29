@@ -271,6 +271,14 @@
     transform var(--transition-bounce);
 }
 
+@media (min-width: 1020px) {
+  .navbar__auth_btn {
+    display: flex;
+    color: #fff;
+    margin-left: 0.7rem;
+  }
+}
+
 .navbar__auth_btn:hover {
   background: var(--color-brand-primary-hover);
   transform: translateY(-1px);
