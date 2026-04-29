@@ -31,6 +31,9 @@
   .navbar__inner {
     padding-inline: var(--space-16);
   }
+
+  .navbar__actions {
+  }
 }
 
 /* ── Logo ─────────  */
@@ -125,7 +128,8 @@
 .navbar__search {
   display: none;
   align-items: center;
-  background: var(--color-bg-subtle);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-bg-muted);
   border-radius: var(--radius-full);
   padding-inline: var(--space-4);
   flex: 1;
@@ -143,14 +147,13 @@
 
 .navbar__search__focused {
   border: 1.5px solid var(--color-brand-primary);
-  background: var(--color-bg-surface);
   /* box-shadow: 0 0 0 3px var(--color-brand-primary-light); */
 }
 
 .navbar__search__input {
   flex: 1;
   min-width: 0;
-  background: none;
+  background: var(--color-bg-surface);
   color: var(--color-text-primary);
   font-size: var(--text-sm);
   border: none;
@@ -175,6 +178,12 @@
   margin-left: auto;
   flex-shrink: 0;
   gap: var(--space-2);
+}
+
+@media (min-width: 1536px) {
+  .navbar__actions {
+    gap: var(--space-4);
+  }
 }
 
 .navbar__icon_btn {
@@ -282,6 +291,14 @@
 .navbar__auth_btn:hover {
   background: var(--color-brand-primary-hover);
   transform: translateY(-1px);
+}
+
+@media (min-width: 1020px) {
+  .navbar__auth_btn {
+    display: flex;
+    color: #fff;
+    margin-left: 0.7rem;
+  }
 }
 
 .navbar__hamburger {
