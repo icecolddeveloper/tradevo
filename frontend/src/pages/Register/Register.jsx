@@ -65,8 +65,8 @@ function Register() {
               fieldObj={fieldObj}
               form={form}
               setForm={setForm}
-              showPassword={showPassword.password}
-              confirm={showPassword.confirm}
+              showPassword={showPassword}
+              confirm={showPassword}
               setShowPassword={setShowPassword}
             />
           ))}
@@ -83,7 +83,11 @@ function FieldWrapper({
   showPassword,
   setShowPassword,
 }) {
-  const isVisible = showPassword[fieldObj.id];
+  function handleToggle() {
+    setShowPassword((prev) => ({ ...prev, [fieldObj.id]: !prev[fieldObj.id] }));
+  }
+
+  console.log(form, showPassword);
 
   return (
     <div className={styles.fieldWrapper}>
@@ -109,12 +113,12 @@ function FieldWrapper({
       ) : (
         <PasswordInput
           id={fieldObj.id}
-          type={fieldObj.type}
+          type={`${showPassword[fieldObj.id] ? 'text' : 'password'}`}
           className={styles.input}
           value={form[fieldObj.id]}
           onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
+          showPassword={showPassword[fieldObj.id]}
+          setShowPassword={handleToggle}
         />
       )}
     </div>

@@ -12,18 +12,16 @@ function PasswordInput({
   autoComplete,
   onChange,
   showPassword,
-  confirm,
   setShowPassword,
-
 }) {
+  console.log(showPassword);
   function handleIconToggle(e) {
     e.preventDefault();
-    setShowPassword(!showPassword);
+    setShowPassword();
   }
 
   return (
     <div className={styles.input__wrapper}>
-      {/* Mail icon */}
       <LockIcon className={styles.field__icon} />
 
       <input
@@ -38,7 +36,7 @@ function PasswordInput({
 
       {/* Eye icon */}
       <button
-        type={type}
+        type="button"
         className={styles.eye__icon__wrapper}
         onClick={handleIconToggle}
       >

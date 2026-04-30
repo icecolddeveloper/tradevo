@@ -71,7 +71,7 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               showPassword={showPassword}
-              setShowPassword={setShowPassword}
+              setShowPassword={() => setShowPassword(!showPassword)}
             />
 
             {/* Error */}
