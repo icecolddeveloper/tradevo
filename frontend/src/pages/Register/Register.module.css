@@ -2,22 +2,91 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--color-bg-subtle);
   margin: 0 auto;
   width: 100%;
   height: 100dvh;
 }
 
-.input {
-  background: inherit;
-  height: 46px;
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface);
+  padding: var(--space-10) var(--space-8);
+  border: 1px solid var(--color-bg-surface);
+  border-radius: var(--radius-2xl);
   width: 100%;
-  padding: 0 var(--space-10);
-  border: 1.5px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
+  max-width: 440px;
+  gap: var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+
+.card__header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.subtext {
+  display: flex;
   font-size: var(--text-sm);
-  color: var(--color-text-primary);
-  outline: none;
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  color: var(--color-text-muted);
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.submit_btn {
+  height: 50px;
+  background: var(--color-brand-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  margin-top: var(--space-2);
+  transition: background var(--transition-fast);
+}
+
+.submit_btn:hover:not(:disabled) {
+  background: var(--color-brand-primary-hover);
+}
+
+.submit_btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.footer_text {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.footer_link {
+  color: var(--color-brand-primary);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.footer_link:hover {
+  text-decoration: underline;
 }

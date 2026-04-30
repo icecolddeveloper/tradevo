@@ -11,9 +11,9 @@ import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ password: false, email: false });
   // const [errors, setErrors] = useState({ password: true, email: true });
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className={styles.page__container}>

@@ -1,5 +1,7 @@
+import EmailIcon from '../../ui/icons/Auth/EmailIcon';
+import UserIcon from '../../ui/icons/Auth/UserIcon';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
-import styles from './FieldWrapper.module.css'
+import styles from './FieldWrapper.module.css';
 
 function FieldWrapper({
   fieldObj,
@@ -13,7 +15,7 @@ function FieldWrapper({
   }
 
   return (
-    <div className={styles.fieldWrapper}>
+    <div className={styles.field__wrapper}>
       {/* Label */}
       <label
         htmlFor={fieldObj.id}
@@ -26,20 +28,28 @@ function FieldWrapper({
       {/* Input */}
       {fieldObj.type !== 'password' ? (
         // Name & Email
-        <input
-          id={fieldObj.id}
-          type={fieldObj.type}
-          placeholder={fieldObj.placeholder}
-          className={styles.input}
-          value={form[fieldObj.id]}
-          onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
-        />
+        <div className={styles.input__wrapper}>
+          <input
+            id={fieldObj.id}
+            type={fieldObj.type}
+            placeholder={fieldObj.placeholder}
+            className={styles.input}
+            value={form[fieldObj.id]}
+            onChange={(e) =>
+              setForm({ ...form, [fieldObj.id]: e.target.value })
+            }
+          />
+
+          {fieldObj.id === 'name' && <UserIcon className={styles.field__icon} />}
+          {fieldObj.id === 'email' && <EmailIcon className={styles.field__icon} />}
+        </div>
       ) : (
         // Password & confirm PW
         <PasswordInput
           id={fieldObj.id}
           type={`${showPassword[fieldObj.id] ? 'text' : 'password'}`}
           className={styles.input}
+          placeholder={fieldObj.placeholder}
           value={form[fieldObj.id]}
           onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
           showPassword={showPassword[fieldObj.id]}
