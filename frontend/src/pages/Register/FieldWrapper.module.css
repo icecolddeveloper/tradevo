@@ -24,7 +24,7 @@
   padding: 0 var(--space-10);
   border: 1.5px solid var(--color-border-default);
   border-radius: var(--radius-lg);
-  font-size: var(--text-sm);
+  font-size: 16px;
   color: var(--color-text-primary);
   outline: none;
   transition:

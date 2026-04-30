@@ -18,9 +18,6 @@ function Login() {
   return (
     <div className={styles.page__container}>
       <div className={styles.card}>
-        {/* Logo */}
-        <Logo />
-
         {/* Title + Sub */}
         <div className={styles.card__header}>
           <div className={styles.title}>Welcome back</div>

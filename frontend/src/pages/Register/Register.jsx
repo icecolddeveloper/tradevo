@@ -22,9 +22,6 @@ function Register() {
   return (
     <div className={styles.page__container}>
       <div className={styles.card}>
-        {/* Logo */}
-        <Logo />
-
         {/* Title + Sub */}
         <div className={styles.card__header}>
           <h1 className={styles.title}>Create your account</h1>

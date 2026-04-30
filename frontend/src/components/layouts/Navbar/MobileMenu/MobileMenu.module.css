@@ -97,6 +97,50 @@
 }
 
 /* ── Auth buttons ────────────────────────────────────────────── */
+.drawer__auth__btns {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  padding-bottom: 1px solid var(--color-border-light);
+}
+
+.drawer__btn_primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand-primary);
+  color: #fff;
+  padding: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.drawer__btn_primary:hover {
+  background: var(--color-brand-primary-hover);
+}
+
+.drawer__btn_ghost {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-border-default);
+  color: var(--color-text-secondary);
+  padding: var(--space-3);
+    font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.drawer__btn_primary:hover {
+  background: var(--color-brand-primary-hover);
+}
 
 /* ── Nav links ───────────────────────────────────────────────── */
 .drawer__nav {
