@@ -1,6 +1,6 @@
-import EyeCloseIcon from '../../../ui/icons/Auth/EyeCloseIcon';
-import EyeOpenIcon from '../../../ui/icons/Auth/EyeOpenIcon';
-import LockIcon from '../../../ui/icons/Auth/LockIcon';
+import EyeCloseIcon from '../icons/Auth/EyeCloseIcon';
+import EyeOpenIcon from '../icons/Auth/EyeOpenIcon';
+import LockIcon from '../icons/Auth/LockIcon';
 import styles from './PasswordInput.module.css';
 
 function PasswordInput({
@@ -14,7 +14,6 @@ function PasswordInput({
   showPassword,
   setShowPassword,
 }) {
-  console.log(showPassword);
   function handleIconToggle(e) {
     e.preventDefault();
     setShowPassword();
@@ -46,4 +45,4 @@ function PasswordInput({
   );
 }
 
-export default PasswordInput;
+export default PasswordInput; // Both register & Login

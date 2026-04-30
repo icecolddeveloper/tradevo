@@ -1,38 +1,8 @@
 import { useState } from 'react';
-import Logo from '../../components/Reusables/Logo/Logo';
-import PasswordInput from '../../components/Reusables/PasswordInput/PasswordInput';
+import { formFields } from '../../data/formFields';
+import Logo from '../../ui/Logo/Logo';
+import FieldWrapper from './FieldWrapper';
 import styles from './Register.module.css';
-
-const formFields = [
-  {
-    id: 'name',
-    label: 'Name',
-    type: 'text',
-    placeholder: 'John Michael',
-    autocomplete: 'name',
-  },
-  {
-    id: 'email',
-    label: 'Email',
-    type: 'email',
-    placeholder: 'you@email.com',
-    autocomplete: 'email',
-  },
-  {
-    id: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: '••••••••',
-    autocomplete: 'new-password',
-  },
-  {
-    id: 'confirm',
-    label: 'Confirm Password',
-    type: 'password',
-    placeholder: '••••••••',
-    autocomplete: 'new-password',
-  },
-];
 
 function Register() {
   const [form, setForm] = useState({
@@ -72,55 +42,6 @@ function Register() {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function FieldWrapper({
-  fieldObj,
-  form,
-  setForm,
-  showPassword,
-  setShowPassword,
-}) {
-  function handleToggle() {
-    setShowPassword((prev) => ({ ...prev, [fieldObj.id]: !prev[fieldObj.id] }));
-  }
-
-  console.log(form, showPassword);
-
-  return (
-    <div className={styles.fieldWrapper}>
-      {/* Label */}
-      <label
-        htmlFor={fieldObj.id}
-        type={fieldObj.type}
-        className={styles.label}
-      >
-        {fieldObj.label}
-      </label>
-
-      {/* Input */}
-      {fieldObj.type !== 'password' ? (
-        <input
-          id={fieldObj.id}
-          type={fieldObj.type}
-          placeholder={fieldObj.placeholder}
-          className={styles.input}
-          value={form[fieldObj.id]}
-          onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
-        />
-      ) : (
-        <PasswordInput
-          id={fieldObj.id}
-          type={`${showPassword[fieldObj.id] ? 'text' : 'password'}`}
-          className={styles.input}
-          value={form[fieldObj.id]}
-          onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
-          showPassword={showPassword[fieldObj.id]}
-          setShowPassword={handleToggle}
-        />
-      )}
     </div>
   );
 }

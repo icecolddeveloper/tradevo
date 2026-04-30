@@ -10,7 +10,7 @@ import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import MobileMenu from './MobileMenu/MobileMenu';
 import { AnimatePresence } from 'framer-motion';
-import Logo from '../../Reusables/Logo/Logo';
+import Logo from '../../../ui/Logo/Logo';
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);

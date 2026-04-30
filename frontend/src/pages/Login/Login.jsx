@@ -5,8 +5,8 @@ import EmailIcon from '../../ui/icons/Auth/EmailIcon';
 import LockIcon from '../../ui/icons/Auth/LockIcon';
 import EyeOpenIcon from '../../ui/icons/Auth/EyeOpenIcon';
 import EyeCloseIcon from '../../ui/icons/Auth/EyeCloseIcon';
-import Logo from '../../components/Reusables/Logo/Logo';
-import PasswordInput from '../../components/Reusables/PasswordInput/PasswordInput';
+import Logo from '../../ui/Logo/Logo';
+import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 
 function Login() {
   const [email, setEmail] = useState('');
