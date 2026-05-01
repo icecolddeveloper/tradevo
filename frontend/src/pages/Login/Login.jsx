@@ -1,21 +1,12 @@
 import { Link, Links } from 'react-router-dom';
 import styles from './Login.module.css';
-import { useState } from 'react';
 import EmailIcon from '../../ui/icons/Auth/EmailIcon';
-import LockIcon from '../../ui/icons/Auth/LockIcon';
-import EyeOpenIcon from '../../ui/icons/Auth/EyeOpenIcon';
-import EyeCloseIcon from '../../ui/icons/Auth/EyeCloseIcon';
 import Logo from '../../ui/Logo/Logo';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 import useForm from '../../hooks/useForm';
+import { motion } from 'framer-motion';
 
 function Login() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [errors, setErrors] = useState({ password: false, email: false });
-  // const [errors, setErrors] = useState({ password: true, email: true });
-
   const { form, showPassword, errors, handleChange, handleIconToggle } =
     useForm({
       initialValues: {
@@ -24,10 +15,29 @@ function Login() {
       },
     });
 
-    console.log(showPassword);
+  const cardVariants = {
+    hidden: {
+      y: 30,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: 'easeIn',
+      },
+    },
+  };
+
   return (
     <div className={styles.page__container}>
-      <div className={styles.card}>
+      <motion.div
+        className={styles.card}
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Title + Sub */}
         <div className={styles.card__header}>
           <div className={styles.title}>Welcome back</div>
@@ -99,7 +109,7 @@ function Login() {
             </Link>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }

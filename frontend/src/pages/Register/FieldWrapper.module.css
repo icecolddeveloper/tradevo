@@ -33,7 +33,8 @@
 }
 
 .input:focus {
-  border-color: var(--color-brand-primary); 
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 3px var(--color-brand-primary-light);
 }
 
 .field__icon {

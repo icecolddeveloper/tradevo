@@ -8,8 +8,6 @@ function useForm({ initialValues }) {
     password: false,
     confirm: false,
   });
-  console.log(showPassword);
-  // const [errors, setErrors] = useState({ password: false, email: false });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({}); // Tracks whether user has interracted with an input field
 

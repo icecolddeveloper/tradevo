@@ -4,6 +4,7 @@ import FieldWrapper from './FieldWrapper';
 import styles from './Register.module.css';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { motion } from 'framer-motion';
 
 function Register() {
   const {
@@ -22,9 +23,29 @@ function Register() {
     },
   });
 
+  const cardVariants = {
+    hidden: {
+      y: 30,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: 'easeIn',
+      },
+    },
+  };
+
   return (
     <div className={styles.page__container}>
-      <div className={styles.card}>
+      <motion.div
+        className={styles.card}
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Title + Sub */}
         <div className={styles.card__header}>
           <h1 className={styles.title}>Create your account</h1>
@@ -61,7 +82,7 @@ function Register() {
             </Link>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
