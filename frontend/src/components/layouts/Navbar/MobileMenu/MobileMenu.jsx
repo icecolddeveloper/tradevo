@@ -199,7 +199,11 @@ function MobileMenu({
                 {/* View Cart */}
                 <Link
                   to="/cart"
-                  className={styles.drawer__cart_btn}
+                  className={
+                    isAuthenticated
+                      ? styles.drawer__cart_btn_half
+                      : styles.drawer__cart_btn_full
+                  }
                   onClick={handleClose}
                 >
                   <CartIcon size={20} />

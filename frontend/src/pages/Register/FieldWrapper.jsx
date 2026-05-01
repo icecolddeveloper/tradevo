@@ -6,14 +6,12 @@ import styles from './FieldWrapper.module.css';
 function FieldWrapper({
   fieldObj,
   form,
-  setForm,
+  errors,
   showPassword,
-  setShowPassword,
+  handleBlur,
+  handleChange,
+  handleIconToggle,
 }) {
-  function handleToggle() {
-    setShowPassword((prev) => ({ ...prev, [fieldObj.id]: !prev[fieldObj.id] }));
-  }
-
   return (
     <div className={styles.field__wrapper}>
       {/* Label */}
@@ -35,13 +33,16 @@ function FieldWrapper({
             placeholder={fieldObj.placeholder}
             className={styles.input}
             value={form[fieldObj.id]}
-            onChange={(e) =>
-              setForm({ ...form, [fieldObj.id]: e.target.value })
-            }
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
 
-          {fieldObj.id === 'name' && <UserIcon className={styles.field__icon} />}
-          {fieldObj.id === 'email' && <EmailIcon className={styles.field__icon} />}
+          {fieldObj.id === 'name' && (
+            <UserIcon className={styles.field__icon} />
+          )}
+          {fieldObj.id === 'email' && (
+            <EmailIcon className={styles.field__icon} />
+          )}
         </div>
       ) : (
         // Password & confirm PW
@@ -51,10 +52,16 @@ function FieldWrapper({
           className={styles.input}
           placeholder={fieldObj.placeholder}
           value={form[fieldObj.id]}
-          onChange={(e) => setForm({ ...form, [fieldObj.id]: e.target.value })}
+          handleChange={handleChange}
           showPassword={showPassword[fieldObj.id]}
-          setShowPassword={handleToggle}
+          handleBlur={handleBlur}
+          handleIconToggle={(e) => handleIconToggle(e, fieldObj)}
         />
+      )}
+
+      {/* Error */}
+      {errors[fieldObj.id] && (
+        <p className={styles.field_error}>{errors[fieldObj.id]}</p>
       )}
     </div>
   );

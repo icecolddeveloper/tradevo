@@ -1,23 +1,26 @@
-import { useState } from 'react';
 import { formFields } from '../../data/formFields';
 import Logo from '../../ui/Logo/Logo';
 import FieldWrapper from './FieldWrapper';
 import styles from './Register.module.css';
 import { Link } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
 
 function Register() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirm: '',
+  const {
+    form,
+    showPassword,
+    errors,
+    handleBlur,
+    handleChange,
+    handleIconToggle,
+  } = useForm({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirm: '',
+    },
   });
-  const [showPassword, setShowPassword] = useState({
-    password: false,
-    confirm: false,
-  });
-  const [errors, setErrors] = useState({ password: false, email: false });
-  // const [errors, setErrors] = useState({ password: true, email: true });
 
   return (
     <div className={styles.page__container}>
@@ -28,20 +31,25 @@ function Register() {
           <p className={styles.subtext}>Join millions of shoppers on Tradevo</p>
         </div>
 
-        <form className={styles.form__container}>
+        <form className={styles.form__container} noValidate>
           {formFields.map((fieldObj) => (
             <FieldWrapper
               key={fieldObj.id}
               fieldObj={fieldObj}
               form={form}
-              setForm={setForm}
+              errors={errors}
               showPassword={showPassword}
-              confirm={showPassword}
-              setShowPassword={setShowPassword}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              handleIconToggle={handleIconToggle}
             />
           ))}
 
-          <button type="submit" className={styles.submit_btn}>
+          <button
+            type="submit"
+            className={styles.submit_btn}
+            onClick={(e) => e.preventDefault()}
+          >
             Create Account
           </button>
 

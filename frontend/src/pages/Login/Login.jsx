@@ -7,14 +7,24 @@ import EyeOpenIcon from '../../ui/icons/Auth/EyeOpenIcon';
 import EyeCloseIcon from '../../ui/icons/Auth/EyeCloseIcon';
 import Logo from '../../ui/Logo/Logo';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
+import useForm from '../../hooks/useForm';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ password: false, email: false });
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [errors, setErrors] = useState({ password: false, email: false });
   // const [errors, setErrors] = useState({ password: true, email: true });
 
+  const { form, showPassword, errors, handleChange, handleIconToggle } =
+    useForm({
+      initialValues: {
+        email: '',
+        password: '',
+      },
+    });
+
+    console.log(showPassword);
   return (
     <div className={styles.page__container}>
       <div className={styles.card}>
@@ -24,7 +34,7 @@ function Login() {
           <p className={styles.subtext}>Sign in to your Tradevo account</p>
         </div>
 
-        <form className={styles.form__container}>
+        <form className={styles.form__container} noValidate>
           <div className={styles.field__wrapper}>
             {/* Label */}
             <label htmlFor="email" className={styles.label}>
@@ -42,8 +52,8 @@ function Login() {
                 type="email"
                 className={`${styles.input} ${errors.email ? styles.input__error : ''}`}
                 placeholder="you@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={form.email}
+                onChange={handleChange}
                 autoComplete="email"
               />
             </div>
@@ -62,13 +72,13 @@ function Login() {
 
             <PasswordInput
               id="password"
-              type={`${showPassword ? 'text' : 'password'}`}
+              type={`${showPassword.password ? 'text' : 'password'}`}
               className={`${styles.input} ${errors.password ? styles.input__error : ''}`}
               placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              showPassword={showPassword}
-              setShowPassword={() => setShowPassword(!showPassword)}
+              value={form.password}
+              handleChange={handleChange}
+              showPassword={showPassword.password}
+              handleIconToggle={(e) => handleIconToggle(e, false, 'password')}
             />
 
             {/* Error */}

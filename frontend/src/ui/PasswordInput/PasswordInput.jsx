@@ -10,14 +10,11 @@ function PasswordInput({
   placeholder,
   value,
   autoComplete,
-  onChange,
+  handleChange,
   showPassword,
-  setShowPassword,
+  handleBlur,
+  handleIconToggle,
 }) {
-  function handleIconToggle(e) {
-    e.preventDefault();
-    setShowPassword();
-  }
 
   return (
     <div className={styles.input__wrapper}>
@@ -29,7 +26,8 @@ function PasswordInput({
         className={className}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
+        onBlur={handleBlur}
         autoComplete={autoComplete}
       />
 
