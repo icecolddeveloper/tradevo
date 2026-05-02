@@ -54,6 +54,12 @@
   gap: var(--space-3);
 }
 
+.field_error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  text-align: center;
+}
+
 .submit_btn {
   height: 50px;
   background: var(--color-brand-primary);

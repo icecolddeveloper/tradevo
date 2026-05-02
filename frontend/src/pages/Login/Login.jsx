@@ -1,12 +1,19 @@
-import { Link, Links } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import styles from './Login.module.css';
 import EmailIcon from '../../ui/icons/Auth/EmailIcon';
 import Logo from '../../ui/Logo/Logo';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 import useForm from '../../hooks/useForm';
 
+const API_BASE = 'http://127.0.0.1:8000/api';
+
 function Login() {
+  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+  const [serverErrors, setServerErrors] = useState({});
+
   const { form, showPassword, errors, handleChange, handleIconToggle } =
     useForm({
       initialValues: {
@@ -14,6 +21,43 @@ function Login() {
         password: '',
       },
     });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (submitting) return;
+
+    setServerErrors({});
+    setSubmitting(true);
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/login/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authUser', JSON.stringify(data.user));
+        navigate('/');
+        return;
+      }
+
+      const flat = Object.fromEntries(
+        Object.entries(data).map(([k, v]) => [k, Array.isArray(v) ? v[0] : v]),
+      );
+      setServerErrors(flat);
+    } catch {
+      setServerErrors({ detail: 'Could not reach the server. Try again.' });
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   const cardVariants = {
     hidden: {
@@ -44,7 +88,11 @@ function Login() {
           <p className={styles.subtext}>Sign in to your Tradevo account</p>
         </div>
 
-        <form className={styles.form__container} noValidate>
+        <form
+          className={styles.form__container}
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <div className={styles.field__wrapper}>
             {/* Label */}
             <label htmlFor="email" className={styles.label}>
@@ -60,7 +108,7 @@ function Login() {
               <input
                 id="email"
                 type="email"
-                className={`${styles.input} ${errors.email ? styles.input__error : ''}`}
+                className={`${styles.input} ${errors.email || serverErrors.email ? styles.input__error : ''}`}
                 placeholder="you@email.com"
                 value={form.email}
                 onChange={handleChange}
@@ -69,8 +117,10 @@ function Login() {
             </div>
 
             {/* Error */}
-            {errors.email && (
-              <p className={styles.field_error}>{'Email err msg'}</p>
+            {(errors.email || serverErrors.email) && (
+              <p className={styles.field_error}>
+                {errors.email || serverErrors.email}
+              </p>
             )}
           </div>
 
@@ -83,7 +133,7 @@ function Login() {
             <PasswordInput
               id="password"
               type={`${showPassword.password ? 'text' : 'password'}`}
-              className={`${styles.input} ${errors.password ? styles.input__error : ''}`}
+              className={`${styles.input} ${errors.password || serverErrors.password ? styles.input__error : ''}`}
               placeholder="••••••••"
               value={form.password}
               handleChange={handleChange}
@@ -92,17 +142,23 @@ function Login() {
             />
 
             {/* Error */}
-            {errors.password && (
-              <p className={styles.field_error}>{'Password err msg'}</p>
+            {(errors.password || serverErrors.password) && (
+              <p className={styles.field_error}>
+                {errors.password || serverErrors.password}
+              </p>
             )}
           </div>
+
+          {serverErrors.detail && (
+            <p className={styles.field_error}>{serverErrors.detail}</p>
+          )}
 
           <button
             type="submit"
             className={styles.submit_btn}
-            onClick={(e) => e.preventDefault()}
+            disabled={submitting}
           >
-            Sign In
+            {submitting ? 'Signing in…' : 'Sign In'}
           </button>
 
           <div className={styles.footer__wrapper}>
