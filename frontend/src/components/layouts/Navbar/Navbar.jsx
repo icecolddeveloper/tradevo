@@ -11,12 +11,12 @@ import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import MobileMenu from './MobileMenu/MobileMenu';
 import { AnimatePresence } from 'framer-motion';
 import Logo from '../../../ui/Logo/Logo';
+import { useAuth } from '../../../context/AuthContext';
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState('Martins');
+  const { user, isAuthenticated } = useAuth();
 
   // Actual State
   const [mobileOpen, setMobileOpen] = useState(false);

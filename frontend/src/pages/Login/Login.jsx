@@ -6,11 +6,13 @@ import EmailIcon from '../../ui/icons/Auth/EmailIcon';
 import Logo from '../../ui/Logo/Logo';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 import useForm from '../../hooks/useForm';
+import { useAuth } from '../../context/AuthContext';
 
 const API_BASE = 'http://127.0.0.1:8000/api';
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [submitting, setSubmitting] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
 
@@ -42,8 +44,7 @@ function Login() {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok) {
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('authUser', JSON.stringify(data.user));
+        login(data.token, data.user);
         navigate('/');
         return;
       }
