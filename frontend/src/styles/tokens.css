@@ -8,7 +8,7 @@
 /* ── LIGHT MODE (default) ─────────────────────────────────── */
 :root {
   /* Brand Colors */
-  --color-brand-primary: #c84b2f;       /* Tradevo coral-red — main CTA color */
+  --color-brand-primary: #e15c3f;       /* Tradevo coral-red — main CTA color */
   --color-brand-primary-hover: #a83a22; /* Darker on hover */
   --color-brand-primary-light: #f9ece8; /* Tint for badges, backgrounds */
   --color-brand-secondary: #1a3a5c;     /* Deep navy — headlines, trust */
