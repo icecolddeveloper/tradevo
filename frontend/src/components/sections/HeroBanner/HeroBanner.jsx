@@ -8,14 +8,14 @@ function HeroBanner() {
   return (
     <section className={styles.hero}>
       {/* Slider image background */}
-      <div className={styles.hero__background}>
+      <div className={styles.hero__slider}>
         <img
           src={slide.image}
-          className={styles.hero__background_img}
+          className={styles.hero__slide_img}
           alt="Hero background"
         />
 
-        <div className={styles.hero__background_overlay} />
+        <div className={styles.hero__slide_overlay} />
       </div>
 
       {/* Content Container */}

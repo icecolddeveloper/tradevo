@@ -23,7 +23,7 @@
   margin: 0 auto;
   padding-inline: var(--space-4);
   max-width: var(--container-max);
-  height: 100%;
+  height: var(--navbar-height);
   gap: var(--space-6);
 }
 

@@ -1,9 +1,12 @@
-import HeroBanner from "../../components/sections/HeroBanner/HeroBanner";
+import HeroBanner from '../../components/sections/HeroBanner/HeroBanner';
+import styles from './Home.module.css';
 
 function Home() {
-  return <div style={{ margin: '5rem 1rem' }}>
-    <HeroBanner />
-  </div>;
+  return (
+    <div className={styles.home}>
+      <HeroBanner />
+    </div>
+  );
 }
 
 export default Home;
