@@ -4,7 +4,7 @@ import styles from './HeroBanner.module.css';
 import ArrowRight from '../../../ui/icons/common/ArrowRight';
 
 function HeroBanner() {
-  const slide = SLIDES[0];
+  const slide = SLIDES[3];
 
   return (
     <section className={styles.hero}>
@@ -58,7 +58,7 @@ function HeroBanner() {
       </div>
 
       {/* Floating badge */}
-      <div className={styles.hero__float_badge}>
+      <div className={styles.hero__float__badge}>
         <span className={styles.hero__float__badge__icon}>
           {slide.badge.icon}
         </span>

@@ -10,7 +10,7 @@ const THEME_KEY = 'tradevo-theme';
 
 function getInitialTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY);
-  return savedTheme ? savedTheme : 'light';
+  return savedTheme ? savedTheme : 'dark';
 }
 
 const initialState = {
@@ -63,7 +63,6 @@ function ThemeProvider({ children }) {
       if (theme !== 'system') return; // only proceed if theme === 'system'
 
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      console.log(mediaQuery);
 
       function handleAutoChange(e) {
         const htmlRoot = document.documentElement;
