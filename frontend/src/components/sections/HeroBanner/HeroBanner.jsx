@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SLIDES, STATS } from '../../../data/heroData';
 import styles from './HeroBanner.module.css';
+import ArrowRight from '../../../ui/icons/common/ArrowRight';
 
 function HeroBanner() {
   const slide = SLIDES[0];
@@ -36,15 +37,20 @@ function HeroBanner() {
           <p className={styles.hero__subtext}>{slide.sub}</p>
 
           <div className={styles.hero__ctas}>
-            <Link to={slide.cta.to}>{slide.cta.label}</Link>
-            <Link to={slide.cta.to}>{slide.ctaGhost.label}</Link>
+            <Link to={slide.cta.to} className={styles.hero__cta_primary}>
+              {slide.cta.label}
+              <ArrowRight />
+            </Link>
+            <Link to={slide.cta.to} className={styles.hero__cta_ghost}>
+              {slide.ctaGhost.label}
+            </Link>
           </div>
 
           <div className={styles.hero__stats}>
-            {STATS.map((stat) => (
-              <div className={styles.hero__stat__container}>
+            {STATS.map((stat, i) => (
+              <div key={i} className={styles.hero__stat__container}>
                 <span className={styles.hero__stat__value}>{stat.value}</span>
-                <span className={styles.hero__stat_label}>{stat.label}</span>
+                <span className={styles.hero__stat__label}>{stat.label}</span>
               </div>
             ))}
           </div>
