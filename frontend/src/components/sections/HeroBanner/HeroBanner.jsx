@@ -89,14 +89,14 @@ function HeroBanner() {
       opacity: 1,
       transition: {
         delay: 0.6,
-        duration: 0.8,
+        duration: 0.5,
       },
     },
     exit: {
       scale: 0.85,
       opacity: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.3,
       },
     },
   };
@@ -171,32 +171,32 @@ function HeroBanner() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Floating badge */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            className={styles.hero__float__badge}
+            variants={badgeVariants}
+            key={slide.id}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <span className={styles.hero__float__badge__icon}>
+              {slide.badge.icon}
+            </span>
+
+            <div>
+              <p className={styles.hero__float__badge__title}>
+                {slide.badge.title}
+              </p>
+              <p className={styles.hero__float__badge__subtitle}>
+                {slide.badge.sub}
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-
-      {/* Floating badge */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          className={styles.hero__float__badge}
-          variants={badgeVariants}
-          key={slide.id}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <span className={styles.hero__float__badge__icon}>
-            {slide.badge.icon}
-          </span>
-
-          <div>
-            <p className={styles.hero__float__badge__title}>
-              {slide.badge.title}
-            </p>
-            <p className={styles.hero__float__badge__subtitle}>
-              {slide.badge.sub}
-            </p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
 
       {/* Controls */}
       <div className={styles.hero__controls}>
