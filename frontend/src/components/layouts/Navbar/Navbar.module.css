@@ -27,12 +27,15 @@
   gap: var(--space-6);
 }
 
+@media (min-width: 1024px) {
+  .navbar__inner {
+    padding-inline: var(--space-10);
+  }
+}
+
 @media (min-width: 1536px) {
   .navbar__inner {
     padding-inline: var(--space-16);
-  }
-
-  .navbar__actions {
   }
 }
 

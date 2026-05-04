@@ -5,20 +5,23 @@ import styles from './HeroBanner.module.css';
 import ArrowRight from '../../../ui/icons/common/ArrowRight';
 import PrevArrow from '../../../ui/icons/common/PrevArrow';
 import NextArrow from '../../../ui/icons/common/NextArrow';
+import { AnimatePresence, delay, motion, scale } from 'framer-motion';
 
 function HeroBanner() {
   const [current, setCurrent] = useState(0);
-
+  const [direction, setDirection] = useState(1);
   const totalSlides = SLIDES.length;
 
   const next = useCallback(
     function handleNext() {
+      setDirection(1);
       setCurrent((curVal) => (curVal + 1) % totalSlides);
     },
     [totalSlides],
   );
 
   function handlePrev() {
+    setDirection(-1);
     setCurrent((curVal) => (curVal - 1 + totalSlides) % totalSlides);
   }
 
@@ -26,81 +29,174 @@ function HeroBanner() {
     function () {
       const timerId = setInterval(() => {
         next();
-      }, 2500);
+      }, 3500);
 
       return () => clearInterval(timerId);
     },
     [next],
   );
 
-  const slide = SLIDES[current];
+  // Variants
+  const slideVariants = {
+    hidden: (direction) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+    exit: {
+      x: '100%',
+      opacity: 0,
+      transition: {
+        duration: 0.1,
+      },
+    },
+  };
+
+  const contentVariants = {
+    hidden: {
+      y: 25,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.1,
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+    exit: {
+      y: -10,
+      opacity: 0,
+    },
+  };
+
+  const badgeVariants = {
+    hidden: {
+      scale: 0.85,
+      opacity: 0,
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.6,
+        duration: 0.8,
+      },
+    },
+    exit: {
+      scale: 0.85,
+      opacity: 0,
+      transition: {
+        duration: 0.7,
+      },
+    },
+  };
+
+  const slide = SLIDES[current]; // SLIDES[1] = obj
 
   return (
     <section className={styles.hero}>
       {/* Slider image background */}
-      <div className={styles.hero__slider}>
-        <img
-          src={slide.image}
-          className={styles.hero__slide_img}
-          alt="Hero background"
-        />
-
-        <div className={styles.hero__slide_overlay} />
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          className={styles.hero__slider}
+          variants={slideVariants}
+          key={slide.id}
+          custom={direction}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <img
+            src={slide.image}
+            className={styles.hero__slide_img}
+            alt="Hero background"
+          />
+          <div className={styles.hero__slide_overlay} />{' '}
+        </motion.div>
+      </AnimatePresence>
 
       {/* Content Container */}
+
       <div className={styles.hero__container}>
-        {/* Hero Content */}
-        <div className={styles.hero__content}>
-          <div className={styles.hero__eyebrow}>{slide.eyebrow}</div>
+        <AnimatePresence mode="wait">
+          {/* Hero Content */}
+          <motion.div
+            className={styles.hero__content}
+            variants={contentVariants}
+            key={slide.id}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className={styles.hero__eyebrow}>{slide.eyebrow}</div>
 
-          <h1 className={styles.hero__headline}>
-            {/* Headline */}
-            {slide.headline} <br />
-            {/* Headline accent */}
-            <span className={styles.hero__headline__accent}>
-              {slide.headlineAccent}
-            </span>
-          </h1>
+            <h1 className={styles.hero__headline}>
+              {/* Headline */}
+              {slide.headline} <br />
+              {/* Headline accent */}
+              <span className={styles.hero__headline__accent}>
+                {slide.headlineAccent}
+              </span>
+            </h1>
 
-          <p className={styles.hero__subtext}>{slide.sub}</p>
+            <p className={styles.hero__subtext}>{slide.sub}</p>
 
-          <div className={styles.hero__ctas}>
-            <Link to={slide.cta.to} className={styles.hero__cta_primary}>
-              {slide.cta.label}
-              <ArrowRight />
-            </Link>
-            <Link to={slide.cta.to} className={styles.hero__cta_ghost}>
-              {slide.ctaGhost.label}
-            </Link>
-          </div>
+            <div className={styles.hero__ctas}>
+              <Link to={slide.cta.to} className={styles.hero__cta_primary}>
+                {slide.cta.label}
+                <ArrowRight />
+              </Link>
+              <Link to={slide.cta.to} className={styles.hero__cta_ghost}>
+                {slide.ctaGhost.label}
+              </Link>
+            </div>
 
-          <div className={styles.hero__stats}>
-            {STATS.map((stat, i) => (
-              <div key={i} className={styles.hero__stat__container}>
-                <span className={styles.hero__stat__value}>{stat.value}</span>
-                <span className={styles.hero__stat__label}>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+            <div className={styles.hero__stats}>
+              {STATS.map((stat, i) => (
+                <div key={i} className={styles.hero__stat__container}>
+                  <span className={styles.hero__stat__value}>{stat.value}</span>
+                  <span className={styles.hero__stat__label}>{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Floating badge */}
-      <div className={styles.hero__float__badge}>
-        <span className={styles.hero__float__badge__icon}>
-          {slide.badge.icon}
-        </span>
+      <AnimatePresence mode="wait">
+        <motion.div
+          className={styles.hero__float__badge}
+          variants={badgeVariants}
+          key={slide.id}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <span className={styles.hero__float__badge__icon}>
+            {slide.badge.icon}
+          </span>
 
-        <div>
-          <p className={styles.hero__float__badge__title}>
-            {slide.badge.title}
-          </p>
-          <p className={styles.hero__float__badge__subtitle}>
-            {slide.badge.sub}
-          </p>
-        </div>
-      </div>
+          <div>
+            <p className={styles.hero__float__badge__title}>
+              {slide.badge.title}
+            </p>
+            <p className={styles.hero__float__badge__subtitle}>
+              {slide.badge.sub}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
       {/* Controls */}
       <div className={styles.hero__controls}>

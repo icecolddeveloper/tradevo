@@ -2,7 +2,6 @@ import { Link, Links } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './Login.module.css';
 import EmailIcon from '../../ui/icons/Auth/EmailIcon';
-import Logo from '../../ui/Logo/Logo';
 import PasswordInput from '../../ui/PasswordInput/PasswordInput';
 import useForm from '../../hooks/useForm';
 

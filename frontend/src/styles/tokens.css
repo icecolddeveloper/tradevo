@@ -8,33 +8,33 @@
 /* ── LIGHT MODE (default) ─────────────────────────────────── */
 :root {
   /* Brand Colors */
-  --color-brand-primary: #e15c3f;       /* Tradevo coral-red — main CTA color */
+  --color-brand-primary: #e15c3f; /* Tradevo coral-red — main CTA color */
   --color-brand-primary-hover: #a83a22; /* Darker on hover */
   --color-brand-primary-light: #f9ece8; /* Tint for badges, backgrounds */
-  --color-brand-secondary: #1a3a5c;     /* Deep navy — headlines, trust */
-  --color-brand-accent: #e8a020;        /* Warm amber — deals, flash sales */
-  --color-brand-accent-light: #fef6e4;  /* Amber tint */
+  --color-brand-secondary: #1a3a5c; /* Deep navy — headlines, trust */
+  --color-brand-accent: #e8a020; /* Warm amber — deals, flash sales */
+  --color-brand-accent-light: #fef6e4; /* Amber tint */
 
   /* Background Layers */
-  --color-bg-base: #fafaf8;             /* Page background — warm off-white */
-  --color-bg-surface: #ffffff;          /* Cards, modals, dropdowns */
-  --color-bg-subtle: #f3f2ef;           /* Section backgrounds, inputs */
-  --color-bg-muted: #e8e6e1;            /* Dividers, skeleton base */
-  --color-bg-inverse: #1a3a5c;          /* Dark sections */
+  --color-bg-base: #fafaf8; /* Page background — warm off-white */
+  --color-bg-surface: #ffffff; /* Cards, modals, dropdowns */
+  --color-bg-subtle: #f3f2ef; /* Section backgrounds, inputs */
+  --color-bg-muted: #e8e6e1; /* Dividers, skeleton base */
+  --color-bg-inverse: #1a3a5c; /* Dark sections */
 
   /* Text Colors */
-  --color-text-primary: #646464;        
-  --color-text-secondary: #4a5568;      /* Supporting text */
-  --color-text-muted: #8a96a3;          /* Placeholder, metadata */
-  --color-text-inverse: #ffffff;        /* Text on dark backgrounds */
-  --color-text-brand: #c84b2f;          /* Brand-colored text */
-  --color-text-link: #c84b2f;           /* Links */
+  --color-text-primary: #646464;
+  --color-text-secondary: #4a5568; /* Supporting text */
+  --color-text-muted: #8a96a3; /* Placeholder, metadata */
+  --color-text-inverse: #ffffff; /* Text on dark backgrounds */
+  --color-text-brand: #c84b2f; /* Brand-colored text */
+  --color-text-link: #c84b2f; /* Links */
 
   /* Border Colors */
-  --color-border-light: #ede9e3;        /* Subtle dividers */
-  --color-border-default: #d4cfc8;      /* Normal borders */
-  --color-border-strong: #b0aba3;       /* Emphasized borders */
-  --color-border-brand: #c84b2f;        /* Brand-colored borders */
+  --color-border-light: #ede9e3; /* Subtle dividers */
+  --color-border-default: #d4cfc8; /* Normal borders */
+  --color-border-strong: #b0aba3; /* Emphasized borders */
+  --color-border-brand: #c84b2f; /* Brand-colored borders */
 
   /* Semantic / Status Colors */
   --color-success: #1a7a4a;
@@ -51,21 +51,21 @@
   --color-star-empty: #d4cfc8;
 
   /* Typography */
-  --font-display: 'Sora', sans-serif;   /* Headlines, logo, big numbers */
-  --font-body: 'DM Sans', sans-serif;   /* All body text */
-  --font-mono: 'DM Mono', monospace;    /* Prices, codes */
+  --font-display: 'Sora', sans-serif; /* Headlines, logo, big numbers */
+  --font-body: 'DM Sans', sans-serif; /* All body text */
+  --font-mono: 'DM Mono', monospace; /* Prices, codes */
 
   /* Font Sizes — fluid scale */
-  --text-xs: 0.75rem;     /* 12px */
-  --text-sm: 0.875rem;    /* 14px */
-  --text-base: 1rem;      /* 16px */
-  --text-md: 1.125rem;    /* 18px */
-  --text-lg: 1.25rem;     /* 20px */
-  --text-xl: 1.5rem;      /* 24px */
-  --text-2xl: 1.875rem;   /* 30px */
-  --text-3xl: 2.25rem;    /* 36px */
-  --text-4xl: 3rem;       /* 48px */
-  --text-5xl: 3.75rem;    /* 60px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 1.875rem; /* 30px */
+  --text-3xl: 2.25rem; /* 36px */
+  --text-4xl: 3rem; /* 48px */
+  --text-5xl: 3.75rem; /* 60px */
 
   /* Font Weights */
   --weight-regular: 400;
@@ -81,20 +81,22 @@
   --leading-relaxed: 1.75;
 
   /* Spacing Scale */
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-7: 1.8rem;    /* 28.8px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
-  --space-20: 5rem;     /* 80px */
-  --space-24: 6rem;     /* 96px */
-  --space-26: 7rem;     
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.85rem; /* 12px */
+  --space-4: 1rem; /* 16px Mobile inline*/
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-7: 1.8rem; /* 28.8px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px min: 1024px inline*/
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px min: 1536px inline*/
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-26: 7rem;
+
+
 
   /* Border Radius */
   --radius-sm: 4px;
@@ -105,10 +107,14 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(15, 31, 48, 0.06), 0 1px 2px rgba(15, 31, 48, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 31, 48, 0.08), 0 2px 4px rgba(15, 31, 48, 0.05);
-  --shadow-lg: 0 8px 24px rgba(15, 31, 48, 0.10), 0 4px 8px rgba(15, 31, 48, 0.06);
-  --shadow-xl: 0 20px 48px rgba(15, 31, 48, 0.12), 0 8px 16px rgba(15, 31, 48, 0.08);
+  --shadow-sm:
+    0 1px 3px rgba(15, 31, 48, 0.06), 0 1px 2px rgba(15, 31, 48, 0.04);
+  --shadow-md:
+    0 4px 12px rgba(15, 31, 48, 0.08), 0 2px 4px rgba(15, 31, 48, 0.05);
+  --shadow-lg:
+    0 8px 24px rgba(15, 31, 48, 0.1), 0 4px 8px rgba(15, 31, 48, 0.06);
+  --shadow-xl:
+    0 20px 48px rgba(15, 31, 48, 0.12), 0 8px 16px rgba(15, 31, 48, 0.08);
   --shadow-brand: 0 4px 16px rgba(200, 75, 47, 0.25);
 
   /* Layout */
@@ -117,7 +123,7 @@
   --container-lg: 1024px;
   --container-xl: 1280px;
   --container-2xl: 1536px;
-  --container-max: 1700px;             /* Max width on 32-inch screens */
+  --container-max: 1700px; /* Max width on 32-inch screens */
 
   /* Navbar */
   --navbar-height: 65px;
@@ -141,32 +147,32 @@
 /* ── DARK MODE ────────────────────────────────────────────── */
 [data-theme='dark'] {
   /* Background Layers — rich near-black zinc palette */
-  --color-bg-base: #0e0e10;       /* Page bg — near black, slight warmth */
-  --color-bg-surface: #222020;    /* Cards, modals, navbar */
-  --color-bg-subtle: #312e2e;     /* Input fields, sidebars, code blocks */
-  --color-bg-muted: #3f3f46;      /* Dividers, skeleton shimmer */
-  --color-bg-inverse: #f4f4f5;    /* Dark-on-light surfaces */
+  --color-bg-base: #0e0e10; /* Page bg — near black, slight warmth */
+  --color-bg-surface: #222020; /* Cards, modals, navbar */
+  --color-bg-subtle: #312e2e; /* Input fields, sidebars, code blocks */
+  --color-bg-muted: #3f3f46; /* Dividers, skeleton shimmer */
+  --color-bg-inverse: #f4f4f5; /* Dark-on-light surfaces */
 
   /* Text Colors — warm whites, not cold */
-  --color-text-primary: #e7e6e6;    /* Headlines — near white */
-  --color-text-secondary: #a1a1aa;  /* Body text — zinc-400 */
-  --color-text-muted: #71717a;      /* Placeholders — zinc-500 */
-  --color-text-inverse: #09090b;    /* Text on light surfaces */
-  --color-text-brand: #f87171;      /* Brand coral — brighter in dark */
+  --color-text-primary: #e7e6e6; /* Headlines — near white */
+  --color-text-secondary: #a1a1aa; /* Body text — zinc-400 */
+  --color-text-muted: #71717a; /* Placeholders — zinc-500 */
+  --color-text-inverse: #09090b; /* Text on light surfaces */
+  --color-text-brand: #f87171; /* Brand coral — brighter in dark */
   --color-text-link: #f87171;
 
   /* Brand — coral pops better on dark backgrounds */
-  --color-brand-primary: #f26b4e;       /* Brighter coral-red */
+  --color-brand-primary: #f26b4e; /* Brighter coral-red */
   --color-brand-primary-hover: #ff7d62; /* Even brighter on hover */
   --color-brand-primary-light: #1f1210; /* Very dark tint for badges */
-  --color-brand-secondary: #6366f1;     /* Indigo — modern, premium feel */
-  --color-brand-accent: #fbbf24;        /* Amber — unchanged */
+  --color-brand-secondary: #6366f1; /* Indigo — modern, premium feel */
+  --color-brand-accent: #fbbf24; /* Amber — unchanged */
   --color-brand-accent-light: #1c1710;
 
   /* Border Colors — subtle, not blue */
-  --color-border-light: #27272a;    /* Almost invisible — structural */
-  --color-border-default: #3f3f46;  /* Normal input borders */
-  --color-border-strong: #52525b;   /* Emphasized / hover state */
+  --color-border-light: #27272a; /* Almost invisible — structural */
+  --color-border-default: #3f3f46; /* Normal input borders */
+  --color-border-strong: #52525b; /* Emphasized / hover state */
   --color-border-brand: #f26b4e;
 
   /* Semantic */
