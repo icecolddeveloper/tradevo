@@ -305,15 +305,15 @@ which matches array indexes
 
 without this:
 
-3 + 1 = 4 
+3 + 1 = 4
 SLIDES[4] → undefined (bug)
 
 WITH %:
 when the value reaches arr.length (e.g. 4 % 4),
 it resets back to 0 (initial state)
 
-(3 + 1) % 4 = 0 
-SLIDES[0] → valid 
+(3 + 1) % 4 = 0
+SLIDES[0] → valid
 
 ----------------------------------------------
 
@@ -324,4 +324,49 @@ MENTAL MODEL
 if value is still within range → it stays
 if value reaches the limit → it resets to 0
 
-----------------------------------------------
+```
+
+```
+------------------------------------------------------------------------------------------------
+
+Why adding `current` to the useEffect dependency array fixes the slider interval reset
+
+------------------------------------------------------------------------------------------------
+
+### The problem
+The slider has two ways to advance: auto (setInterval) and manual (clicking prev/next).
+When you click manually, the setInterval does not know you clicked — it just keeps counting
+from whenever it last started. So if you click at 3.4s, the interval fires 0.1s later
+and you get a double-transition / stutter.
+
+### How useEffect cleanup works
+Every time a useEffect dependency changes:
+1. React runs the cleanup function from the previous render
+2. Then it runs the effect again fresh
+
+So if your dependency array is `[next]` and `next` never changes reference (because
+useCallback memoizes it), the effect only runs ONCE — on mount. The interval never
+resets no matter what the user clicks.
+
+### Why adding `current` fixes it
+`current` is the state that tracks which slide is active.
+Every time the user clicks prev/next → `setCurrent()` runs → `current` changes →
+React detects the dependency changed → cleanup fires (clears the old interval) →
+effect runs again (starts a fresh interval from 0ms).
+
+So now every manual click gives the user a full 3500ms before the next auto-advance.
+The interval always resets to zero after interaction.
+
+### Why useCallback is still needed
+If `next` was not wrapped in useCallback, it would be a brand new function with a new
+reference on every render.
+That would make `[next]` a constantly changing dependency,
+causing the effect (and interval) to restart on every single render — even unrelated ones.
+useCallback locks the reference so `next` as a dependency is stable and predictable.
+
+### Summary
+- useCallback → keeps `next` reference stable (safe to use as a dependency)
+- `current` in deps → triggers cleanup + restart every time the slide changes
+- cleanup → clears the old interval before starting a new one
+- result → manual clicks always reset the countdown to a full 3500ms
+```

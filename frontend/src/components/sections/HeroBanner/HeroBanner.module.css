@@ -22,6 +22,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
 .hero__slide_bg {
@@ -75,6 +76,7 @@
     width: 100%;
     max-width: var(--container-max);
     z-index: 1;
+    overflow: hidden;
   }
 }
 
@@ -132,7 +134,7 @@
 @media (min-width: 1020px) {
   .hero__ctas {
     gap: var(--space-6);
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-16);
   }
 }
 
@@ -233,7 +235,7 @@
   bottom: 9.8rem;
   right: var(--space-4);
   gap: var(--space-3);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255, 255, 255);
   border-radius: var(--radius-xl);
   padding: var(--space-2) var(--space-4);
   box-shadow: var(--shadow-xl);
@@ -245,11 +247,9 @@
 @media (min-width: 1024px) {
   .hero__float__badge {
     right: var(--space-16);
-    padding: var(--space-4) var(--space-6);
+    padding: var(--space-3) var(--space-6);
   }
 }
-
-
 
 .hero__float__badge__icon {
   font-size: 25px;
@@ -259,7 +259,7 @@
 .hero__float__badge__title {
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
-  color: var(--color-text-primary);
+  color: #161616c9;
 }
 
 .hero__float__badge__subtitle {

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { AnimatePresence, motion} from 'framer-motion';
 import { SLIDES, STATS } from '../../../data/heroData';
+import { Link } from 'react-router-dom';
 import styles from './HeroBanner.module.css';
 import ArrowRight from '../../../ui/icons/common/ArrowRight';
 import PrevArrow from '../../../ui/icons/common/PrevArrow';
 import NextArrow from '../../../ui/icons/common/NextArrow';
-import { AnimatePresence, delay, motion, scale } from 'framer-motion';
 
 function HeroBanner() {
   const [current, setCurrent] = useState(0);
@@ -27,13 +27,13 @@ function HeroBanner() {
 
   useEffect(
     function () {
-      const timerId = setInterval(() => {
+      const timerRef = setInterval(() => {
         next();
       }, 3500);
 
-      return () => clearInterval(timerId);
+      return () => clearInterval(timerRef);
     },
-    [next],
+    [next, current],
   );
 
   // Variants
@@ -46,15 +46,16 @@ function HeroBanner() {
       x: 0,
       opacity: 1,
       transition: {
-        duration: 0.7,
+        duration: 0.65,
         ease: [0.22, 1, 0.36, 1],
       },
     },
     exit: {
-      x: '100%',
+      x: direction > 0 ? '-10%' : '5%',
       opacity: 0,
       transition: {
-        duration: 0.1,
+        duration: 0,
+        ease: 'easeIn',
       },
     },
   };
@@ -68,8 +69,8 @@ function HeroBanner() {
       y: 0,
       opacity: 1,
       transition: {
-        delay: 0.1,
-        duration: 0.6,
+        delay: 0.3,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -88,7 +89,7 @@ function HeroBanner() {
       scale: 1,
       opacity: 1,
       transition: {
-        delay: 0.6,
+        delay: 1,
         duration: 0.5,
       },
     },
@@ -96,7 +97,7 @@ function HeroBanner() {
       scale: 0.85,
       opacity: 0,
       transition: {
-        duration: 0.3,
+        duration: 0,
       },
     },
   };
@@ -106,24 +107,22 @@ function HeroBanner() {
   return (
     <section className={styles.hero}>
       {/* Slider image background */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          className={styles.hero__slider}
-          variants={slideVariants}
-          key={slide.id}
-          custom={direction}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <img
-            src={slide.image}
-            className={styles.hero__slide_img}
-            alt="Hero background"
-          />
-          <div className={styles.hero__slide_overlay} />{' '}
-        </motion.div>
-      </AnimatePresence>
+      <div className={styles.hero__slider}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={slide.id}
+            className={styles.hero__slide_bg} 
+            variants={slideVariants}
+            custom={direction}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <img src={slide.image} className={styles.hero__slide_img} alt="" />
+            <div className={styles.hero__slide_overlay} />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Content Container */}
 
@@ -133,7 +132,7 @@ function HeroBanner() {
           <motion.div
             className={styles.hero__content}
             variants={contentVariants}
-            key={slide.id}
+            key={slide.id + '-content'}
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -177,7 +176,7 @@ function HeroBanner() {
           <motion.div
             className={styles.hero__float__badge}
             variants={badgeVariants}
-            key={slide.id}
+            key={slide.id + '-badge'}
             initial="hidden"
             animate="visible"
             exit="exit"
