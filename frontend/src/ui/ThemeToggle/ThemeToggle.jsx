@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import DarkIcon from '../icons/theme/DarkIcon';
 import LightIcon from '../icons/theme/LightIcon';

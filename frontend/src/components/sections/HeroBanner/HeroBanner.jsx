@@ -1,10 +1,39 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SLIDES, STATS } from '../../../data/heroData';
 import styles from './HeroBanner.module.css';
 import ArrowRight from '../../../ui/icons/common/ArrowRight';
+import PrevArrow from '../../../ui/icons/common/PrevArrow';
+import NextArrow from '../../../ui/icons/common/NextArrow';
 
 function HeroBanner() {
-  const slide = SLIDES[3];
+  const [current, setCurrent] = useState(0);
+
+  const totalSlides = SLIDES.length;
+
+  const next = useCallback(
+    function handleNext() {
+      setCurrent((curVal) => (curVal + 1) % totalSlides);
+    },
+    [totalSlides],
+  );
+
+  function handlePrev() {
+    setCurrent((curVal) => (curVal - 1 + totalSlides) % totalSlides);
+  }
+
+  useEffect(
+    function () {
+      const timerId = setInterval(() => {
+        next();
+      }, 2500);
+
+      return () => clearInterval(timerId);
+    },
+    [next],
+  );
+
+  const slide = SLIDES[current];
 
   return (
     <section className={styles.hero}>
@@ -74,7 +103,11 @@ function HeroBanner() {
       </div>
 
       {/* Controls */}
-      <div className={styles.hero__controls}></div>
+      <div className={styles.hero__controls}>
+        <PrevArrow className={styles.hero__arrow} onClick={handlePrev} />
+
+        <NextArrow className={styles.hero__arrow} onClick={next} />
+      </div>
     </section>
   );
 }

@@ -14,6 +14,7 @@ import CartIcon from '../../../../ui/icons/navigation/CartIcon';
 import SignOutIcon from '../../../../ui/icons/navigation/SignOutIcon';
 import CategoriesItem from './CategoriesItem';
 import NavItem from './NavItem';
+import ThemeToggle from '../../../../ui/ThemeToggle/ThemeToggle';
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -150,6 +151,8 @@ function MobileMenu({
                   )}
                 </AnimatePresence>
               </motion.div>
+
+              <ThemeToggle showLabel={true} />
 
               {/* Available for authenticated */}
               {isAuthenticated && (
