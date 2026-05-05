@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion} from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { SLIDES, STATS } from '../../../data/heroData';
 import { Link } from 'react-router-dom';
 import styles from './HeroBanner.module.css';
@@ -35,6 +35,11 @@ function HeroBanner() {
     },
     [next, current],
   );
+
+  function handleGoto(idx, dir = 1) {
+    setDirection(dir)
+    setCurrent(idx);
+  }
 
   // Variants
   const slideVariants = {
@@ -111,7 +116,7 @@ function HeroBanner() {
         <AnimatePresence mode="wait">
           <motion.div
             key={slide.id}
-            className={styles.hero__slide_bg} 
+            className={styles.hero__slide_bg}
             variants={slideVariants}
             custom={direction}
             initial="hidden"
@@ -200,6 +205,16 @@ function HeroBanner() {
       {/* Controls */}
       <div className={styles.hero__controls}>
         <PrevArrow className={styles.hero__arrow} onClick={handlePrev} />
+
+        <div className={styles.hero__dots}>
+          {SLIDES.map((slideObj, i) => (
+            <button
+              key={slideObj.id}
+              className={`${styles.hero__dot} ${i === current ? styles.hero__dot__active : ''}`}
+              onClick={() => handleGoto(i, i > current ? 1 : -1)}
+            />
+          ))}
+        </div>
 
         <NextArrow className={styles.hero__arrow} onClick={next} />
       </div>
