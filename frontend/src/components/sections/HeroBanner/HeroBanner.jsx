@@ -7,6 +7,72 @@ import ArrowRight from '../../../ui/icons/common/ArrowRight';
 import PrevArrow from '../../../ui/icons/common/PrevArrow';
 import NextArrow from '../../../ui/icons/common/NextArrow';
 
+// Variants
+const slideVariants = {
+  hidden: (direction) => ({
+    x: direction > 0 ? '100%' : '-100%',
+    opacity: 0,
+  }),
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: (direction) => ({
+    x: direction > 0 ? '-10%' : '5%',
+    opacity: 0,
+    transition: {
+      duration: 0,
+      ease: 'easeIn',
+    },
+  }),
+};
+
+const contentVariants = {
+  hidden: {
+    y: 30,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: 0.3,
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    y: -10,
+    opacity: 0,
+  },
+};
+
+const badgeVariants = {
+  hidden: {
+    scale: 0.85,
+    opacity: 0,
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      delay: 1,
+      duration: 0.5,
+    },
+  },
+  exit: {
+    scale: 0.85,
+    opacity: 0,
+    transition: {
+      duration: 0,
+    },
+  },
+};
+
 function HeroBanner() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -29,83 +95,18 @@ function HeroBanner() {
     function () {
       const timerRef = setInterval(() => {
         next();
-      }, 3500);
+      }, 5500);
 
       return () => clearInterval(timerRef);
     },
     [next, current],
   );
 
-  function handleGoto(idx, dir = 1) {
-    setDirection(dir)
+  function handleGoto(idx) {
+    const dir = idx > current ? 1 : -1;
+    setDirection(dir);
     setCurrent(idx);
   }
-
-  // Variants
-  const slideVariants = {
-    hidden: (direction) => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0,
-    }),
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.65,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-    exit: {
-      x: direction > 0 ? '-10%' : '5%',
-      opacity: 0,
-      transition: {
-        duration: 0,
-        ease: 'easeIn',
-      },
-    },
-  };
-
-  const contentVariants = {
-    hidden: {
-      y: 25,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-    exit: {
-      y: -10,
-      opacity: 0,
-    },
-  };
-
-  const badgeVariants = {
-    hidden: {
-      scale: 0.85,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        delay: 1,
-        duration: 0.5,
-      },
-    },
-    exit: {
-      scale: 0.85,
-      opacity: 0,
-      transition: {
-        duration: 0,
-      },
-    },
-  };
 
   const slide = SLIDES[current]; // SLIDES[1] = obj
 
@@ -211,7 +212,7 @@ function HeroBanner() {
             <button
               key={slideObj.id}
               className={`${styles.hero__dot} ${i === current ? styles.hero__dot__active : ''}`}
-              onClick={() => handleGoto(i, i > current ? 1 : -1)}
+              onClick={() => handleGoto(i)}
             />
           ))}
         </div>

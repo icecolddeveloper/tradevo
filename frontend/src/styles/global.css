@@ -101,3 +101,23 @@ h6 {
   margin-inline: auto;
   padding-inline: var(--space-4);
 }
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--space-8);
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: var(--container-max);
+    padding-inline: var(--space-16);
+  }
+}
+

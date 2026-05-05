@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()], // enable React support (JSX, fast refresh)
 
   server: {
+    port: 5000,
     host: true, // allow access from network (e.g. phone, other devices)
   },
 

@@ -1,7 +1,7 @@
 export const SLIDES = [
   {
     id: 1,
-    eyebrow: '🔥 Flash Deals — Up to 50% Off',
+    eyebrow: 'Flash Deals — Up to 50% Off',
     headline: 'Everything You',
     headlineAccent: 'Need, Delivered.',
     sub: 'Millions of products. Unbeatable prices. Fast delivery right to your door.',
@@ -13,7 +13,7 @@ export const SLIDES = [
   },
   {
     id: 2,
-    eyebrow: '✨ New Season — Fresh Arrivals',
+    eyebrow: 'New Season — Fresh Arrivals',
     headline: 'Style That',
     headlineAccent: 'Speaks Volumes.',
     sub: 'Curated fashion from top brands. Discover your new wardrobe staples today.',
@@ -25,7 +25,7 @@ export const SLIDES = [
   },
   {
     id: 3,
-    eyebrow: '📱 Tech Week — Best Prices',
+    eyebrow: 'Tech Week — Best Prices',
     headline: 'Power Up Your',
     headlineAccent: 'Digital Life.',
     sub: 'The latest electronics, gadgets and accessories at unbeatable prices.',
@@ -37,7 +37,7 @@ export const SLIDES = [
   },
   {
     id: 4,
-    eyebrow: '🏠 Home & Living — Refresh Your Space',
+    eyebrow: 'Home & Living — Refresh Your Space',
     headline: 'Make Your Home',
     headlineAccent: 'Feel Like Home.',
     sub: 'Premium home essentials, furniture, and decor delivered to your door.',
