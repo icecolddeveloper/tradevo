@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { CATEGORIES } from '../../../data/mockProducts';
 import styles from './Navbar.module.css';
 import MegaMenu from './MegaMenu';
@@ -9,7 +10,6 @@ import ThemeToggle from '../../../ui/ThemeToggle/ThemeToggle';
 import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import MobileMenu from './MobileMenu/MobileMenu';
-import { AnimatePresence } from 'framer-motion';
 import Logo from '../../../ui/Logo/Logo';
 
 function Navbar() {
