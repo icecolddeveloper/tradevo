@@ -15,8 +15,6 @@ function FeaturedCategories() {
     (catObj) => catObj.id === activeId,
   );
 
-
-
   // dropdown show/hide
   function closeDropdown() {
     setDropdownOpen(false);

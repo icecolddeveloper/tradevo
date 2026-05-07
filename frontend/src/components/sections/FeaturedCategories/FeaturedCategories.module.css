@@ -231,6 +231,7 @@
   margin-top: var(--space-1);
   transition: letter-spacing var(--transition-fast);
 }
+
 .dropdown__card__cta:hover {
   letter-spacing: 0.01em;
 }
