@@ -9,7 +9,7 @@ import ToysKidsIcon from "../ui/icons/common/ToysKidsIcon";
 
 export const CATEGORY_DATA = [
   {
-    id: 'electronics', label: 'Electronics', emoji: '📱', icon: ElectronicsIcon, color: '#e8f0fb',
+    id: 'electronics', label: 'Electronics', emoji: '📱', icon: ElectronicsIcon, color: '#edeed8',
     items: ['Smartphones', 'Laptops', 'Headphones', 'Smartwatches', 'Cameras', 'Accessories'],
     featured: { label: 'Top Pick', name: 'ProSound Headphones X1', discount: '40% off' },
   },

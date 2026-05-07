@@ -30,11 +30,11 @@
 }
 
 /* ── Tray ─── */
-.tray__wrapper {
+.main__container {
   position: relative;
 }
 
-.track {
+.category__items__container {
   display: flex;
   align-items: stretch;
   gap: 0;
@@ -46,19 +46,15 @@
   padding: var(--space-1);
 }
 
-.track::-webkit-scrollbar {
+.category__items__container::-webkit-scrollbar {
   display: none; /* hides it in Chrome/Safari*/
 }
 
-
-/* ----- Category Item ------- */
+/* categoryItem Component */
 .category__item {
-  display: relative;
-  flex: 1;
-}
-
-.category__item__wrapper {
+  position: relative;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
@@ -75,4 +71,166 @@
   width: 100%;
 }
 
-/* categoryItem Component */
+.category__item::hover,
+.category__label__active {
+  background: var(--color-brand-primary-hover);
+  color: var(--color-brand-primary);
+}
+
+.category__icon {
+  display: none;
+}
+
+@media (min-width: 1020px) {
+  .category__icon {
+    display: inline-flex;
+  }
+}
+
+.chevron__close__icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.category__chevron__rotate {
+  transform: rotate(90deg);
+}
+
+.category__chevron__restore {
+  transform: rotate(0deg);
+}
+
+/* Dropdown */
+.dropdown__wrapper {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0px;
+  min-width: 360px;
+  background-color: var(--color-bg-surface);
+
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  z-index: var(--z-dropdown);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.dropdown__inner {
+  display: flex;
+}
+
+.dropdown__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown__inner {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+}
+
+.dropdown__links {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  border-right: 1px solid var(--color-border-light);
+  gap: 2px;
+}
+
+.dropdown__heading {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-2);
+}
+
+/* Dropdown link component */
+.dropdown__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.dropdown__link:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.dropdown__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-border-strong);
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}
+
+.dropdown__link:hover .dropdown__dot {
+  background: var(--color-brand-primary);
+}
+
+/* Dropdown card */
+.dropdown__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-5);
+  gap: var(--space-8);
+}
+
+.dropdown__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.dropdown__card__eye {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-brand-primary);
+}
+
+.dropdown__card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+  line-height: var(--leading-snug);
+}
+
+.dropdown__card__badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  background: var(--color-brand-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.dropdown__card__cta {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-top: var(--space-1);
+  transition: letter-spacing var(--transition-fast);
+}
+.dropdown__card__cta:hover {
+  letter-spacing: 0.01em;
+}
