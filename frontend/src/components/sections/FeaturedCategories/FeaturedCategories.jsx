@@ -15,6 +15,30 @@ function FeaturedCategories() {
     (catObj) => catObj.id === activeId,
   );
 
+  function handleDropdownShift(e) {
+    const isWide = window.matchMedia('(min-width: 1020px)').matches;
+    let offset = 0;
+
+    if (isWide) {
+      const clickedBtnEl = e.currentTarget; // current btn user clicked
+      const mainContainerEl = clickedBtnEl.closest(
+        `.${styles.main__container}`,
+      );
+
+      const mainContainerRect = mainContainerEl.getBoundingClientRect();
+      const clickedBtnRect = clickedBtnEl.getBoundingClientRect();
+      const dropdownWidth = 360;
+      console.log(mainContainerRect, clickedBtnRect);
+
+      const rawOffset = clickedBtnRect.left - mainContainerRect.left;
+      const maxOffset = mainContainerRect.width - dropdownWidth;
+
+      offset = Math.min(rawOffset, maxOffset);
+
+      return offset;
+    }
+  }
+
   // dropdown show/hide
   function closeDropdown() {
     setDropdownOpen(false);
@@ -22,8 +46,11 @@ function FeaturedCategories() {
   }
 
   function showDropdown(e, clickedId) {
+    const offset = handleDropdownShift(e);
+
     setDropdownOpen(true);
     setActiveId(clickedId);
+    setDropdownLeft(offset);
   }
 
   function handleClick(e, clickedId) {
@@ -99,6 +126,7 @@ function FeaturedCategories() {
               <motion.div
                 className={styles.dropdown__wrapper}
                 variants={dropdownVariants}
+                style={{ left: dropdownLeft }}
                 key={activeId}
                 initial="hidden"
                 animate="visible"
