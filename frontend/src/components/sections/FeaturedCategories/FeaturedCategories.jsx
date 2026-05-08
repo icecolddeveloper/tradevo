@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { CATEGORY_DATA } from '../../../data/featuredCategory';
 import { AnimatePresence, motion } from 'framer-motion';
+import { CATEGORY_DATA } from '../../../data/featuredCategory';
+import { Link } from 'react-router-dom';
 import styles from './FeaturedCategories.module.css';
 import ChevronClose from '../../../ui/icons/common/ChevronClose';
 
@@ -15,28 +15,45 @@ function FeaturedCategories() {
     (catObj) => catObj.id === activeId,
   );
 
-  function handleDropdownShift(e) {
-    const isWide = window.matchMedia('(min-width: 1020px)').matches;
-    let offset = 0;
+  
 
-    if (isWide) {
-      const clickedBtnEl = e.currentTarget; // current btn user clicked
-      const mainContainerEl = clickedBtnEl.closest(
-        `.${styles.main__container}`,
-      );
+  /* function move/shift a dropdown horizontally so it appears under the btn the user clicked, 
+     but also prevents the dropdown from overflowing outside the main container. 
+  */
+  function calculateDropdownLeftPosition(e) {
+    const isDesktopScreen = window.matchMedia('(min-width: 1020px)').matches;
 
-      const mainContainerRect = mainContainerEl.getBoundingClientRect();
-      const clickedBtnRect = clickedBtnEl.getBoundingClientRect();
-      const dropdownWidth = 360;
-      console.log(mainContainerRect, clickedBtnRect);
+    if (!isDesktopScreen) return 0;
 
-      const rawOffset = clickedBtnRect.left - mainContainerRect.left;
-      const maxOffset = mainContainerRect.width - dropdownWidth;
+    const clickedCategoryButton = e.currentTarget;
+    const categoryContainer = clickedCategoryButton.closest(
+      `.${styles.main__container}`,
+    );
 
-      offset = Math.min(rawOffset, maxOffset);
+    if (!categoryContainer) return 0;
 
-      return offset;
-    }
+    const containerPosition = categoryContainer.getBoundingClientRect();
+    const buttonPosition = clickedCategoryButton.getBoundingClientRect();
+
+    const dropdownWidth = 360;
+
+    const buttonLeftInsideContainer =
+      buttonPosition.left - containerPosition.left;
+
+    // This is the maximum left position the dropdown can use
+    // before it overflows outside the container.
+    const maxLeftPosition = Math.max(
+      containerPosition.width - dropdownWidth,
+      0,
+    );
+
+    // Use the button's left position, but never go beyond the maximum allowed left position.
+    const dropdownLeftPosition = Math.min(
+      buttonLeftInsideContainer,
+      maxLeftPosition,
+    );
+
+    return dropdownLeftPosition;
   }
 
   // dropdown show/hide
@@ -46,7 +63,7 @@ function FeaturedCategories() {
   }
 
   function showDropdown(e, clickedId) {
-    const offset = handleDropdownShift(e);
+    const offset = calculateDropdownLeftPosition(e);
 
     setDropdownOpen(true);
     setActiveId(clickedId);
