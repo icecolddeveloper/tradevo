@@ -10,7 +10,7 @@ function FeaturedCategories() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownLeft, setDropdownLeft] = useState(0);
   const timerRef = useRef();
-  const dropdownRef = useRef();
+  const sectionRef = useRef();
 
   const activeCategoryObj = CATEGORY_DATA.find(
     (catObj) => catObj.id === activeId,
@@ -76,6 +76,20 @@ function FeaturedCategories() {
     [dropdownOpen, closeDropdown],
   );
 
+  useEffect(
+    function () {
+      function handleTouchOutside(e) {
+        if (sectionRef.current && !sectionRef.current.contains(e.target)) {
+          closeDropdown();
+        }
+      }
+
+      document.addEventListener('touchend', handleTouchOutside);
+      return () => document.removeEventListener('touchend', handleTouchOutside);
+    },
+    [closeDropdown],
+  );
+
   function showDropdown(e, clickedId) {
     const offset = calculateDropdownLeftPosition(e);
 
@@ -105,7 +119,7 @@ function FeaturedCategories() {
   function scheduleClose() {
     timerRef.current = setTimeout(() => {
       closeDropdown();
-    }, 300);
+    }, 200);
   }
 
   const dropdownVariants = {
@@ -135,7 +149,7 @@ function FeaturedCategories() {
           </Link>
         </div>
 
-        <div className={styles.main__container} ref={dropdownRef}>
+        <div className={styles.main__container} ref={sectionRef}>
           {/* Category Title */}
           <div className={styles.category__items__container}>
             {CATEGORY_DATA.map((catObj) => (
@@ -205,122 +219,6 @@ function FeaturedCategories() {
             )}
           </AnimatePresence>
         </div>
-
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet illo
-          libero nihil dolorum sequi. Illum natus alias laboriosam
-          exercitationem quae iusto, voluptatibus voluptatem. Ut distinctio id
-          sed? Placeat aliquam iure vitae corporis ea sint assumenda excepturi
-          deserunt nihil, commodi nobis hic illum accusamus dolores id magnam?
-          Magni ducimus, fugiat similique esse animi eius impedit beatae commodi
-          nostrum, facilis exercitationem tempore, eaque iusto nobis molestiae
-          itaque numquam quod? Sapiente quod, dolor minus facere ipsa explicabo
-          impedit odit tempora magnam libero veniam doloribus molestias porro in
-          quam harum maiores deserunt odio vitae? Architecto repellendus
-          temporibus fugiat maxime eius cumque ab at qui aspernatur vero,
-          debitis, totam praesentium possimus sapiente quasi officiis sint
-          deleniti est voluptas aliquam expedita fuga quibusdam. Repellat, neque
-          a exercitationem sequi in magni consectetur natus ad dolorem voluptas
-          assumenda ea quia doloribus officia quisquam. Maiores nobis
-          dignissimos ab perferendis, aut esse, unde quaerat voluptates tempore
-          quisquam hic voluptatem error, blanditiis consequatur! Esse amet eum
-          ducimus alias impedit voluptatibus dolorum, eius fuga modi tenetur
-          labore eaque blanditiis exercitationem natus assumenda repudiandae
-          dolorem aut quis earum. Quasi expedita labore et, omnis asperiores
-          enim minus distinctio a? Autem dignissimos modi saepe magni molestias
-          at iusto recusandae quibusdam temporibus. Fuga id magnam minus
-          obcaecati illum rerum, vero corporis dolorem, omnis, voluptatum at
-          quod nemo. Dolore exercitationem, soluta, officiis fuga saepe eaque
-          minima nemo sit quisquam cumque nostrum aliquid tempora libero aperiam
-          non odio eveniet et accusantium magnam quod minus sunt! Enim aperiam
-          similique eius ducimus dolore cumque nihil officia aut vitae
-          laboriosam. Deserunt ratione sit quia quibusdam quidem, iste
-          blanditiis perferendis ullam voluptatum dicta possimus molestias
-          commodi necessitatibus praesentium debitis beatae aliquid unde
-          asperiores. Aliquid voluptatum sed asperiores doloribus ab amet
-          commodi repellat, dolorem illo beatae deleniti eum vel! Eligendi
-          facilis, repellendus nihil tenetur ad voluptate. Qui, accusamus
-          doloremque. Alias, quaerat facere sed eius tempora voluptatum maiores
-          blanditiis accusamus. Accusamus consequuntur ipsam fugiat ipsa est
-          sint nulla eveniet doloribus adipisci laboriosam, aut harum, modi
-          beatae possimus corporis facilis animi hic? Repudiandae dolorem
-          laboriosam quia consectetur dolorum aut magni a distinctio ut ea
-          maiores fuga recusandae cupiditate minus natus facere, voluptatum,
-          deleniti sapiente voluptatibus nihil mollitia possimus? Vel quibusdam
-          distinctio magnam et corporis fuga delectus, nisi sint voluptate
-          ducimus amet ex inventore placeat accusantium, at a facilis? Non vel
-          ea animi ullam facilis magni soluta in tempora nemo sit numquam quam
-          distinctio, nostrum similique blanditiis, amet repudiandae aliquam
-          atque, dicta dignissimos inventore quaerat molestiae delectus rerum!
-          Impedit dolores culpa quae libero enim aliquam iusto dignissimos
-          sapiente. Sit, tempora itaque inventore distinctio dolore quod. Quia,
-          ea, cupiditate similique, labore impedit ab magni quo quidem illum
-          eaque quas laborum commodi quasi repellendus quibusdam dolores
-          accusamus numquam explicabo rerum minima. Nobis accusantium reiciendis
-          consequatur voluptatum mollitia sapiente, temporibus repellat sequi
-          totam quibusdam similique dolore ipsum consectetur asperiores fugit
-          corrupti non. Praesentium eum delectus nemo explicabo! Praesentium
-          laborum necessitatibus minus consectetur! Quos beatae, officia sequi
-          provident, cumque quibusdam aliquam debitis maxime quam fugit
-          necessitatibus voluptatum! Dignissimos ad id aliquam consectetur totam
-          vel delectus obcaecati, mollitia repellendus, omnis deleniti.
-          Molestias officiis exercitationem ullam dolores id! Ad mollitia
-          facilis cupiditate nulla unde consequatur eum similique! Odit
-          repellendus vitae praesentium expedita, nulla nobis hic architecto
-          beatae cumque ducimus qui! Debitis aperiam odit ut laborum, eius ipsum
-          commodi quis fugit exercitationem sequi voluptatibus, quo iusto
-          dolorem neque blanditiis? Vel sint itaque provident saepe autem
-          tempore eaque iure corporis. Exercitationem id autem quasi cum vel et
-          quidem quisquam aut doloremque earum quae suscipit illum nam dicta
-          fugit, iste incidunt! Consequuntur est quos dolore distinctio esse
-          voluptate incidunt itaque quas unde! Nesciunt iure sapiente, eligendi
-          error dolorem recusandae quaerat! Natus possimus ut illo atque
-          consequuntur aliquid nostrum cumque autem mollitia sint quidem iste
-          doloribus, debitis neque accusantium animi voluptatem, quam quod
-          quasi. Tempora laboriosam, est soluta nisi officiis libero explicabo,
-          quos fugiat sapiente sed eligendi consequuntur inventore! Minus
-          explicabo unde perspiciatis! Dolore quae libero aspernatur repudiandae
-          sed blanditiis error laboriosam at praesentium impedit delectus, id
-          quasi neque, nam vitae dicta voluptatum alias excepturi explicabo
-          voluptas consequatur ducimus consectetur doloribus sapiente. Impedit,
-          distinctio dolore qui corporis perspiciatis vero ipsa saepe vitae
-          fugit commodi assumenda obcaecati error iste a magni placeat. Fugiat,
-          modi architecto quia at quidem culpa aperiam maiores nostrum magni
-          amet laboriosam et minus exercitationem ab laborum nam voluptas
-          itaque, similique repudiandae iste asperiores perferendis unde? Maxime
-          eligendi voluptas ipsa explicabo blanditiis, vero quam quo natus,
-          nulla temporibus ut at dignissimos sit, nesciunt modi? Provident odio
-          architecto incidunt aperiam dolore, illum iusto labore fuga cumque
-          fugit ea dignissimos in vitae vel? Ducimus, eaque? Cupiditate nihil
-          culpa dolore recusandae ea quidem nulla dolor mollitia illum esse,
-          sit, dignissimos tenetur repellendus? Natus aliquid nihil rem
-          architecto, dolorum, mollitia modi, cupiditate ipsam molestias error
-          veniam explicabo adipisci? Ratione illum voluptate cum ipsum esse quia
-          quod, minus animi culpa, nemo ipsam veritatis! Aspernatur accusantium
-          officiis harum libero assumenda. Temporibus consequatur, ipsam
-          eveniet, praesentium laudantium ullam quod ab soluta eum illo dolore
-          laboriosam? Perspiciatis, accusamus possimus officiis, reprehenderit
-          nihil mollitia incidunt odio sunt laboriosam excepturi consequatur
-          vero delectus veritatis minima, cum alias eaque aperiam inventore
-          totam ipsam eligendi ut accusantium obcaecati! Recusandae in
-          voluptatum autem, laboriosam corporis, sit commodi debitis, nisi quis
-          tempora pariatur? Adipisci repellat voluptatum itaque sunt vel dolore
-          quasi quam nostrum, aliquam tempora quo esse vero aperiam, ratione
-          deleniti voluptas ex tempore id. Impedit libero dicta quidem facilis
-          beatae, eaque corporis fuga facere maiores? Molestias perspiciatis
-          quas mollitia culpa reprehenderit, cupiditate corrupti ea ratione
-          omnis qui tenetur, est consequuntur saepe laudantium iste earum porro
-          eaque. Doloribus distinctio fugit ex harum illo non sit odit dolor
-          asperiores quidem, eveniet est quam aliquid! Soluta iure quo voluptate
-          quibusdam quod, ducimus libero aliquid culpa atque explicabo sapiente
-          omnis adipisci quisquam fuga corrupti earum quam ipsa aperiam deserunt
-          vero temporibus eveniet architecto nam? Dolore suscipit magnam
-          expedita, harum, esse animi id consequatur sint, ipsam ut repudiandae
-          voluptatibus laboriosam veritatis illum officia dolor nemo. Itaque
-          quaerat neque beatae fugit corrupti at illum. Atque impedit neque
-          rerum soluta ab sapiente aliquam nobis est, ipsam et sequi laborum
-          accusamus similique velit laudantium minus.
-        </div>
       </div>
     </section>
   );
@@ -347,13 +245,15 @@ function CategoryItem({
 
   return (
     <button
-      className={styles.category__item}
+      className={`${styles.category__item} ${activeId === catObj.id ? styles.category__label__active : ''} `}
       onClick={(e) => handleClick(e, catObj.id)}
       onMouseEnter={(e) => handleMouseEnter(e, catObj.id)}
       onMouseLeave={scheduleClose}
     >
-      <IconName className={styles.category__icon} size={23} />
-      <span className={styles.category__label}>{catObj.label}</span>
+      <div className={styles.category__item__desc}>
+        <IconName className={styles.category__icon} size={22} />
+        <span className={styles.category__label}>{catObj.label}</span>
+      </div>
 
       <ChevronClose
         size={20}
