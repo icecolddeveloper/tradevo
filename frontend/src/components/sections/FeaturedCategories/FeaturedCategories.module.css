@@ -1,7 +1,7 @@
 .section {
   display: flex;
   padding: var(--space-12) 0;
-  /* background: var(--color-bg-subtle); */
+  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .header {
@@ -48,7 +48,7 @@
 
 @media (min-width: 1020px) {
   .category__items__container {
-    padding: var(--space-4)
+    padding: var(--space-4);
   }
 }
 
@@ -77,9 +77,9 @@
   width: 100%;
 }
 
-.category__item::hover,
+.category__item:hover,
 .category__label__active {
-  background: var(--color-brand-primary-hover);
+  background: var(--color-brand-primary-light);
   color: var(--color-brand-primary);
 }
 

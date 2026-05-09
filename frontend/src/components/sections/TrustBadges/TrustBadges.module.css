@@ -1,8 +1,7 @@
 .section {
   padding: var(--space-8) 0;
   background-color: --color-bg-base;
-  border-top: 1px solid var(--color-border-light);
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .grid {

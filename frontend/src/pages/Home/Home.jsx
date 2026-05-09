@@ -11,6 +11,8 @@ function Home() {
       <TrustBadges />
 
       <FeaturedCategories />
+
+      
     </div>
   );
 }
