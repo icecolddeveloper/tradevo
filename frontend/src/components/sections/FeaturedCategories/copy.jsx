@@ -20,7 +20,7 @@ function FeaturedCategories() {
     setActiveId(null);
   }, []);
 
-  // Click outside
+  // handle outside click
   useEffect(() => {
     function handleClickOutside(e) {
       if (sectionRef.current && !sectionRef.current.contains(e.target)) {
