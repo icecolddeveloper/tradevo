@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CATEGORY_DATA } from '../../../data/featuredCategory';
 import { Link } from 'react-router-dom';
@@ -10,12 +10,11 @@ function FeaturedCategories() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownLeft, setDropdownLeft] = useState(0);
   const timerRef = useRef();
+  const sectionRef = useRef();
 
   const activeCategoryObj = CATEGORY_DATA.find(
     (catObj) => catObj.id === activeId,
   );
-
-  
 
   /* function move/shift a dropdown horizontally so it appears under the btn the user clicked, 
      but also prevents the dropdown from overflowing outside the main container. 
@@ -57,10 +56,34 @@ function FeaturedCategories() {
   }
 
   // dropdown show/hide
-  function closeDropdown() {
+  const closeDropdown = useCallback(() => {
     setDropdownOpen(false);
     setActiveId(null);
-  }
+  }, []);
+
+  // Click outside
+  useEffect(
+    function () {
+      function handleOutsideClick(e) {
+        if (sectionRef.current && !sectionRef.current.contain(e.target)) {
+          closeDropdown();
+        }
+      }
+
+      document.addEventListener('mousedown', handleOutsideClick);
+
+      return () =>
+        document.removeEventListener('mousedown', handleOutsideClick);
+    },
+    [closeDropdown],
+  );
+
+  useEffect(function () {
+    if (!dropdownOpen) return;
+    const startY = window.scrollY;
+
+    
+  }, []);
 
   function showDropdown(e, clickedId) {
     const offset = calculateDropdownLeftPosition(e);
@@ -106,12 +129,12 @@ function FeaturedCategories() {
       y: -4,
       scaleY: 0.97,
       opacity: 0,
-      transition: { duration: 0.2, ease: 'easeIn' },
+      transition: { duration: 0.15, ease: 'easeIn' },
     },
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} ref={sectionRef}>
       <div className="container">
         <div className={styles.header}>
           <h2 className={styles.title}>Browse by category</h2>
