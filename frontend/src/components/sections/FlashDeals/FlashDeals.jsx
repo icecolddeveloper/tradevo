@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
 import styles from './FlashDeals.module.css';
+import { useCountdown } from '../../../hooks/useCountdown';
 
-function FlashDeals(timeDuration = 1) {
-  const [timeLeft, setTimeLeft] = useState({ hr: timeDuration, m: 0, s: 0 });
-
-  useEffect(function () {
-    const timeDurationInMs = timeDuration * 60 * 60 * 1000;
-    const countdownEndTime = Date.now() + timeDurationInMs;
-  }, []);
+function FlashDeals({ timeDuration = 5 }) {
+  const timeLeft = useCountdown(timeDuration);
+  const { hr, min, sec } = timeLeft;
 
   return (
     <section className={styles.section}>
@@ -29,13 +25,12 @@ function FlashDeals(timeDuration = 1) {
 
             <div className={styles.timer__wrapper}>
               <TimeBlock label="HR" value={hr} />
-              <span className={styles.timer__seperator}>:</span>
+              <span className={styles.timer__separator}>:</span>
 
               <TimeBlock label="MIN" value={min} />
-              <span className={styles.timer__seperator}>:</span>
+              <span className={styles.timer__separator}>:</span>
 
               <TimeBlock label="SEC" value={sec} />
-              <span className={styles.timer__seperator}>:</span>
             </div>
           </div>
         </div>
