@@ -46,8 +46,8 @@ function FlashDeals({ timeDuration = 24, flashProducts = [] }) {
 
         <div className={styles.scroll_track}>
           {flashProducts.map((productObj) => (
-            <div className={styles.card_wrap}>
-              <ProductCard key={productObj.id} productObj={productObj} />
+            <div key={productObj.id}  className={styles.card_wrap}>
+              <ProductCard productObj={productObj} />
             </div>
           ))}
         </div>

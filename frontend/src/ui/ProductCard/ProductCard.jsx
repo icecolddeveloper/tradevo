@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import HeartIcon from '../icons/navigation/HeartIcon';
 import CartIcon from '../icons/navigation/CartIcon';
+import CheckIcon from '../icons/common/CheckIcon';
+import { useCart } from '../../context/cartContext';
 
 /* ============================================================
    TRADEVO — ProductCard
@@ -9,19 +12,35 @@ import CartIcon from '../icons/navigation/CartIcon';
    Home page, Shop page, Wishlist page, Related Products.
    ============================================================ */
 function ProductCard({ productObj }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [addedFeedback, setAddedFeedback] = useState(false);
+
+  const { currentState, dispatch } = useCart();
+  useEffect(() => {
+    console.log(currentState);
+  }, [currentState])
+
+  function handleAddToCart(e) {
+    e.preventDefault(); // don't navigate to product page
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 1500);
+  }
+
   return (
     <div className={styles.card}>
       <Link to={`/product/${productObj.slug}`} className={styles.card__link}>
         {/* ──────────────  Image area ─────────────────────── */}
         <div className={styles.card__image_wrap}>
           {/* Skeleton while image loads */}
-          {/* {!imgLoaded && (
+          {!imgLoaded && (
             <div className={`${styles.card__image_skeleton} skeleton`} />
-          )} */}
+          )}
 
           <img
             src={productObj.thumbnail || productObj.images[0]}
             className={`${styles.card__image}`}
+            onLoad={() => setImgLoaded(true)}
+            loading="lazy"
           />
 
           <div className={styles.card__badges}>
@@ -54,7 +73,7 @@ function ProductCard({ productObj }) {
           </div>
 
           <button className={`${styles.card__wishlist}`}>
-            <HeartIcon size={22} />
+            <HeartIcon size={17} />
           </button>
 
           {/* Out of stock overlay */}
@@ -84,12 +103,24 @@ function ProductCard({ productObj }) {
       </Link>
 
       <div className={styles.card__footer}>
-        <button className={styles.card__add_btn}>
-          <div className={styles.cart__wrapper}>
-            <CartIcon size={18}/>
-
-            Add to cart
-          </div>
+        <button
+          className={`${styles.card__add_btn} ${addedFeedback ? styles.card__add_btn__added : ''}`}
+          onClick={handleAddToCart}
+        >
+          {addedFeedback ? (
+            <div className={styles.cart__wrapper}>
+              <CheckIcon size={18} />
+              Added!
+            </div>
+          ) : (
+            <div
+              className={styles.cart__wrapper}
+              onClick={() => dispatch({ type: 'ADD_TO_CART' })}
+            >
+              <CartIcon size={18} />
+              Add to cart
+            </div>
+          )}
         </button>
       </div>
     </div>

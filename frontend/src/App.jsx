@@ -1,3 +1,4 @@
+import { CartProvider } from './context/cartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import AppRouter from './router/AppRouter';
 import './styles/global.css';
@@ -5,7 +6,9 @@ import './styles/global.css';
 function App() {
   return (
     <ThemeProvider>
-      <AppRouter />
+      <CartProvider>
+        <AppRouter />
+      </CartProvider>
     </ThemeProvider>
   );
 }

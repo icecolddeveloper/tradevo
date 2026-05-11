@@ -123,7 +123,7 @@ function Navbar() {
           >
             <HeartIcon />
 
-            {[1].length > 0 && (
+            {[].length > 0 && (
               /* ---- WishlistCount----- */
               <span className={styles.navbar__badge}>{wishListCount}</span>
             )}
@@ -137,7 +137,7 @@ function Navbar() {
           >
             <CartIcon />
 
-            {[1].length > 0 && (
+            {[].length > 0 && (
               /* ---- CartCount-----  */
               <span className={styles.navbar__badge}>{wishListCount}</span>
             )}

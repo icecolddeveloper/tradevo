@@ -93,8 +93,8 @@
   position: absolute;
   top: var(--space-2);
   right: var(--space-2);
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-full);
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border-light);
@@ -103,17 +103,13 @@
   justify-content: center;
   color: var(--color-text-muted);
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition:
     opacity var(--transition-fast),
     color var(--transition-fast),
     background var(--transition-fast),
     transform var(--transition-bounce);
   box-shadow: var(--shadow-sm);
-}
-
-.card:hover .card__wishlist {
-  opacity: 1;
 }
 
 .card__wishlist:hover {
