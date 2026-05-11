@@ -1,3 +1,4 @@
+import { flashDeals } from '../../data/mockProducts';
 import FeaturedCategories from '../../components/sections/FeaturedCategories/FeaturedCategories';
 import FlashDeals from '../../components/sections/FlashDeals/FlashDeals';
 import HeroBanner from '../../components/sections/HeroBanner/HeroBanner';
@@ -13,7 +14,9 @@ function Home() {
 
       <FeaturedCategories />
 
-      <FlashDeals />
+      <FlashDeals timeDuration={24} flashProducts={flashDeals} />
+
+      
     </div>
   );
 }
