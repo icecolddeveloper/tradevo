@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const cartContext = createContext(null);
 
@@ -7,22 +7,35 @@ const initialState = {
 };
 
 function reducer(state, action) {
+  console.log(action);
+
   switch (action.type) {
     case 'ADD_TO_CART':
       return {
         ...state,
-        items: [...state.items, 'done'],
+        items: [...state.items, action.payload],
       };
+
+    default:
+      return state;
   }
 }
 
 function CartProvider({ children }) {
   const [currentState, dispatch] = useReducer(reducer, initialState);
 
-  console.log(currentState);
+  const totalItems = currentState.items.length;
+
+  useEffect(() => {
+    console.log(currentState, totalItems);
+  }, [currentState, totalItems]);
+
+  function addToCart(productObj) {
+    dispatch({ type: 'ADD_TO_CART', payload: productObj });
+  }
 
   return (
-    <cartContext.Provider value={{ currentState, dispatch }}>
+    <cartContext.Provider value={{ currentState, addToCart, totalItems }}>
       {children}
     </cartContext.Provider>
   );

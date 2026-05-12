@@ -15,14 +15,12 @@ function ProductCard({ productObj }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [addedFeedback, setAddedFeedback] = useState(false);
 
-  const { currentState, dispatch } = useCart();
-  useEffect(() => {
-    console.log(currentState);
-  }, [currentState])
+  const { addToCart } = useCart();
 
   function handleAddToCart(e) {
     e.preventDefault(); // don't navigate to product page
     setAddedFeedback(true);
+    addToCart(productObj);
     setTimeout(() => setAddedFeedback(false), 1500);
   }
 
@@ -113,10 +111,7 @@ function ProductCard({ productObj }) {
               Added!
             </div>
           ) : (
-            <div
-              className={styles.cart__wrapper}
-              onClick={() => dispatch({ type: 'ADD_TO_CART' })}
-            >
+            <div className={styles.cart__wrapper}>
               <CartIcon size={18} />
               Add to cart
             </div>
