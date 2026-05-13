@@ -20,7 +20,7 @@ function ProductCard({ productObj }) {
   function handleAddToCart(e) {
     e.preventDefault(); // don't navigate to product page
     setAddedFeedback(true);
-    addToCart(productObj);
+    addToCart(productObj, 1);
     setTimeout(() => setAddedFeedback(false), 1500);
   }
 
