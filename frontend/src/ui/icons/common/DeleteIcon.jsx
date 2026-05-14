@@ -1,4 +1,4 @@
-function DeleteIcon({ className = '', size = 20 }) {
+function DeleteIcon({ className = '', size = 20, handleDelete }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,6 +7,7 @@ function DeleteIcon({ className = '', size = 20 }) {
       viewBox="0 0 24 24"
       fill="none"
       className={className}
+      onClick={handleDelete}
     >
       <path
         d="M4 7H20"

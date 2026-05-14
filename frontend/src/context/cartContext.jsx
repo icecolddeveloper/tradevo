@@ -42,6 +42,55 @@ function reducer(state, action) {
       }
     }
 
+    case 'DELETE_ITEM':
+      return {
+        ...state,
+
+        items: state.items.filter(
+          (itemObj) => itemObj.itemKey !== action.payload,
+        ),
+      };
+
+    case 'DECREASE_QUANTITY': {
+      const itemObj = action.payload;
+      const { itemKey, quantity } = itemObj;
+
+      // if quantity is 1 → remove item
+      if (quantity === 1) {
+        return {
+          ...state,
+
+          items: state.items.filter((itemObj) => itemObj.itemKey !== itemKey),
+        };
+      } else {
+        // otherwise decrease quantity
+        return {
+          ...state,
+
+          items: state.items.map((itemObj) =>
+            itemObj.itemKey === itemKey
+              ? { ...itemObj, quantity: quantity - 1 }
+              : itemObj,
+          ),
+        };
+      }
+    }
+
+    case 'INCREASE_QUANTITY': {
+      const itemObj = action.payload;
+      const { itemKey, quantity } = itemObj;
+
+      return {
+        ...state,
+
+        items: state.items.map((itemObj) =>
+          itemObj.itemKey === itemKey
+            ? { ...itemObj, quantity: quantity + 1 }
+            : itemObj,
+        ),
+      };
+    }
+
     default:
       return state;
   }
@@ -63,9 +112,29 @@ function CartProvider({ children }) {
     });
   }
 
+  function handleDelete(itemKey) {
+    dispatch({ type: 'DELETE_ITEM', payload: itemKey });
+  }
+
+  function handleQtyDecrease(itemObj) {
+    dispatch({ type: 'DECREASE_QUANTITY', payload: itemObj });
+  }
+
+  function handleQtyIncrease(itemObj) {
+    dispatch({ type: 'INCREASE_QUANTITY', payload: itemObj });
+  }
+
   return (
     <cartContext.Provider
-      value={{ items: currentState.items, currentState, addToCart, totalItems }}
+      value={{
+        items: currentState.items,
+        currentState,
+        addToCart,
+        totalItems,
+        handleDelete,
+        handleQtyDecrease,
+        handleQtyIncrease,
+      }}
     >
       {children}
     </cartContext.Provider>
