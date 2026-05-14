@@ -10,6 +10,7 @@ function reducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM': {
       const { productObj, quantity = 1, variant = null } = action.payload;
+
       const itemKey = variant
         ? `${productObj.id}-${variant}`
         : `${productObj.id}`; // string
@@ -63,7 +64,9 @@ function CartProvider({ children }) {
   }
 
   return (
-    <cartContext.Provider value={{ currentState, addToCart, totalItems }}>
+    <cartContext.Provider
+      value={{ items: currentState.items, currentState, addToCart, totalItems }}
+    >
       {children}
     </cartContext.Provider>
   );
