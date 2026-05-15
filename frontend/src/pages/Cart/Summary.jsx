@@ -1,6 +1,14 @@
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useCart } from '../../context/cartContext';
 import styles from './Cart.module.css';
+import NavigateBackIcon from '../../ui/icons/common/NavigateBackIcon';
 
 function Summary({ totalItems, discount = false }) {
+  const { handleGetSubTotal, handleCheckout } = useCart();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <div className={styles.summary}>
       <h2 className={styles.summary__title}>Order Summary</h2>
@@ -8,8 +16,10 @@ function Summary({ totalItems, discount = false }) {
       <div className={styles.summary__lines}>
         {/* subtotal */}
         <div className={styles.summary__line}>
-          <span>Subtotal ({totalItems} items)</span>
-          <span>${totalItems.toFixed(2)}</span>
+          <span>
+            Subtotal ({totalItems} {totalItems < 2 ? 'item' : 'items'})
+          </span>
+          <span>${handleGetSubTotal().toFixed(2)}</span>
         </div>
 
         {/* shipping */}
@@ -51,6 +61,21 @@ function Summary({ totalItems, discount = false }) {
             </div>
           )}
         </div>
+
+        {/* total */}
+        <div className={styles.summary__total}>
+          <span className={styles.summary__total_title}>Total</span>
+          <span>{handleGetSubTotal().toFixed(2)}</span>
+        </div>
+
+        <button className={styles.checkout_btn} onClick={handleCheckout}>
+          {isAuthenticated ? 'Proceed to Checkout' : 'Sign in to Checkout'}
+        </button>
+
+        <Link to="/shop" className={styles.continue_link}>
+          <NavigateBackIcon size={20} />
+          Continue Shopping
+        </Link>
       </div>
     </div>
   );

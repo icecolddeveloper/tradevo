@@ -1,10 +1,18 @@
 import { useCart } from '../../context/cartContext';
+import { useState } from 'react';
 import styles from './Cart.module.css';
 import Summary from './Summary';
 import Item from './Item';
 
 function Cart() {
-  const { items, totalItems } = useCart();
+  const { items, totalItems, handleClearCart } = useCart();
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selected, setSelected] = useState(false);
+
+  // function handleItemSelect() {
+  //   setSelected(true);
+  // }
+
   return (
     <section className={styles.page}>
       <div className="container">
@@ -21,12 +29,26 @@ function Cart() {
           <div className={styles.items}>
             {/* clear all */}
             <div className={styles.items__actions}>
-              <button className={styles.clear_btn}>Clear cart</button>
+              <button
+                className={styles.select_multiple_btn}
+                onClick={() => setIsSelecting(!isSelecting)}
+              >
+                Select multiple
+              </button>
+
+              <button className={styles.clear_btn} onClick={handleClearCart}>
+                Clear cart
+              </button>
             </div>
 
             {/* item list */}
             {items.map((itemObj) => (
-              <Item key={itemObj.id} itemObj={itemObj} />
+              <Item
+                key={itemObj.id}
+                itemObj={itemObj}
+                isSelecting={isSelecting} //todo: use handle later
+                selected={selected}
+              />
             ))}
 
             {/* order summary */}

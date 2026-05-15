@@ -91,25 +91,36 @@ function reducer(state, action) {
       };
     }
 
+    case 'CLEAR_CART':
+      return {
+        ...state,
+
+        items: [],
+      };
+
     default:
       return state;
   }
 }
 
 function CartProvider({ children }) {
-  const [currentState, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const totalItems = currentState.items.length;
+  const totalItems = state.items.length;
 
   useEffect(() => {
-    console.log(currentState);
-  }, [currentState, totalItems]);
+    console.log(state);
+  }, [state, totalItems]);
 
   function addToCart(productObj, quantity = 1, variant = null) {
     dispatch({
       type: 'ADD_ITEM',
       payload: { productObj, quantity, variant },
     });
+  }
+
+  function handleClearCart() {
+    dispatch({ type: 'CLEAR_CART' });
   }
 
   function handleDelete(itemKey) {
@@ -124,16 +135,25 @@ function CartProvider({ children }) {
     dispatch({ type: 'INCREASE_QUANTITY', payload: itemObj });
   }
 
+  function handleGetSubTotal() {
+    return state.items.reduce(
+      (acc, itemObj) => acc + itemObj.price * itemObj.quantity,
+      0,
+    );
+  }
+
   return (
     <cartContext.Provider
       value={{
-        items: currentState.items,
-        currentState,
+        items: state.items,
+        state,
         addToCart,
         totalItems,
         handleDelete,
+        handleClearCart,
         handleQtyDecrease,
         handleQtyIncrease,
+        handleGetSubTotal,
       }}
     >
       {children}
