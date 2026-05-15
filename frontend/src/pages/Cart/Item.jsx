@@ -4,14 +4,16 @@ import styles from './Cart.module.css';
 import DeleteIcon from '../../ui/icons/common/DeleteIcon';
 import SelectCheckIcon from '../../ui/icons/common/SelectCheckIcon';
 
-function Item({ itemObj, isSelecting, handleItemSelect }) {
+function Item({ itemObj, multipleSelect, selected, handleItemSelect }) {
   const { handleDelete, handleQtyDecrease, handleQtyIncrease } = useCart();
+  const isSelected = selected.some((item) => item.itemKey === itemObj.itemKey); // true or false
 
   return (
     <div className={styles.item__row_container}>
-      {isSelecting && (
+      {multipleSelect && (
         <SelectCheckIcon
-          isSelecting={isSelecting}
+          multipleSelect={multipleSelect}
+          isSelected={isSelected}
           handleItemSelect={handleItemSelect}
         />
       )}

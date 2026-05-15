@@ -2,7 +2,7 @@ function SelectCheckIcon({
   className = '',
   size = 22,
   isSelecting = false,
-  selected = false,
+  isSelected = false,
   handleItemSelect,
 }) {
   // Colors
@@ -24,9 +24,10 @@ function SelectCheckIcon({
       viewBox="0 0 24 24"
       fill="none"
       className={className}
+      onClick={handleItemSelect}
     >
       {/* Unselected state */}
-      {!selected && (
+      {!isSelected && (
         <circle
           cx="12"
           cy="12"
@@ -38,7 +39,7 @@ function SelectCheckIcon({
       )}
 
       {/* Selected state */}
-      {selected && (
+      {isSelected && (
         <>
           <rect
             x="2"

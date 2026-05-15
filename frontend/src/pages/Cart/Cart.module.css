@@ -15,6 +15,7 @@
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
 }
+
 .count {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
@@ -80,6 +81,7 @@
   display: grid;
   grid-template-columns: 80px 1fr auto;
   align-items: center;
+  width: 100%;
   padding: var(--space-3);
   gap: var(--space-4);
   background: var(--color-bg-surface);

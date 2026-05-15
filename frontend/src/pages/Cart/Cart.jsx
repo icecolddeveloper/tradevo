@@ -6,12 +6,27 @@ import Item from './Item';
 
 function Cart() {
   const { items, totalItems, handleClearCart } = useCart();
-  const [isSelecting, setIsSelecting] = useState(false);
-  const [selected, setSelected] = useState(false);
+  const [multipleSelect, setMultipleSelect] = useState(false);
+  const [selected, setSelected] = useState([]);
 
-  // function handleItemSelect() {
-  //   setSelected(true);
-  // }
+  console.log(selected);
+
+  function handleToggleSelectMode() {
+    setMultipleSelect((prev) => !prev);
+    setSelected([]); // clear selected list
+  }
+
+  function handleItemSelect(itemObj) {
+    setSelected((prev) => {
+      const isExisting = prev.find((item) => item.itemKey === itemObj.itemKey); // best here to avoid getting stale value
+
+      if (isExisting) {
+        return prev.filter((item) => item.itemKey !== itemObj.itemKey); // remove if existing using filter
+      } else {
+        return [...prev, itemObj];
+      }
+    });
+  }
 
   return (
     <section className={styles.page}>
@@ -31,7 +46,7 @@ function Cart() {
             <div className={styles.items__actions}>
               <button
                 className={styles.select_multiple_btn}
-                onClick={() => setIsSelecting(!isSelecting)}
+                onClick={handleToggleSelectMode}
               >
                 Select multiple
               </button>
@@ -46,7 +61,8 @@ function Cart() {
               <Item
                 key={itemObj.id}
                 itemObj={itemObj}
-                isSelecting={isSelecting} //todo: use handle later
+                multipleSelect={multipleSelect}
+                handleItemSelect={() => handleItemSelect(itemObj)}
                 selected={selected}
               />
             ))}
