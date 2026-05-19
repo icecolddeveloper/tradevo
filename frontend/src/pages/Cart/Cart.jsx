@@ -28,6 +28,16 @@ function Cart() {
     });
   }
 
+  function handleSelectAll() {
+    setSelected(prev => [...prev, ...items])
+  }
+  function handleDeleteSelected() {
+
+  }
+  // function handleToggleSelectMode() {
+
+  // }
+
   return (
     <section className={styles.page}>
       <div className="container">
@@ -44,16 +54,30 @@ function Cart() {
           <div className={styles.items}>
             {/* clear all */}
             <div className={styles.items__actions}>
-              <button
-                className={styles.select_multiple_btn}
-                onClick={handleToggleSelectMode}
-              >
-                Select multiple
-              </button>
+              {multipleSelect ? (
+                <>
+                  <span>{selected.length} selected</span>
+                  <button onClick={handleSelectAll}>Select all</button>
+                  <button onClick={handleDeleteSelected}>Remove</button>
+                  {/* <button onClick={handleToggleSelectMode}>Cancel</button> */}
+                </>
+              ) : (
+                <>
+                  <button
+                    className={styles.select_multiple_btn}
+                    onClick={handleToggleSelectMode}
+                  >
+                    Select multiple
+                  </button>
 
-              <button className={styles.clear_btn} onClick={handleClearCart}>
-                Clear cart
-              </button>
+                  <button
+                    className={styles.clear_btn}
+                    onClick={handleClearCart}
+                  >
+                    Clear cart
+                  </button>
+                </>
+              )}
             </div>
 
             {/* item list */}
@@ -62,7 +86,7 @@ function Cart() {
                 key={itemObj.id}
                 itemObj={itemObj}
                 multipleSelect={multipleSelect}
-                handleItemSelect={() => handleItemSelect(itemObj)}
+                handleItemSelect={handleItemSelect}
                 selected={selected}
               />
             ))}
