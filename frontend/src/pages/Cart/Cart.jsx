@@ -5,11 +5,12 @@ import Summary from './Summary';
 import Item from './Item';
 
 function Cart() {
-  const { items, totalItems, handleClearCart } = useCart();
+  const { items, totalItems, handleClearCart, handleDeleteSelected } =
+    useCart();
   const [multipleSelect, setMultipleSelect] = useState(false);
   const [selected, setSelected] = useState([]);
 
-  console.log(selected);
+  console.log(items, selected);
 
   function handleToggleSelectMode() {
     setMultipleSelect((prev) => !prev);
@@ -29,11 +30,13 @@ function Cart() {
   }
 
   function handleSelectAll() {
-    setSelected(prev => [...prev, ...items])
+    if (selected.length < items.length) {
+      setSelected((prev) => [...prev, ...items]);
+    } else {
+      setSelected([]);
+    }
   }
-  function handleDeleteSelected() {
 
-  }
   // function handleToggleSelectMode() {
 
   // }
@@ -57,8 +60,20 @@ function Cart() {
               {multipleSelect ? (
                 <>
                   <span>{selected.length} selected</span>
-                  <button onClick={handleSelectAll}>Select all</button>
-                  <button onClick={handleDeleteSelected}>Remove</button>
+                  <button onClick={handleSelectAll}>
+                    {items.length === selected.length
+                      ? 'Deselect all'
+                      : 'Select  all'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleDeleteSelected(selected);
+                      setMultipleSelect(false);
+                      setSelected([]);
+                    }}
+                  >
+                    Remove
+                  </button>
                   {/* <button onClick={handleToggleSelectMode}>Cancel</button> */}
                 </>
               ) : (

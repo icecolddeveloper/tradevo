@@ -98,6 +98,20 @@ function reducer(state, action) {
         items: [],
       };
 
+    case 'DELETE_SELECTED_ITEMS': {
+      const selectedItems = action.payload;
+      const selectedItemsKeys = selectedItems.map((itemObj) => itemObj.itemKey);
+
+      console.log(selectedItemsKeys);
+
+      return {
+        ...state,
+
+        items: state.items.filter(
+          (itemObj) => !selectedItemsKeys.includes(itemObj.itemKey), // call includes on an array
+        ),
+      };
+    }
     default:
       return state;
   }
@@ -108,9 +122,12 @@ function CartProvider({ children }) {
 
   const totalItems = state.items.length;
 
-  useEffect(() => {
-    console.log(state);
-  }, [state, totalItems]);
+  useEffect(() => {}, [state, totalItems]);
+
+  function handleDeleteSelected(selected) {
+    console.log(selected);
+    dispatch({ type: 'DELETE_SELECTED_ITEMS', payload: selected });
+  }
 
   function addToCart(productObj, quantity = 1, variant = null) {
     dispatch({
@@ -154,6 +171,7 @@ function CartProvider({ children }) {
         handleQtyDecrease,
         handleQtyIncrease,
         handleGetSubTotal,
+        handleDeleteSelected,
       }}
     >
       {children}
