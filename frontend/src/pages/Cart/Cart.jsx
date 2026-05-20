@@ -37,9 +37,17 @@ function Cart() {
     }
   }
 
-  // function handleToggleSelectMode() {
+  function handleRemoveSelected() {
+    if (selected.length === 0) return;
 
-  // }
+    handleDeleteSelected(selected);
+    setMultipleSelect(false);
+    setSelected([]);
+  }
+
+  function handleCancel() {
+    setMultipleSelect(false);
+  }
 
   return (
     <section className={styles.page}>
@@ -60,21 +68,22 @@ function Cart() {
               {multipleSelect ? (
                 <>
                   <span>{selected.length} selected</span>
-                  <button onClick={handleSelectAll}>
+                  <button
+                    className={styles.select__options_btn}
+                    onClick={handleSelectAll}
+                  >
                     {items.length === selected.length
                       ? 'Deselect all'
                       : 'Select  all'}
                   </button>
                   <button
-                    onClick={() => {
-                      handleDeleteSelected(selected);
-                      setMultipleSelect(false);
-                      setSelected([]);
-                    }}
+                    className={styles.item__remove_btn}
+                    onClick={handleRemoveSelected}
+                    disabled={selected.length === 0}
                   >
                     Remove
                   </button>
-                  <button onClick={handleToggleSelectMode}>Cancel</button>
+                  <button className={styles.cancel_btn} onClick={handleCancel}>Cancel</button>
                 </>
               ) : (
                 <>
