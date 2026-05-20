@@ -74,7 +74,7 @@ function Cart() {
                   >
                     Remove
                   </button>
-                  {/* <button onClick={handleToggleSelectMode}>Cancel</button> */}
+                  <button onClick={handleToggleSelectMode}>Cancel</button>
                 </>
               ) : (
                 <>
