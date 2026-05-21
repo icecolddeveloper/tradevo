@@ -1,4 +1,5 @@
 import { useCart } from '../../context/cartContext';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Cart.module.css';
 import Summary from './Summary';
@@ -31,7 +32,7 @@ function Cart() {
 
   function handleSelectAll() {
     if (selected.length < items.length) {
-      setSelected((prev) => [...prev, ...items]);
+      setSelected(items);
     } else {
       setSelected([]);
     }
@@ -49,11 +50,36 @@ function Cart() {
     setMultipleSelect(false);
   }
 
+  if (items.length === 0) {
+    return (
+      <div className={styles.empty_state}>
+        <div className="container">
+          <div className={styles.empty}>
+            <div>
+              <span className={styles.empty__icon}>🛒</span>
+            </div>
+
+            <h2 className={styles.empty__title}>Your cart is empty</h2>
+
+            <p className={styles.empty__sub}>
+              Looks like you haven't added anything yet.
+            </p>
+
+            <Link to="/shop" className={styles.empty__btn}>
+              Start Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className={styles.page}>
       <div className="container">
         <div className={styles.header}>
           <h1 className={styles.title}>Shopping Cart</h1>
+
           <span className={styles.count}>
             {totalItems}{' '}
             {totalItems === 0 || totalItems === 1 ? 'item' : 'items'}
@@ -83,7 +109,9 @@ function Cart() {
                   >
                     Remove
                   </button>
-                  <button className={styles.cancel_btn} onClick={handleCancel}>Cancel</button>
+                  <button className={styles.cancel_btn} onClick={handleCancel}>
+                    Cancel
+                  </button>
                 </>
               ) : (
                 <>
@@ -114,10 +142,10 @@ function Cart() {
                 selected={selected}
               />
             ))}
-
-            {/* order summary */}
-            <Summary totalItems={totalItems} />
           </div>
+
+          {/* order summary */}
+          <Summary totalItems={totalItems} />
         </div>
       </div>
     </section>

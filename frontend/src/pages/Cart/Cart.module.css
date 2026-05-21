@@ -3,6 +3,53 @@
   min-height: 70vh;
 }
 
+.empty_state {
+  padding: var(--space-16) 0;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  width: 100%;
+}
+
+.empty__icon {
+  font-size: 50px;
+  display: block;
+}
+
+.empty__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.empty__sub {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.empty__btn {
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-brand-primary);
+  color: white;
+  border-radius: var(--radius-full);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: background var(--transition-fast);
+}
+
+.empty__btn:hover {
+  background: var(--color-brand-primary-hover);
+}
+
 .header {
   display: flex;
   align-items: baseline;
@@ -24,13 +71,14 @@
 .layout {
   display: grid;
   grid-template-columns: 1fr;
+  align-items: start; /* IMPORTANT for sticky on summary */
   gap: var(--space-8);
-  align-items: start;
 }
 
 @media (min-width: 1024px) {
   .layout {
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr 450px;
+    gap: var(--space-12);
   }
 }
 
@@ -46,8 +94,11 @@
   justify-content: space-between;
 }
 
-.select_multiple_btn {
-  font-size: .95rem;
+.select_multiple_btn,
+.select__options_btn,
+.item__remove_btn,
+.cancel_btn {
+  font-size: 0.95rem;
   color: var(--color-text-muted);
   background: none;
   border: none;
@@ -74,7 +125,7 @@
 .item__row_container {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .item {
@@ -227,6 +278,7 @@
 
 /* Summary */
 .summary {
+  position: sticky;
   display: flex;
   flex-direction: column;
   padding: var(--space-6);
@@ -234,7 +286,6 @@
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-2xl);
   gap: var(--space-5);
-  position: sticky;
   top: calc(var(--navbar-height) + var(--space-4));
 }
 

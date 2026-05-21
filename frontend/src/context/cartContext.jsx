@@ -4,6 +4,7 @@ const cartContext = createContext(null);
 
 const initialState = {
   items: [],
+  discount: null,
 };
 
 function reducer(state, action) {
@@ -112,6 +113,25 @@ function reducer(state, action) {
         ),
       };
     }
+
+    case 'APPLY_DISCOUNT': {
+      const discountObj = action.payload;
+
+      return {
+        ...state,
+
+        discount: discountObj,
+      };
+    }
+
+    case 'REMOVE_DISCOUNT': {
+      return {
+        ...state,
+
+        discount: null,
+      };
+    }
+
     default:
       return state;
   }
@@ -159,10 +179,34 @@ function CartProvider({ children }) {
     );
   }
 
+  function handleApplyDiscount(discountObj) {
+    dispatch({ type: 'APPLY_DISCOUNT', payload: discountObj });
+  }
+
+  function discountAmount() {
+    if (!state.discount) return 0;
+    const { value, type } = state.discount;
+    const percentDiscount = value / 100;
+    const subTotal = handleGetSubTotal();
+
+    if (type === 'percent') return subTotal * percentDiscount;
+
+    if (type === 'fixed') return Math.min(state.discount.value, subTotal); // use subtotal when user buys an item very low e.g. $2
+
+    return 0;
+  }
+
+  const total = Math.max(handleGetSubTotal() - discountAmount(), 0);
+
+  function handleRemoveDiscount() {
+    dispatch({ type: 'REMOVE_DISCOUNT' });
+  }
+
   return (
     <cartContext.Provider
       value={{
         items: state.items,
+        discount: state.discount,
         state,
         addToCart,
         totalItems,
@@ -172,6 +216,10 @@ function CartProvider({ children }) {
         handleQtyIncrease,
         handleGetSubTotal,
         handleDeleteSelected,
+        handleApplyDiscount,
+        discountAmount,
+        total,
+        handleRemoveDiscount,
       }}
     >
       {children}
