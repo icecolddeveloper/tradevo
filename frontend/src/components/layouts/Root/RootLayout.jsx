@@ -33,11 +33,13 @@ function RootLayout() {
   return (
     <>
       <Navbar />
+
       <main className="page-content">
         <Suspense fallback={<PageLoader />}>
           <Outlet />
         </Suspense>
       </main>
+      
       {/* <Footer /> */}
     </>
   );

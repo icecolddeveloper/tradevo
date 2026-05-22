@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import HeartIcon from '../icons/navigation/HeartIcon';
@@ -27,7 +27,7 @@ function ProductCard({ productObj }) {
   return (
     <div className={styles.card}>
       <Link to={`/product/${productObj.slug}`} className={styles.card__link}>
-        {/* ──────────────  Image area ─────────────────────── */}
+        {/* ──────────  Image area ──────────── */}
         <div className={styles.card__image_wrap}>
           {/* Skeleton while image loads */}
           {!imgLoaded && (
@@ -82,7 +82,7 @@ function ProductCard({ productObj }) {
           )}
         </div>
 
-        {/* ────────────── Content area ──────────────--------- */}
+        {/* ───────── Content area ───────----- */}
         <div className={styles.card__body}>
           <p className={styles.card__category}>{productObj.category}</p>
           <h3 className={styles.card__name}>{productObj.name}</h3>

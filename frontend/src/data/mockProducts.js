@@ -1813,35 +1813,6 @@ export const mockProducts = [
   },
 ];
 
-// -------- TEMPLATE OF THE OBJECT ------------
-// {
-//   id: 1,
-//   name: 'ProSound Wireless Headphones X1',
-//   slug: 'prosound-wireless-headphones-x1',
-//   category: 'electronics',
-//   price: 89.99,
-//   originalPrice: 149.99,
-//   discount: 40,
-//   rating: 0,
-//   reviewCount: 0,
-//   images: [img('headphones1'), img('headphones2'), img('headphones3')],
-//   thumbnail: img('headphones1', 200, 200),
-//   description:
-//     'Premium wireless headphones with 40-hour battery life, active noise cancellation, and crystal-clear audio. Built for commuters and audiophiles alike.',
-//   specs: {
-//     Battery: '40 hours',
-//     Connectivity: 'Bluetooth 5.3',
-//     Weight: '250g',
-//     Colors: 'Black, White, Navy',
-//   },
-//   tags: ['wireless', 'noise-cancelling', 'audio', 'travel'],
-//   inStock: true,
-//   isFeatured: true,
-//   isFlashDeal: true,
-//   isNew: false,
-//   soldCount: 0,
-// },
-
 // ── HELPER FUNCTIONS ─────────────────────────────────────────
 // These are used by the Shop page and FilterContext to filter/sort products.
 export const flashDeals = mockProducts.filter(
