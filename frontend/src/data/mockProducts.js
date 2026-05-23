@@ -14,153 +14,272 @@ export const CATEGORIES = [
 // Format: { main, alt1, alt2 } — use as many as the product needs
 const IMAGE_MAP = {
   // Electronics
-  headphones1:  'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
-  headphones2:  'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80',
-  headphones3:  'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80',
-  keyboard1:    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80',
-  keyboard2:    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&q=80',
-  monitor1:     'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&q=80',
-  monitor2:     'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&q=80',
-  watch1:       'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80',
-  watch2:       'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&q=80',
-  watch3:       'https://images.unsplash.com/photo-1585123334904-845d60e97b29?w=800&q=80',
-  hub1:         'https://images.unsplash.com/photo-1625014618427-fbc980b974f5?w=800&q=80',
-  hub2:         'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-  earbuds1:     'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80',
-  earbuds2:     'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80',
-  webcam1:      'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
-  tablet1:      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
-  tablet2:      'https://images.unsplash.com/photo-1600359746315-119f1360d663?w=800&q=80',
-  speaker1:     'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80',
-  speaker2:     'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=80',
-  projector1:   'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80',
-  projector2:   'https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?w=800&q=80',
-  powerbank1:   'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&q=80',
-  laptopstand1: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
-  charger1:     'https://images.unsplash.com/photo-1633381638729-27f730955c23?w=800&q=80',
-  mouse1:       'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&q=80',
+  headphones1:
+    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
+  headphones2:
+    'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80',
+  headphones3:
+    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80',
+  keyboard1:
+    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80',
+  keyboard2:
+    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&q=80',
+  monitor1:
+    'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&q=80',
+  monitor2:
+    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&q=80',
+  watch1:
+    'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80',
+  watch2:
+    'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&q=80',
+  watch3:
+    'https://images.unsplash.com/photo-1585123334904-845d60e97b29?w=800&q=80',
+  hub1: 'https://images.unsplash.com/photo-1625014618427-fbc980b974f5?w=800&q=80',
+  hub2: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+  earbuds1:
+    'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80',
+  earbuds2:
+    'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80',
+  webcam1:
+    'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
+  tablet1:
+    'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
+  tablet2:
+    'https://images.unsplash.com/photo-1600359746315-119f1360d663?w=800&q=80',
+  speaker1:
+    'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80',
+  speaker2:
+    'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=80',
+  projector1:
+    'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80',
+  projector2:
+    'https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?w=800&q=80',
+  powerbank1:
+    'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&q=80',
+  laptopstand1:
+    'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
+  charger1:
+    'https://images.unsplash.com/photo-1633381638729-27f730955c23?w=800&q=80',
+  mouse1:
+    'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&q=80',
 
   // New gadgets
-  iphone16pm1:    'https://images.unsplash.com/photo-1726878638059-93e2e5a55376?w=800&q=80',
-  iphone16pm2:    'https://images.unsplash.com/photo-1721863751847-cfe24e038f53?w=800&q=80',
-  iphone13pm1:    'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=800&q=80',
-  iphone13pm2:    'https://images.unsplash.com/photo-1635434803802-fc6f546c0e3f?w=800&q=80',
-  macbookpro1:    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80',
-  macbookpro2:    'https://images.unsplash.com/photo-1611186871525-7f8f374aa2d6?w=800&q=80',
-  ipadpro1:       'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
-  ipadpro2:       'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&q=80',
-  applewatch1:    'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&q=80',
-  applewatch2:    'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
-  galaxys24u1:    'https://images.unsplash.com/photo-1706864256861-c964f3b838e3?w=800&q=80',
-  galaxys24u2:    'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80',
-  galaxytab1:     'https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800&q=80',
-  galaxytab2:     'https://images.unsplash.com/photo-1623126908029-58cb08a2b272?w=800&q=80',
-  galaxywatch1:   'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80',
-  galaxywatch2:   'https://images.unsplash.com/photo-1617043786394-f977fa12eddf?w=800&q=80',
-  galaxybuds1:    'https://images.unsplash.com/photo-1628538137623-ce4ddf3b3d82?w=800&q=80',
-  galaxybuds2:    'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80',
-  airpods1:       'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&q=80',
-  airpods2:       'https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=800&q=80',
-  appletv1:       'https://images.unsplash.com/photo-1593359677879-a4bb92f829e1?w=800&q=80',
-  homepod1:       'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80',
-  samsungtv1:     'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80',
-  samsungtv2:     'https://images.unsplash.com/photo-1539794830467-1f1755804d13?w=800&q=80',
-  galaxyzfold1:   'https://images.unsplash.com/photo-1663530670768-8a66af8e7cba?w=800&q=80',
-  galaxyzfold2:   'https://images.unsplash.com/photo-1622532374248-7fb9ceabfaf6?w=800&q=80',
+  iphone16pm1:
+    'https://images.unsplash.com/photo-1726878638059-93e2e5a55376?w=800&q=80',
+  iphone16pm2:
+    'https://images.unsplash.com/photo-1721863751847-cfe24e038f53?w=800&q=80',
+  iphone13pm1:
+    'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=800&q=80',
+  iphone13pm2:
+    'https://images.unsplash.com/photo-1635434803802-fc6f546c0e3f?w=800&q=80',
+  macbookpro1:
+    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80',
+  macbookpro2:
+    'https://images.unsplash.com/photo-1611186871525-7f8f374aa2d6?w=800&q=80',
+  ipadpro1:
+    'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
+  ipadpro2:
+    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&q=80',
+  applewatch1:
+    'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&q=80',
+  applewatch2:
+    'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
+  galaxys24u1:
+    'https://images.unsplash.com/photo-1706864256861-c964f3b838e3?w=800&q=80',
+  galaxys24u2:
+    'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80',
+  galaxytab1:
+    'https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800&q=80',
+  galaxytab2:
+    'https://images.unsplash.com/photo-1623126908029-58cb08a2b272?w=800&q=80',
+  galaxywatch1:
+    'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80',
+  galaxywatch2:
+    'https://images.unsplash.com/photo-1617043786394-f977fa12eddf?w=800&q=80',
+  galaxybuds1:
+    'https://images.unsplash.com/photo-1628538137623-ce4ddf3b3d82?w=800&q=80',
+  galaxybuds2:
+    'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80',
+  airpods1:
+    'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&q=80',
+  airpods2:
+    'https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=800&q=80',
+  appletv1:
+    'https://images.unsplash.com/photo-1593359677879-a4bb92f829e1?w=800&q=80',
+  homepod1:
+    'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80',
+  samsungtv1:
+    'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80',
+  samsungtv2:
+    'https://images.unsplash.com/photo-1539794830467-1f1755804d13?w=800&q=80',
+  galaxyzfold1:
+    'https://images.unsplash.com/photo-1663530670768-8a66af8e7cba?w=800&q=80',
+  galaxyzfold2:
+    'https://images.unsplash.com/photo-1622532374248-7fb9ceabfaf6?w=800&q=80',
 
   // Fashion
-  hoodie1:      'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80',
-  hoodie2:      'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=800&q=80',
-  hoodie3:      'https://images.unsplash.com/photo-1614495640574-afb62e8a5d37?w=800&q=80',
-  chinos1:      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80',
-  chinos2:      'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=800&q=80',
-  shirt1:       'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80',
-  shirt2:       'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80',
-  sneakers1:    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
-  sneakers2:    'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&q=80',
-  sneakers3:    'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&q=80',
-  bag1:         'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
-  bag2:         'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80',
-  jumper1:      'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80',
-  jumper2:      'https://images.unsplash.com/photo-1614495640574-afb62e8a5d37?w=800&q=80',
-  leatherwatch1:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&q=80',
-  leatherwatch2:'https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80',
-  tights1:      'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&q=80',
-  tights2:      'https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&q=80',
-  glasses1:     'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=800&q=80',
+  hoodie1:
+    'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80',
+  hoodie2:
+    'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=800&q=80',
+  hoodie3:
+    'https://images.unsplash.com/photo-1614495640574-afb62e8a5d37?w=800&q=80',
+  chinos1:
+    'https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80',
+  chinos2:
+    'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=800&q=80',
+  shirt1:
+    'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80',
+  shirt2:
+    'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80',
+  sneakers1:
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
+  sneakers2:
+    'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&q=80',
+  sneakers3:
+    'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&q=80',
+  bag1: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+  bag2: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80',
+  jumper1:
+    'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80',
+  jumper2:
+    'https://images.unsplash.com/photo-1614495640574-afb62e8a5d37?w=800&q=80',
+  leatherwatch1:
+    'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&q=80',
+  leatherwatch2:
+    'https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80',
+  tights1:
+    'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&q=80',
+  tights2:
+    'https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&q=80',
+  glasses1:
+    'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=800&q=80',
 
   // Home & Living
-  coffee1:      'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
-  coffee2:      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80',
-  coffee3:      'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
-  shelf1:       'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-  shelf2:       'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80',
-  duvet1:       'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-  duvet2:       'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
-  teapot1:      'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80',
-  teapot2:      'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=800',
-  diffuser1:    'https://images.unsplash.com/photo-1732229035217-e7e42f61af4b?q=80&w=800',
-  diffuser2:    'https://images.unsplash.com/photo-1732229033245-a1b93c1baa65?q=80&w=800',
-  desk1:        'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
-  desk2:        'https://images.unsplash.com/photo-1541558869434-2840d308329a?w=800&q=80',
-  airpurifier1: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80',
-  airpurifier2: 'https://images.unsplash.com/photo-1607941421036-a9b1ac0e9fd8?w=800&q=80',
-  candle1:      'https://images.unsplash.com/photo-1603905179139-db12ab535ca9?w=800&q=80',
-  frenchpress1: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80',
-  cuttingboard1:'https://images.unsplash.com/photo-1593759608142-e976b5e3e0b7?w=800&q=80',
-  pillowcase1:  'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
-  spicerack1:   'https://images.unsplash.com/photo-1607195765591-38c7d49bb92f?w=800&q=80',
+  coffee1:
+    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
+  coffee2:
+    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80',
+  coffee3:
+    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
+  shelf1:
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+  shelf2:
+    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80',
+  duvet1:
+    'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+  duvet2:
+    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
+  teapot1:
+    'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80',
+  teapot2:
+    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=800',
+  diffuser1:
+    'https://images.unsplash.com/photo-1732229035217-e7e42f61af4b?q=80&w=800',
+  diffuser2:
+    'https://images.unsplash.com/photo-1732229033245-a1b93c1baa65?q=80&w=800',
+  desk1:
+    'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
+  desk2:
+    'https://images.unsplash.com/photo-1541558869434-2840d308329a?w=800&q=80',
+  airpurifier1:
+    'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80',
+  airpurifier2:
+    'https://images.unsplash.com/photo-1607941421036-a9b1ac0e9fd8?w=800&q=80',
+  candle1:
+    'https://images.unsplash.com/photo-1603905179139-db12ab535ca9?w=800&q=80',
+  frenchpress1:
+    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80',
+  cuttingboard1:
+    'https://images.unsplash.com/photo-1593759608142-e976b5e3e0b7?w=800&q=80',
+  pillowcase1:
+    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
+  spicerack1:
+    'https://images.unsplash.com/photo-1607195765591-38c7d49bb92f?w=800&q=80',
 
   // Beauty
-  serum1:       'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80',
-  serum2:       'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80',
-  guasha1:      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80',
-  cream1:       'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80',
-  cream2:       'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&q=80',
-  niacinamide1: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800&q=80',
-  moisturiser1: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80',
+  serum1:
+    'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80',
+  serum2:
+    'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80',
+  guasha1:
+    'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80',
+  cream1:
+    'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80',
+  cream2:
+    'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&q=80',
+  niacinamide1:
+    'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800&q=80',
+  moisturiser1:
+    'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80',
 
   // Sports
-  bands1:       'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&q=80',
-  bands2:       'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-  jumprope1:    'https://images.unsplash.com/photo-1598575468023-85e8e70e8d6e?w=800&q=80',
-  yogamat1:     'https://images.unsplash.com/photo-1601925228008-0b0a1d0c26e5?w=800&q=80',
-  yogamat2:     'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
-  foamroller1:  'https://images.unsplash.com/photo-1618355776464-8666794d2520?w=800&q=80',
-  posture1:     'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
-  acupressure1: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80',
-  shaker1:      'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800&q=80',
-  multitool1:   'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&q=80',
+  bands1:
+    'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&q=80',
+  bands2:
+    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
+  jumprope1:
+    'https://images.unsplash.com/photo-1598575468023-85e8e70e8d6e?w=800&q=80',
+  yogamat1:
+    'https://images.unsplash.com/photo-1601925228008-0b0a1d0c26e5?w=800&q=80',
+  yogamat2:
+    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
+  foamroller1:
+    'https://images.unsplash.com/photo-1618355776464-8666794d2520?w=800&q=80',
+  posture1:
+    'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
+  acupressure1:
+    'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80',
+  shaker1:
+    'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800&q=80',
+  multitool1:
+    'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&q=80',
 
   // Books
-  book1:        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
-  book2:        'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
-  book3:        'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80',
-  book4:        'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=80',
-  book5:        'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=800&q=80',
-  book6:        'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80',
+  book1: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
+  book2:
+    'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
+  book3:
+    'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80',
+  book4:
+    'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=80',
+  book5:
+    'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=800&q=80',
+  book6:
+    'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80',
 
   // Toys
-  robot1:       'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80',
-  robot2:       'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80',
-  puzzle1:      'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800&q=80',
-  artkit1:      'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&q=80',
-  rccar1:       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+  robot1:
+    'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80',
+  robot2:
+    'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80',
+  puzzle1:
+    'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800&q=80',
+  artkit1:
+    'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&q=80',
+  rccar1:
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
 
   // Food & Drink
-  matcha1:      'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=800&q=80',
-  matcha2:      'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80',
-  chocolate1:   'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=800&q=80',
-  chocolate2:   'https://images.unsplash.com/photo-1548907040-4baa42d10919?w=800&q=80',
-  coldbrew1:    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
-  oliveoil1:    'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80',
+  matcha1:
+    'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=800&q=80',
+  matcha2:
+    'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80',
+  chocolate1:
+    'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=800&q=80',
+  chocolate2:
+    'https://images.unsplash.com/photo-1548907040-4baa42d10919?w=800&q=80',
+  coldbrew1:
+    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
+  oliveoil1:
+    'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80',
 };
 
 // Helper — returns the Unsplash URL for a key, with optional size params ignored
 // (size params were used with picsum; Unsplash URLs include ?w= already)
 function img(key) {
   const url = IMAGE_MAP[key];
-  
+
   if (!url) {
     console.warn(`[mockProducts] No image mapped for key: "${key}"`);
     return `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/960px-No-Image-Placeholder.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20200912122019`;
@@ -170,7 +289,7 @@ function img(key) {
 
 export const mockProducts = [
   // ── ELECTRONICS ──────────────────────────────────────────
-  
+
   {
     id: 1,
     name: 'ProSound Wireless Headphones X1',
@@ -1818,3 +1937,6 @@ export const mockProducts = [
 export const flashDeals = mockProducts.filter(
   (productObj) => productObj.isFlashDeal,
 );
+
+export const getProductBySlug = (slug) =>
+  mockProducts.find((productObj) => productObj.slug === slug);

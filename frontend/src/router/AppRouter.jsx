@@ -26,11 +26,12 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'shop', element: <Shop /> },
       { path: 'shop/:categories', element: <Shop /> },
-      {path: 'product/:slug', element: <ProductDetail />},
+      { path: '/product/:slug', element: <ProductDetail /> },
       { path: 'cart', element: <Cart /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'dashboard', element: <Dashboard /> },
+
       { path: '*', element: <NotFound /> },
     ],
   },
