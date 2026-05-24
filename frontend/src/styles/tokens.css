@@ -16,8 +16,8 @@
   --color-brand-accent-light: #fef6e4; /* Amber tint */
 
   /* Background Layers */
-  --color-bg-base: #d6d6d4; /* Page background — warm off-white */
-  --color-bg-surface: #ffffff; /* Cards, modals, dropdowns */
+  --color-bg-base: #fff; /* Page background — warm off-white */
+  --color-bg-surface: #e8e8e1; /* Cards, modals, dropdowns */
   --color-bg-subtle: #f3f2ef; /* Section backgrounds, inputs */
   --color-bg-muted: #e8e6e1; /* Dividers, skeleton base */
   --color-bg-inverse: #1a3a5c; /* Dark sections */
