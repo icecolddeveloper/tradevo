@@ -2,12 +2,24 @@
   padding: var(--space-20) 0 var(--space-16);
 }
 
+@media (min-width: 1024px) {
+  .page {
+    padding: var(--space-26) 0 var(--space-16);
+  }
+}
+
 .breadcrumb {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   flex-wrap: wrap;
   margin-bottom: var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .breadcrumb {
+    margin-bottom: var(--space-10);
+  }
 }
 
 .breadcrumb__group {
@@ -33,7 +45,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-7);
-  /* margin-bottom: var(--space-16); */
+  margin-bottom: var(--space-10);
 }
 
 @media (min-width: 1024px) {
@@ -200,6 +212,12 @@
   gap: var(--space-2);
 }
 
+@media (min-width: 1024px) {
+  .info {
+    gap: var(--space-4);
+  }
+}
+
 .info__category {
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
@@ -310,6 +328,7 @@
 .info__actions {
   display: flex;
   gap: var(--space-3);
+  margin: var(--space-6) 0;
 }
 
 .btn_primary {
@@ -458,6 +477,7 @@
   max-width: 720px;
 }
 
+/* Specs */
 .specs_grid {
   display: flex;
   flex-direction: column;
@@ -470,6 +490,7 @@
 
 .spec_row {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid var(--color-border-light);
 }
 
@@ -480,7 +501,7 @@
 .spec_key {
   flex: 0 0 160px;
   padding: var(--space-4) var(--space-5);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
   color: var(--color-text-secondary);
   background: var(--color-bg-subtle);
@@ -574,8 +595,6 @@
   font-weight: var(--weight-semibold);
 }
 
-
-
 /* ── Reviews empty state ─────────────────────────────────────── */
 .reviews__empty {
   display: flex;
@@ -602,7 +621,7 @@
 }
 
 .reviews__empty__sub {
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
   max-width: 320px;
   line-height: var(--leading-relaxed);
@@ -625,8 +644,6 @@
   background: var(--color-brand-primary-hover);
 }
 
-
-
 /* Related */
 .related {
   display: flex;
@@ -639,23 +656,27 @@
   font-weight: var(--weight-bold);
   margin-bottom: var(--space-8);
 }
+
 .related__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
 }
+
 @media (min-width: 640px) {
   .related__grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (min-width: 1024px) {
   .related__grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
 @media (min-width: 1280px) {
   .related__grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }

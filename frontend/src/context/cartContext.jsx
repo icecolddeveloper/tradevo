@@ -145,7 +145,6 @@ function CartProvider({ children }) {
   useEffect(() => {}, [state, totalItems]);
 
   function handleDeleteSelected(selected) {
-    console.log(selected);
     dispatch({ type: 'DELETE_SELECTED_ITEMS', payload: selected });
   }
 
