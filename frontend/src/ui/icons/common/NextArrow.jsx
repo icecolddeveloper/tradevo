@@ -1,4 +1,4 @@
-function NextArrow({ onClick, className }) {
+function NextArrow({ onClick, className, size = 20 }) {
   return (
     <button
       type="button"
@@ -6,7 +6,7 @@ function NextArrow({ onClick, className }) {
       className={className}
       aria-label="Next slide"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path
           d="M9 18l6-6-6-6"
           stroke="currentColor"

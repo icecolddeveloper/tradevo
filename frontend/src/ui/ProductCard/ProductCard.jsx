@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/cartContext';
 import styles from './ProductCard.module.css';
 import HeartIcon from '../icons/navigation/HeartIcon';
 import CartIcon from '../icons/navigation/CartIcon';
 import CheckIcon from '../icons/common/CheckIcon';
-import { useCart } from '../../context/cartContext';
 
 /* ============================================================
    TRADEVO — ProductCard
@@ -27,11 +27,13 @@ function ProductCard({ productObj }) {
   return (
     <div className={styles.card}>
       <Link to={`/product/${productObj.slug}`} className={styles.card__link}>
-        {/* ──────────────  Image area ─────────────────────── */}
+        {/* ──────────  Image area ──────────── */}
         <div className={styles.card__image_wrap}>
           {/* Skeleton while image loads */}
           {!imgLoaded && (
-            <div className={`${styles.card__image_skeleton} skeleton`} />
+            <div className={`${styles.card__image_skeleton}`}>
+              <div className={styles.skeleton__content}>No image</div>
+            </div>
           )}
 
           <img
@@ -82,7 +84,7 @@ function ProductCard({ productObj }) {
           )}
         </div>
 
-        {/* ────────────── Content area ──────────────--------- */}
+        {/* ───────── Content area ───────----- */}
         <div className={styles.card__body}>
           <p className={styles.card__category}>{productObj.category}</p>
           <h3 className={styles.card__name}>{productObj.name}</h3>

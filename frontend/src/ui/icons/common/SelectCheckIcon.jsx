@@ -1,18 +1,18 @@
 function SelectCheckIcon({
   className = '',
   size = 22,
-  isSelecting = false,
+  multipleSelect = false,
   isSelected = false,
   handleItemSelect,
 }) {
   // Colors
-  const selectedBackgroundColor = '#e15c3f';
+  const selectedBackgroundColor = 'var(--color-brand-primary)';
   const selectedCheckColor = '#ffffff';
 
   const unselectedCircleColor = '#9ca3af';
 
   // Hide icon completely when not in selection mode
-  if (!isSelecting) {
+  if (!multipleSelect) {
     return null;
   }
 
@@ -41,12 +41,11 @@ function SelectCheckIcon({
       {/* Selected state */}
       {isSelected && (
         <>
-          <rect
-            x="2"
-            y="2"
-            width="20"
-            height="20"
-            rx="6"
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            strokeWidth="2"
             fill={selectedBackgroundColor}
           />
 

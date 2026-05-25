@@ -14,7 +14,7 @@ function Item({ itemObj, multipleSelect, selected, handleItemSelect }) {
         <SelectCheckIcon
           multipleSelect={multipleSelect}
           isSelected={isSelected}
-          handleItemSelect={handleItemSelect}
+          handleItemSelect={() => handleItemSelect(itemObj)}
         />
       )}
 
