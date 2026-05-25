@@ -34,6 +34,16 @@
 .card__image_skeleton {
   position: absolute;
   inset: 0;
+  background: var(--color-bg-muted);
+}
+
+.skeleton__content {
+  position: absolute;
+  top: calc(50% - 1rem);
+  left: calc(30% - 1rem);
+  padding: 1rem;
+ background: var(--color-bg-muted);
+  z-index: 200;
 }
 
 .card__image {
@@ -50,9 +60,9 @@
   opacity: 1;
 }
 
-.card:hover .card__image {
+/* .card:hover .card__image {
   transform: scale(1.04);
-}
+} */
 
 .card__badges {
   position: absolute;
@@ -252,8 +262,8 @@
   border-color: var(--color-success) !important;
 }
 
-.cart__wrapper{
+.cart__wrapper {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }

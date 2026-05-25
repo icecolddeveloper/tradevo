@@ -118,7 +118,7 @@
   color: #686262;
 }
 
-.current__image {
+.current__image__badge {
   position: absolute;
   display: flex;
   align-items: center;
@@ -129,7 +129,7 @@
   background: #d7d3d3;
   border-radius: var(--radius-full);
   color: #686262;
-  font-size: 0.8rem;
+  font-size: 0.73rem;
   font-weight: var(--weight-extrabold);
 }
 
@@ -596,13 +596,13 @@
 
 .reviews__empty__title {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: var(--weight-semibold);
   color: var(--color-text-primary);
 }
 
 .reviews__empty__sub {
-  font-size: var(--text-sm);
+  font-size: .8rem;
   color: var(--color-text-muted);
   max-width: 320px;
   line-height: var(--leading-relaxed);
@@ -620,6 +620,42 @@
   cursor: pointer;
   transition: background var(--transition-fast);
 }
+
 .reviews__write_btn:hover {
   background: var(--color-brand-primary-hover);
+}
+
+
+
+/* Related */
+.related {
+  display: flex;
+  flex-direction: column;
+}
+
+.related__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-8);
+}
+.related__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+@media (min-width: 640px) {
+  .related__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .related__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .related__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }

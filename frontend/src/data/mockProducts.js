@@ -1940,3 +1940,6 @@ export const flashDeals = mockProducts.filter(
 
 export const getProductBySlug = (slug) =>
   mockProducts.find((productObj) => productObj.slug === slug);
+
+export const getRelatedProducts = (receivedCategory) =>
+  mockProducts.filter((prodObj) => prodObj.category === receivedCategory);

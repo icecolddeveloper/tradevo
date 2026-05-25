@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { getProductBySlug } from '../../data/mockProducts';
+import { getProductBySlug, getRelatedProducts } from '../../data/mockProducts';
 import { useSwipeable } from 'react-swipeable';
 import { useState } from 'react';
 import styles from './ProductDetail.module.css';
@@ -7,6 +7,7 @@ import ArrowRight from '../../ui/icons/common/ArrowRight';
 import NextArrow from '../../ui/icons/common/NextArrow';
 import HeartIcon from '../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../ui/icons/navigation/CartIcon';
+import ProductCard from '../../ui/ProductCard/ProductCard';
 
 function ProductDetail() {
   const { slug } = useParams(); // derive from the url e.g. prosound-wireless-headphones-x1
@@ -15,7 +16,7 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const productObj = getProductBySlug(slug);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const imageArrLength = productObj.images.length;
 
@@ -38,6 +39,10 @@ function ProductDetail() {
   const categoryLabel =
     productObj.category.charAt(0).toLocaleUpperCase() +
     productObj.category.slice(1);
+
+  const relatedProducts = getRelatedProducts(productObj.category);
+
+  console.log(relatedProducts);
 
   return (
     <div className={styles.page}>
@@ -95,7 +100,7 @@ function ProductDetail() {
               </div> */}
 
               {/* Current count */}
-              <div className={styles.current__image}>
+              <div className={styles.current__image__badge}>
                 Item {activeImage + 1} / {imageArrLength}
               </div>
 
@@ -224,7 +229,7 @@ function ProductDetail() {
               ))}
             </div>
 
-            <div className={styles.tab__content}>
+            <div className={styles.tab_content}>
               {/* Description */}
               {activeTab === 'Description' && (
                 <p className={styles.description_text}>
@@ -248,7 +253,7 @@ function ProductDetail() {
               {activeTab === 'Reviews' && (
                 <div className={styles.reviews}>
                   <div className={styles.reviews__empty}>
-                    
+                    {/* Contents */}
                     <h3 className={styles.reviews__empty__title}>
                       No reviews yet
                     </h3>
@@ -257,6 +262,7 @@ function ProductDetail() {
                       Be the first to share your experience with this product.
                     </p>
 
+                    {/* CTA */}
                     {isAuthenticated ? (
                       <button className={styles.reviews__write_btn}>
                         Write a Review
@@ -280,6 +286,18 @@ function ProductDetail() {
               )}
             </div>
           </div>
+
+          {/* Related products */}
+          {relatedProducts.length > 0 && (
+            <div className={styles.related}>
+              <h2 className={styles.related__title}>You might also like</h2>
+              <div className={styles.related__grid}>
+                {relatedProducts.map((prodObj) => (
+                  <ProductCard key={prodObj.id} productObj={prodObj} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

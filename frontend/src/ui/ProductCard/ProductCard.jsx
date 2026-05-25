@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/cartContext';
 import styles from './ProductCard.module.css';
 import HeartIcon from '../icons/navigation/HeartIcon';
 import CartIcon from '../icons/navigation/CartIcon';
 import CheckIcon from '../icons/common/CheckIcon';
-import { useCart } from '../../context/cartContext';
 
 /* ============================================================
    TRADEVO — ProductCard
@@ -31,7 +31,9 @@ function ProductCard({ productObj }) {
         <div className={styles.card__image_wrap}>
           {/* Skeleton while image loads */}
           {!imgLoaded && (
-            <div className={`${styles.card__image_skeleton} skeleton`} />
+            <div className={`${styles.card__image_skeleton}`}>
+              <div className={styles.skeleton__content}>No image</div>
+            </div>
           )}
 
           <img
