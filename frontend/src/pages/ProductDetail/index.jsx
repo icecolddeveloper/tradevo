@@ -17,6 +17,7 @@ function ProductDetail() {
   const [activeTab, setActiveTab] = useState('Specs');
   const [quantity, setQuantity] = useState(1);
   const productObj = getProductBySlug(slug);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
@@ -81,10 +82,13 @@ function ProductDetail() {
           <div className={styles.gallery}>
             {/* Main image */}
             <div className={styles.gallery__main}>
+              {/* Skeleton while image loads */}
+
               <img
                 src={productObj.images[activeImage]}
                 alt=""
                 className={styles.gallery__img}
+                onLoad={() => setImgLoaded(true)}
                 {...handlers}
               />
 
