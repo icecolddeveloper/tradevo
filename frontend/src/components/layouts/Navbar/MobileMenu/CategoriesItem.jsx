@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './MobileMenu.module.css';
 
 function CategoriesItem({ categoryObj, handleClose }) {
+  console.log(categoryObj);
   return (
     <Link
       to={categoryObj.id === 'all' ? '/shop' : `/shop/${categoryObj.id}`}

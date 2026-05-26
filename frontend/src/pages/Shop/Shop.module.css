@@ -1,0 +1,4 @@
+.shop {
+  padding: var(--space-8) 0 var(--space-16);
+  min-height: 80vh;
+}
