@@ -8,13 +8,16 @@ import NextArrow from '../../ui/icons/common/NextArrow';
 import HeartIcon from '../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../ui/icons/navigation/CartIcon';
 import ProductCard from '../../ui/ProductCard/ProductCard';
+import { useCart } from '../../context/cartContext';
 
 function ProductDetail() {
+  const { addToCart } = useCart();
   const { slug } = useParams(); // derive from the url e.g. prosound-wireless-headphones-x1
   const [activeImage, setActiveImage] = useState(0);
-  const [activeTab, setActiveTab] = useState('Description');
+  const [activeTab, setActiveTab] = useState('Specs');
   const [quantity, setQuantity] = useState(1);
   const productObj = getProductBySlug(slug);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
@@ -40,7 +43,7 @@ function ProductDetail() {
     productObj.category.charAt(0).toLocaleUpperCase() +
     productObj.category.slice(1);
 
-  const relatedProducts = getRelatedProducts(productObj.category);
+  const relatedProducts = getRelatedProducts(productObj.category, 6);
 
   return (
     <div className={styles.page}>
@@ -77,10 +80,13 @@ function ProductDetail() {
           <div className={styles.gallery}>
             {/* Main image */}
             <div className={styles.gallery__main}>
+              {/* Skeleton while image loads */}
+
               <img
                 src={productObj.images[activeImage]}
                 alt=""
                 className={styles.gallery__img}
+                onLoad={() => setImgLoaded(true)}
                 {...handlers}
               />
 
@@ -153,150 +159,153 @@ function ProductDetail() {
                 </>
               )}
             </div>
-          </div>
 
-          {/* Short desc */}
-          <p className={styles.info__desc}>{productObj.description}</p>
+            {/* Short desc */}
+            <p className={styles.info__desc}>{productObj.description}</p>
 
-          {/* Quantity selector */}
-          <div className={styles.info__qty_row}>
-            <span className={styles.info__qty_label}>Quantity</span>
+            {/* Quantity selector */}
+            <div className={styles.info__qty_row}>
+              <span className={styles.info__qty_label}>Quantity</span>
 
-            {/* Container */}
-            <div className={styles.qty_control}>
-              {/* Decrememnt */}
-              <button
-                className={styles.qty_btn}
-                onClick={() => setQuantity((q) => Math.max(q - 1, 1))}
-                aria-label="Decrease quantity"
-              >
-                −
+              {/* Container */}
+              <div className={styles.qty_control}>
+                {/* Decrememnt */}
+                <button
+                  className={styles.qty_btn}
+                  onClick={() => setQuantity((q) => Math.max(q - 1, 1))}
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+
+                {/* Current count */}
+                <span className={styles.qty_value}>{quantity}</span>
+
+                {/* Increment */}
+                <button
+                  className={styles.qty_btn}
+                  onClick={() => setQuantity((q) => q + 1)}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* CTA buttons */}
+            <div className={styles.info__actions}>
+              <button className={styles.btn_primary}>
+                {productObj.inStock ? (
+                  <span
+                    className={styles.btn__primary_a}
+                    onClick={() => addToCart(productObj, quantity)}
+                  >
+                    <CartIcon size={20} /> Add to Cart
+                  </span>
+                ) : (
+                  'Out of Stock'
+                )}
               </button>
 
-              {/* Current count */}
-              <span className={styles.qty_value}>{quantity}</span>
+              <button className={styles.btn_secondary}>Buy Now</button>
+            </div>
 
-              {/* Increment */}
-              <button
-                className={styles.qty_btn}
-                onClick={() => setQuantity((q) => q + 1)}
-                aria-label="Increase quantity"
-              >
-                +
-              </button>
+            {/* Hashtags */}
+            <div className={styles.info__tags}>
+              {productObj.tags.map((tagName) => (
+                <span key={tagName} className={styles.tag}>
+                  #{tagName}
+                </span>
+              ))}
             </div>
           </div>
+        </div>
 
-          {/* CTA buttons */}
-          <div className={styles.info__actions}>
-            <button className={styles.btn_primary}>
-              {productObj.inStock ? (
-                <span className={styles.btn__primary_a}>
-                  <CartIcon size={20} /> Add to Cart
-                </span>
-              ) : (
-                'Out of Stock'
-              )}
-            </button>
-
-            <button className={styles.btn_secondary}>Buy Now</button>
-          </div>
-
-          {/* Hashtags */}
-          <div className={styles.info__tags}>
-            {productObj.tags.map((tagName) => (
-              <span key={tagName} className={styles.tag}>
-                #{tagName}
-              </span>
+        {/*  Tabs: Description / Specs / Reviews  */}
+        <div className={styles.tabs}>
+          <div className={styles.tabs__nav}>
+            {['Specs', 'Reviews'].map((tabName, idx) => (
+              <button
+                key={tabName}
+                className={`${styles.tab_btn} 
+                  ${tabName === activeTab ? styles.tab_btn__active : ''} 
+                  ${idx === 0 ? styles.idx_1_tab_btn : ''}`}
+                onClick={() => setActiveTab(tabName)}
+              >
+                {tabName}
+              </button>
             ))}
           </div>
 
-          {/*  Tabs: Description / Specs / Reviews  */}
-          <div className={styles.tabs}>
-            <div className={styles.tabs__nav}>
-              {['Description', 'Specs', 'Reviews'].map((tabName, idx) => (
-                <button
-                  key={tabName}
-                  className={`${styles.tab_btn} 
-                  ${tabName === activeTab ? styles.tab_btn__active : ''} 
-                  ${idx === 0 ? styles.idx_1_tab_btn : ''}`}
-                  onClick={() => setActiveTab(tabName)}
-                >
-                  {tabName}
-                </button>
-              ))}
-            </div>
-
-            <div className={styles.tab_content}>
-              {/* Description */}
-              {activeTab === 'Description' && (
+          <div className={styles.tab_content}>
+            {/* Description */}
+            {/* {activeTab === 'Description' && (
                 <p className={styles.description_text}>
                   {productObj.description}
                 </p>
-              )}
+              )} */}
 
-              {/* Specs */}
-              {activeTab === 'Specs' && (
-                <div className={styles.specs_grid}>
-                  {Object.entries(productObj.specs).map(([key, val]) => (
-                    <div className={styles.spec_row}>
-                      <span className={styles.spec_key}>{key}</span>
-                      <span className={styles.spec_val}>{val}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Reviews */}
-              {activeTab === 'Reviews' && (
-                <div className={styles.reviews}>
-                  <div className={styles.reviews__empty}>
-                    {/* Contents */}
-                    <h3 className={styles.reviews__empty__title}>
-                      No reviews yet
-                    </h3>
-
-                    <p className={styles.reviews__empty__sub}>
-                      Be the first to share your experience with this product.
-                    </p>
-
-                    {/* CTA */}
-                    {isAuthenticated ? (
-                      <button className={styles.reviews__write_btn}>
-                        Write a Review
-                      </button>
-                    ) : (
-                      <div className={styles.reviews__cta}>
-                        <p>
-                          Have this product?{' '}
-                          <Link
-                            to="/login"
-                            className={styles.reviews__login_link}
-                          >
-                            Sign in
-                          </Link>{' '}
-                          to write the first review.
-                        </p>
-                      </div>
-                    )}
+            {/* Specs */}
+            {activeTab === 'Specs' && (
+              <div className={styles.specs_grid}>
+                {Object.entries(productObj.specs).map(([key, val]) => (
+                  <div className={styles.spec_row}>
+                    <span className={styles.spec_key}>{key}</span>
+                    <span className={styles.spec_val}>{val}</span>
                   </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Related products */}
-          {relatedProducts.length > 0 && (
-            <div className={styles.related}>
-              <h2 className={styles.related__title}>You might also like</h2>
-              <div className={styles.related__grid}>
-                {relatedProducts.map((prodObj) => (
-                  <ProductCard key={prodObj.id} productObj={prodObj} />
                 ))}
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Reviews */}
+            {activeTab === 'Reviews' && (
+              <div className={styles.reviews}>
+                <div className={styles.reviews__empty}>
+                  {/* Contents */}
+                  <h3 className={styles.reviews__empty__title}>
+                    No reviews yet
+                  </h3>
+
+                  <p className={styles.reviews__empty__sub}>
+                    Be the first to share your experience with this product.
+                  </p>
+
+                  {/* CTA */}
+                  {isAuthenticated ? (
+                    <button className={styles.reviews__write_btn}>
+                      Write a Review
+                    </button>
+                  ) : (
+                    <div className={styles.reviews__cta}>
+                      <p>
+                        Have this product?{' '}
+                        <Link
+                          to="/login"
+                          className={styles.reviews__login_link}
+                        >
+                          Sign in
+                        </Link>{' '}
+                        to write the first review.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Related products */}
+        {relatedProducts.length > 0 && (
+          <div className={styles.related}>
+            <h2 className={styles.related__title}>You might also like</h2>
+            <div className={styles.related__grid}>
+              {relatedProducts.map((prodObj) => (
+                <ProductCard key={prodObj.id} productObj={prodObj} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
