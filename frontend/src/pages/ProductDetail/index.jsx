@@ -42,8 +42,6 @@ function ProductDetail() {
 
   const relatedProducts = getRelatedProducts(productObj.category);
 
-  console.log(relatedProducts);
-
   return (
     <div className={styles.page}>
       <div className="container">
