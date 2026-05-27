@@ -1945,3 +1945,12 @@ export const getRelatedProducts = (receivedCategory, limit = 10) =>
   mockProducts
     .filter((prodObj) => prodObj.category === receivedCategory)
     .slice(0, limit);
+
+export const getCategoryItems = (receivedCategory) =>
+  mockProducts.filter((prodObj) => {
+    if (receivedCategory) {
+      return prodObj.category === receivedCategory;
+    } else {
+      return prodObj;
+    }
+  });
