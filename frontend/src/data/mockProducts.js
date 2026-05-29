@@ -287,6 +287,18 @@ function img(key) {
   return url;
 }
 
+const now = Date.now();
+const daysAgo = (days) => now - days * 24 * 60 * 60 * 1000;
+
+// isNew  cisNewProduct(),
+const NEW_PRODUCT_DAYS = 14;
+
+export const isNewProduct = (product) => {
+  const daysInMs = NEW_PRODUCT_DAYS * 24 * 60 * 60 * 1000;
+
+  return Date.now() - product.createdAt <= daysInMs;
+};
+
 export const mockProducts = [
   // ── ELECTRONICS ──────────────────────────────────────────
 
@@ -314,7 +326,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(1),
     soldCount: 0,
   },
   {
@@ -341,7 +353,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(1),
     soldCount: 0,
   },
   {
@@ -368,7 +380,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(2),
     soldCount: 0,
   },
   {
@@ -395,7 +407,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(2),
     soldCount: 0,
   },
   {
@@ -422,7 +434,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(3),
     soldCount: 0,
   },
   {
@@ -449,7 +461,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(3),
     soldCount: 0,
   },
   {
@@ -476,7 +488,7 @@ export const mockProducts = [
     inStock: false,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(4),
     soldCount: 0,
   },
   {
@@ -503,7 +515,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(4),
     soldCount: 0,
   },
 
@@ -532,7 +544,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(5),
     soldCount: 0,
   },
   {
@@ -559,7 +571,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(5),
     soldCount: 0,
   },
   {
@@ -586,7 +598,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(6),
     soldCount: 0,
   },
   {
@@ -613,7 +625,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(6),
     soldCount: 0,
   },
   {
@@ -640,7 +652,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(7),
     soldCount: 0,
   },
   {
@@ -667,7 +679,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(7),
     soldCount: 0,
   },
 
@@ -696,7 +708,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(8),
     soldCount: 0,
   },
   {
@@ -723,7 +735,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(8),
     soldCount: 0,
   },
   {
@@ -750,7 +762,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(9),
     soldCount: 0,
   },
   {
@@ -777,7 +789,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(9),
     soldCount: 0,
   },
   {
@@ -804,7 +816,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(10),
     soldCount: 0,
   },
   {
@@ -831,7 +843,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(10),
     soldCount: 0,
   },
 
@@ -860,7 +872,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(11),
     soldCount: 0,
   },
   {
@@ -887,7 +899,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(11),
     soldCount: 0,
   },
   {
@@ -914,7 +926,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(12),
     soldCount: 0,
   },
 
@@ -943,7 +955,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(12),
     soldCount: 0,
   },
   {
@@ -970,7 +982,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(13),
     soldCount: 0,
   },
   {
@@ -997,7 +1009,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(13),
     soldCount: 0,
   },
 
@@ -1026,7 +1038,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(14),
     soldCount: 0,
   },
   {
@@ -1053,7 +1065,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(14),
     soldCount: 0,
   },
 
@@ -1082,7 +1094,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(15),
     soldCount: 0,
   },
   {
@@ -1109,7 +1121,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(15),
     soldCount: 0,
   },
 
@@ -1138,7 +1150,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: true,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(16),
     soldCount: 0,
   },
   {
@@ -1165,7 +1177,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(16),
     soldCount: 0,
   },
 
@@ -1194,7 +1206,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(17),
     soldCount: 0,
   },
   {
@@ -1221,7 +1233,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(17),
     soldCount: 0,
   },
   {
@@ -1248,7 +1260,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(18),
     soldCount: 0,
   },
 
@@ -1277,7 +1289,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(18),
     soldCount: 0,
   },
   {
@@ -1304,7 +1316,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(19),
     soldCount: 0,
   },
 
@@ -1333,7 +1345,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(19),
     soldCount: 0,
   },
   {
@@ -1360,7 +1372,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(20),
     soldCount: 0,
   },
   {
@@ -1387,7 +1399,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(20),
     soldCount: 0,
   },
   {
@@ -1414,7 +1426,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(21),
     soldCount: 12300,
   },
   {
@@ -1441,7 +1453,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(21),
     soldCount: 34500,
   },
   {
@@ -1468,7 +1480,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(22),
     soldCount: 23400,
   },
   {
@@ -1495,7 +1507,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(22),
     soldCount: 18900,
   },
   {
@@ -1522,7 +1534,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(23),
     soldCount: 67800,
   },
   {
@@ -1549,7 +1561,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(23),
     soldCount: 23400,
   },
   {
@@ -1576,7 +1588,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(24),
     soldCount: 56700,
   },
   {
@@ -1603,7 +1615,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(24),
     soldCount: 12300,
   },
   {
@@ -1630,7 +1642,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(25),
     soldCount: 8900,
   },
   {
@@ -1657,7 +1669,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(25),
     soldCount: 34500,
   },
   {
@@ -1684,7 +1696,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(26),
     soldCount: 18900,
   },
   {
@@ -1711,7 +1723,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(26),
     soldCount: 23400,
   },
   {
@@ -1738,7 +1750,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(27),
     soldCount: 45600,
   },
   {
@@ -1765,7 +1777,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(27),
     soldCount: 18900,
   },
   {
@@ -1792,7 +1804,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(28),
     soldCount: 23400,
   },
   {
@@ -1819,7 +1831,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(28),
     soldCount: 7890,
   },
   {
@@ -1846,7 +1858,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(29),
     soldCount: 15600,
   },
   {
@@ -1873,7 +1885,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: true,
-    isNew: false,
+    createdAt: daysAgo(29),
     soldCount: 56700,
   },
   {
@@ -1900,7 +1912,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: true,
+    createdAt: daysAgo(30),
     soldCount: 4560,
   },
   {
@@ -1927,7 +1939,7 @@ export const mockProducts = [
     inStock: true,
     isFeatured: false,
     isFlashDeal: false,
-    isNew: false,
+    createdAt: daysAgo(30),
     soldCount: 12300,
   },
 ];

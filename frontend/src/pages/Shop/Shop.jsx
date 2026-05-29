@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './Shop.module.css';
 import ProductCard from '../../ui/ProductCard/ProductCard';
 import FilterIcon from '../../ui/icons/common/FilterIcon';
+import { ProductCardSkeleton } from '../../ui/Skeleton/Skeleton';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -21,13 +22,39 @@ function Shop() {
   const capitalizedCategory =
     category?.charAt(0).toUpperCase() + category?.slice(1);
 
-  const filteredProducts = getCategoryItems(category);
-  console.log(filteredProducts);
+  const categoryItems = getCategoryItems(category);
+  console.log(categoryItems);
 
   // Sort logic
-  const [sort, setSort] = useState('newest');
+  const [sortBy, setSortBy] = useState('newest');
 
-  console.log(sort);
+  const low = [...categoryItems].sort((objA, objB) => objA.price - objB.price);
+
+  function sortProducts(categoryItems, sortBy) {
+    switch (sortBy) {
+      case 'newest': {
+        return [...categoryItems].sort((a, b) => b.createdAt - a.createdAt); // timestamp difference
+      }
+
+      case 'price-asc': {
+        return [...categoryItems].sort((a, b) => a.price - b.price);
+      }
+
+      case 'price-desc': {
+        return [...categoryItems].sort((a, b) => b.price - a.price);
+      }
+
+      default: {
+        console.log('unknown sort');
+      }
+    }
+  }
+
+  const sorted = sortProducts(categoryItems, sortBy);
+
+  console.log(sorted);
+
+  console.log(sortBy);
   return (
     <div className={styles.shop}>
       <div className="container">
@@ -41,7 +68,7 @@ function Shop() {
             </div>
 
             <p className={styles.count}>
-              {isLoading ? '—' : `${filteredProducts.length} products`}
+              {isLoading ? '—' : `${categoryItems.length} products`}
             </p>
           </div>
 
@@ -53,8 +80,8 @@ function Shop() {
 
             {/* Sort */}
             <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
               aria-label="Sort products"
             >
               {SORT_OPTIONS.map((option) => (
@@ -67,7 +94,7 @@ function Shop() {
         </div>
 
         <div className={styles.grid}>
-          {filteredProducts.map((prodObj) => (
+          {sorted.map((prodObj) => (
             <ProductCard key={prodObj.id} productObj={prodObj} />
           ))}
         </div>
