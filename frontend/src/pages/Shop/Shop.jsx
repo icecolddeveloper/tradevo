@@ -1,5 +1,5 @@
 import { getCategoryItems } from '../../data/mockProducts';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Shop.module.css';
 import ProductCard from '../../ui/ProductCard/ProductCard';
@@ -16,8 +16,13 @@ const SORT_OPTIONS = [
 ];
 
 function Shop() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sortBy = searchParams.get('sortBy') || 'newest';
+
   const { category } = useParams(); // e.g. electronics
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(searchParams, sortBy);
 
   const capitalizedCategory =
     category?.charAt(0).toUpperCase() + category?.slice(1);
@@ -26,7 +31,7 @@ function Shop() {
   console.log(categoryItems);
 
   // Sort logic
-  const [sortBy, setSortBy] = useState('newest');
+  // const [sortBy, setSortBy] = useState('newest');
 
   const low = [...categoryItems].sort((objA, objB) => objA.price - objB.price);
 
@@ -81,7 +86,7 @@ function Shop() {
             {/* Sort */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e) => setSearchParams({sortBy: e.target.value})}
               aria-label="Sort products"
             >
               {SORT_OPTIONS.map((option) => (
