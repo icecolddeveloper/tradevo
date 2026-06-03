@@ -84,7 +84,7 @@ function MegaMenuItem({ idx, categoryObj, onClose }) {
       animate="visible"
     >
       <Link
-        to={`/shop/${categoryObj.id}`}
+        to={`/shop?category=${categoryObj.id}`}
         className={styles.megamenu__item}
         onClick={onClose}
       >

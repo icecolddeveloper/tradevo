@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { useCart } from '../context/cartContext';
 import { getProductBySlug, getRelatedProducts } from '../data/mockProducts';
-import { useState } from 'react';
+import { useCart } from '../context/cartContext';
 import { useSwipeable } from 'react-swipeable';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 export function useProductDetail() {
   // 1. external hooks first
@@ -21,7 +21,7 @@ export function useProductDetail() {
   const [activeImage, setActiveImage] = useState(0);
   const [activeTab, setActiveTab] = useState('Specs');
   const [quantity, setQuantity] = useState(1);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [ setImgLoaded] = useState(false);
   const [isAuthenticated] = useState(true);
 
   // 4. third party hooks that depend on state/handlers

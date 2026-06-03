@@ -5,7 +5,7 @@ function CategoriesItem({ categoryObj, handleClose }) {
   console.log(categoryObj);
   return (
     <Link
-      to={categoryObj.id === 'all' ? '/shop' : `/shop/${categoryObj.id}`}
+      to={categoryObj.id === 'all' ? '/shop' : `/shop?category=${categoryObj.id}`}
       className={styles.drawer__category_link}
       onClick={() => handleClose()}
     >
