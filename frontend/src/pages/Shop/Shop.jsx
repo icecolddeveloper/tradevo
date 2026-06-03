@@ -1,10 +1,10 @@
+import { ProductCardSkeleton } from '../../ui/Skeleton/Skeleton';
 import { getCategoryItems } from '../../data/mockProducts';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Shop.module.css';
 import ProductCard from '../../ui/ProductCard/ProductCard';
 import FilterIcon from '../../ui/icons/common/FilterIcon';
-import { ProductCardSkeleton } from '../../ui/Skeleton/Skeleton';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -26,9 +26,7 @@ function Shop() {
   console.log(categoryItems);
 
   // Sort logic
-  const [sortBy, setSortBy] = useState('newest');
-
-  const low = [...categoryItems].sort((objA, objB) => objA.price - objB.price);
+  const [sortBy, setSortBy] = useState('newest'); 
 
   function sortProducts(categoryItems, sortBy) {
     switch (sortBy) {
