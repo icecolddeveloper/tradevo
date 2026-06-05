@@ -1,9 +1,10 @@
-function NextArrow({ onClick, className, size = 20 }) {
+function NextArrow({ onClick, className, handleDisable, size = 20 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={className}
+      disabled={handleDisable}
       aria-label="Next slide"
     >
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
