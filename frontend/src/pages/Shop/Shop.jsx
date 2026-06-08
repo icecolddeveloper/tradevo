@@ -35,7 +35,7 @@ const SORT_OPTIONS = [
 ];
 
 function Shop() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sort') || 'newest';
   const category = searchParams.get('category') || '';
