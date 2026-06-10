@@ -1,6 +1,6 @@
 import { CATEGORIES, getCategoryItems } from '../../data/mockProducts';
-import { useSearchParams } from 'react-router-dom';
 import { useFilter } from '../../context/FilterContext';
+import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import Slider from 'rc-slider';
 import ProductCard from '../../ui/ProductCard/ProductCard';
@@ -9,6 +9,7 @@ import styles from './Shop.module.css';
 import Pagination from '../../ui/Pagination/Pagination';
 import CloseIcon from '../../ui/icons/navigation/CloseIcon';
 import 'rc-slider/assets/index.css'; // required — imports default styles
+import { AnimatePresence, motion } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -40,6 +41,7 @@ const SORT_OPTIONS = [
 
 function Shop() {
   const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [isLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sort') || 'newest';
@@ -81,6 +83,46 @@ function Shop() {
     }));
   }
 
+  function handleSideBarToggle() {
+    setSideBarOpen((prev) => !prev);
+  }
+
+  // motion
+  const overlayVariant = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+      },
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  const sidebarVariant = {
+    hidden: {
+      x: '-100%',
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+      },
+    },
+    exit: {
+      x: '-100%',
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
     <div className={styles.shop}>
       <div className="container">
@@ -100,7 +142,10 @@ function Shop() {
 
           <div className={styles.header__actions}>
             {/* Mobile filter toggle */}
-            <button className={styles.filter_toggle}>
+            <button
+              className={styles.filter_toggle}
+              onClick={handleSideBarToggle}
+            >
               <FilterIcon size={20} /> Filters
             </button>
 
@@ -122,85 +167,110 @@ function Shop() {
 
         {/* Layout */}
         <div className={styles.layout}>
-          {/* Overlay — sibling to sidebar */}
-          <div className={styles.sidebar_overlay} />
+          <AnimatePresence>
+            {sideBarOpen && (
+              <>
+                {/* Mobile overlay — sibling to sidebar */}
+                {sideBarOpen && (
+                  <motion.div
+                    className={styles.sidebar_overlay}
+                    variants={overlayVariant}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  />
+                )}
 
-          {/* Sidebar */}
-          <div className={styles.sidebar}>
-            {/* Sidebar header */}
-            <div className={styles.sidebar__header}>
-              <h3>Filters</h3>
+                {/* Sidebar */}
+                <motion.div
+                  className={styles.sidebar}
+                  variants={sidebarVariant}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  {/* Sidebar header */}
+                  <div className={styles.sidebar__header}>
+                    <h3>Filters</h3>
 
-              <button className={styles.sidebar__close}>
-                <CloseIcon />
-              </button>
-            </div>
+                    <button
+                      className={styles.sidebar__close}
+                      onClick={handleSideBarToggle}
+                    >
+                      <CloseIcon />
+                    </button>
+                  </div>
 
-            {/* Category */}
-            <div className={styles.filter_group}>
-              <h4 className={styles.filter_label}>Category</h4>
+                  {/* Category */}
+                  <div className={styles.filter_group}>
+                    <h4 className={styles.filter_label}>Category</h4>
 
-              <div className={styles.filter_list}>
-                {CATEGORIES.map((categoryObj) => (
-                  <button
-                    key={categoryObj.id}
-                    className={`${styles.filter_option} ${styles.e}`}
-                  >
-                    <span>{categoryObj.icon} </span>
+                    <div className={styles.filter_list}>
+                      {CATEGORIES.map((categoryObj) => (
+                        <button
+                          key={categoryObj.id}
+                          className={`${styles.filter_option} ${styles.e}`}
+                        >
+                          <span>{categoryObj.icon} </span>
 
-                    <span>{categoryObj.label} </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+                          <span>{categoryObj.label} </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-            {/* Price range */}
-            <div className={styles.filter_group}>
-              <div className={styles.range_header}>
-                <h4 className={styles.filter_label}>Price Range </h4>
+                  {/* Price range */}
+                  <div className={styles.filter_group}>
+                    <div className={styles.range_header}>
+                      <h4 className={styles.filter_label}>Price Range </h4>
 
-                <span className={styles.filter_value}>
-                  ${priceRange[0]} - ${priceRange[1]}
-                </span>
-              </div>
+                      <span className={styles.filter_value}>
+                        ${priceRange[0]} - ${priceRange[1]}
+                      </span>
+                    </div>
 
-              <div
-                className={styles.range_wrap}
-                style={{ touchAction: 'none' }}
-              >
-                <Slider
-                  range
-                  min={0}
-                  max={5000}
-                  step={10}
-                  value={priceRange}
-                  onChange={(newRange) => setPriceRange(newRange)} // [120, 400]
-                />
-              </div>
-            </div>
+                    <div
+                      className={styles.range_wrap}
+                      style={{ touchAction: 'none' }}
+                    >
+                      <Slider
+                        range
+                        min={0}
+                        max={5000}
+                        step={10}
+                        value={priceRange}
+                        onChange={(newRange) => setPriceRange(newRange)} // [120, 400]
+                      />
+                    </div>
+                  </div>
 
-            {/* Condition & Stock */}
-            <div className={styles.filter_group}>
-              <h4 className={styles.filter_label}>Condition</h4>
+                  {/* Condition & Stock */}
+                  <div className={styles.filter_group}>
+                    <h4 className={styles.filter_label}>Condition</h4>
 
-              <label className={styles.checkbox_wrapper}>
-                <input type="checkbox" className={styles.checkbox} />
-                <span className={styles.checkbox_label}>Brand New</span>
-              </label>
+                    <label className={styles.checkbox_wrapper}>
+                      <input type="checkbox" className={styles.checkbox} />
+                      <span className={styles.checkbox_label}>Brand New</span>
+                    </label>
 
-              <label className={styles.checkbox_wrapper}>
-                <input type="checkbox" className={styles.checkbox} />
-                <span className={styles.checkbox_label}>Fairly Used</span>
-              </label>
+                    <label className={styles.checkbox_wrapper}>
+                      <input type="checkbox" className={styles.checkbox} />
+                      <span className={styles.checkbox_label}>Fairly Used</span>
+                    </label>
 
-              <label className={styles.checkbox_wrapper}>
-                <input type="checkbox" className={styles.checkbox} />
-                <span className={styles.checkbox_label}>In Stock Only</span>
-              </label>
-            </div>
+                    <label className={styles.checkbox_wrapper}>
+                      <input type="checkbox" className={styles.checkbox} />
+                      <span className={styles.checkbox_label}>
+                        In Stock Only
+                      </span>
+                    </label>
+                  </div>
 
-            {/* discount */}
-          </div>
+                  {/* discount */}
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </div>
 
         {currentPageItems.length === 0 ? (
