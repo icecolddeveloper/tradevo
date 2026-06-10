@@ -1,12 +1,16 @@
-import { getCategoryItems } from '../../data/mockProducts';
+import { CATEGORIES, getCategoryItems } from '../../data/mockProducts';
 import { useSearchParams } from 'react-router-dom';
+import { useFilter } from '../../context/FilterContext';
+import { useState } from 'react';
+import Slider from 'rc-slider';
 import ProductCard from '../../ui/ProductCard/ProductCard';
 import FilterIcon from '../../ui/icons/common/FilterIcon';
 import styles from './Shop.module.css';
 import Pagination from '../../ui/Pagination/Pagination';
-import { useState } from 'react';
+import CloseIcon from '../../ui/icons/navigation/CloseIcon';
+import 'rc-slider/assets/index.css'; // required — imports default styles
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 function sortProducts(categoryItems, sortBy) {
   switch (sortBy) {
@@ -35,7 +39,8 @@ const SORT_OPTIONS = [
 ];
 
 function Shop() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [isLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sort') || 'newest';
   const category = searchParams.get('category') || '';
@@ -92,34 +97,124 @@ function Shop() {
               {isLoading ? '—' : `${categoryItems.length} products`}
             </p>
           </div>
+
+          <div className={styles.header__actions}>
+            {/* Mobile filter toggle */}
+            <button className={styles.filter_toggle}>
+              <FilterIcon size={20} /> Filters
+            </button>
+
+            {/* Sort */}
+            <select
+              className={styles.sort_select}
+              value={sortBy}
+              onChange={handleSortChange}
+              aria-label="Sort products"
+            >
+              {SORT_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className={styles.header__actions}>
-          {/* Mobile filter toggle */}
-          <button className={styles.filter_toggle}>
-            <FilterIcon size={20} /> Filters
-          </button>
+        {/* Layout */}
+        <div className={styles.layout}>
+          {/* Overlay — sibling to sidebar */}
+          <div className={styles.sidebar_overlay} />
 
-          {/* Sort */}
-          <select
-            className={styles.sort_select}
-            value={sortBy}
-            onChange={handleSortChange}
-            aria-label="Sort products"
-          >
-            {SORT_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
+          {/* Sidebar */}
+          <div className={styles.sidebar}>
+            {/* Sidebar header */}
+            <div className={styles.sidebar__header}>
+              <h3>Filters</h3>
+
+              <button className={styles.sidebar__close}>
+                <CloseIcon />
+              </button>
+            </div>
+
+            {/* Category */}
+            <div className={styles.filter_group}>
+              <h4 className={styles.filter_label}>Category</h4>
+
+              <div className={styles.filter_list}>
+                {CATEGORIES.map((categoryObj) => (
+                  <button
+                    key={categoryObj.id}
+                    className={`${styles.filter_option} ${styles.e}`}
+                  >
+                    <span>{categoryObj.icon} </span>
+
+                    <span>{categoryObj.label} </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price range */}
+            <div className={styles.filter_group}>
+              <div className={styles.range_header}>
+                <h4 className={styles.filter_label}>Price Range </h4>
+
+                <span className={styles.filter_value}>
+                  ${priceRange[0]} - ${priceRange[1]}
+                </span>
+              </div>
+
+              <div
+                className={styles.range_wrap}
+                style={{ touchAction: 'none' }}
+              >
+                <Slider
+                  range
+                  min={0}
+                  max={5000}
+                  step={10}
+                  value={priceRange}
+                  onChange={(newRange) => setPriceRange(newRange)} // [120, 400]
+                />
+              </div>
+            </div>
+
+            {/* Condition & Stock */}
+            <div className={styles.filter_group}>
+              <h4 className={styles.filter_label}>Condition</h4>
+
+              <label className={styles.checkbox_wrapper}>
+                <input type="checkbox" className={styles.checkbox} />
+                <span className={styles.checkbox_label}>Brand New</span>
+              </label>
+
+              <label className={styles.checkbox_wrapper}>
+                <input type="checkbox" className={styles.checkbox} />
+                <span className={styles.checkbox_label}>Fairly Used</span>
+              </label>
+
+              <label className={styles.checkbox_wrapper}>
+                <input type="checkbox" className={styles.checkbox} />
+                <span className={styles.checkbox_label}>In Stock Only</span>
+              </label>
+            </div>
+
+            {/* discount */}
+          </div>
+        </div>
+
+        {currentPageItems.length === 0 ? (
+          <div className={styles.empty}>
+            <h3 className={styles.empty__title}>No products found</h3>
+            <p className={styles.empty__sub}>Try adjusting your filters.</p>
+          </div>
+        ) : (
+          <div className={styles.grid}>
+            {currentPageItems.map((prodObj) => (
+              <ProductCard key={prodObj.id} productObj={prodObj} />
             ))}
-          </select>
-        </div>
-
-        <div className={styles.grid}>
-          {currentPageItems.map((prodObj) => (
-            <ProductCard key={prodObj.id} productObj={prodObj} />
-          ))}
-        </div>
+          </div>
+        )}
 
         <Pagination
           currentPage={currentPage}
@@ -132,3 +227,23 @@ function Shop() {
 }
 
 export default Shop;
+
+// <input
+//   type="range"
+//   min={0}
+//   max={5000}
+//   step={10}
+//   value={0}
+//   className={styles.range_input}
+//   aria-label="Minimum price"
+// />
+
+// <input
+//   type="range"
+//   min={0}
+//   max={5000}
+//   step={10}
+//   value={0}
+//   className={styles.range_input}
+//   aria-label="Minimum price"
+// />

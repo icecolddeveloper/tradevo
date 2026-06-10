@@ -107,6 +107,27 @@ h6 {
   height: 0;
 }
 
+/* slider */
+.rc-slider-rail {
+  height: 6px !important;
+  background-color: var(--color-brand-primary) !important;
+}
+
+.rc-slider-track {
+  height: 6px !important;
+  background: var(--color-brand-primary) !important;
+}
+
+.rc-slider-handle {
+  width: 22px !important;
+  height: 22px !important;
+  margin-top: -8px !important;
+  border: 7px solid  var(--color-text-muted)!important;
+  background: var(--color-brand-primary)  !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  opacity: 1 !important;
+}
+
 /* ── LAYOUT UTILITIES ────────────────────────────────────── */
 .container {
   width: 100%;

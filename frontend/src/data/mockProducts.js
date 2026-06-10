@@ -328,6 +328,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(1),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 2,
@@ -355,6 +357,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(1),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 3,
@@ -382,6 +386,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(2),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 4,
@@ -409,6 +415,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(2),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 5,
@@ -436,6 +444,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(3),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 6,
@@ -463,6 +473,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(3),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 7,
@@ -490,6 +502,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(4),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 8,
@@ -517,6 +531,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(4),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 
   // ── FASHION ───────────────────────────────────────────────
@@ -546,6 +562,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(5),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 10,
@@ -573,6 +591,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(5),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 11,
@@ -600,6 +620,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(6),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 12,
@@ -627,6 +649,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(6),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 13,
@@ -654,6 +678,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(7),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 14,
@@ -681,6 +707,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(7),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 
   // ── HOME & LIVING ─────────────────────────────────────────
@@ -710,6 +738,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(8),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 16,
@@ -737,6 +767,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(8),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 17,
@@ -764,6 +796,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(9),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 18,
@@ -791,6 +825,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(9),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 19,
@@ -818,6 +854,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(10),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 20,
@@ -845,6 +883,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(10),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
 
   // ── BEAUTY ────────────────────────────────────────────────
@@ -874,6 +914,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(11),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 22,
@@ -901,6 +943,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(11),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 23,
@@ -928,6 +972,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(12),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
 
   // ── SPORTS ───────────────────────────────────────────────
@@ -957,6 +1003,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(12),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 25,
@@ -984,6 +1032,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(13),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 26,
@@ -1011,6 +1061,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(13),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 
   // ── BOOKS ────────────────────────────────────────────────
@@ -1040,6 +1092,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(14),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 28,
@@ -1067,6 +1121,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(14),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
 
   // ── TOYS & KIDS ──────────────────────────────────────────
@@ -1096,6 +1152,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(15),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 30,
@@ -1123,6 +1181,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(15),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 
   // ── FOOD & DRINKS ────────────────────────────────────────
@@ -1152,6 +1212,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(16),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 32,
@@ -1179,6 +1241,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(16),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 
   // ── MORE ELECTRONICS ──────────────────────────────────────
@@ -1208,6 +1272,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(17),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 34,
@@ -1235,6 +1301,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(17),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 35,
@@ -1262,6 +1330,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(18),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
 
   // ── MORE FASHION ──────────────────────────────────────────
@@ -1291,6 +1361,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(18),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 37,
@@ -1318,6 +1390,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(19),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
 
   // ── MORE HOME ─────────────────────────────────────────────
@@ -1347,6 +1421,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(19),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 39,
@@ -1374,6 +1450,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(20),
     soldCount: 0,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 40,
@@ -1401,6 +1479,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(20),
     soldCount: 0,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 41,
@@ -1428,6 +1508,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(21),
     soldCount: 12300,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 42,
@@ -1455,6 +1537,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(21),
     soldCount: 34500,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 43,
@@ -1482,6 +1566,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(22),
     soldCount: 23400,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 44,
@@ -1509,6 +1595,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(22),
     soldCount: 18900,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 45,
@@ -1536,6 +1624,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(23),
     soldCount: 67800,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 46,
@@ -1563,6 +1653,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(23),
     soldCount: 23400,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 47,
@@ -1590,6 +1682,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(24),
     soldCount: 56700,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 48,
@@ -1617,6 +1711,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(24),
     soldCount: 12300,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 49,
@@ -1644,6 +1740,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(25),
     soldCount: 8900,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 50,
@@ -1671,6 +1769,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(25),
     soldCount: 34500,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 51,
@@ -1698,6 +1798,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(26),
     soldCount: 18900,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 52,
@@ -1725,6 +1827,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(26),
     soldCount: 23400,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 53,
@@ -1752,6 +1856,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(27),
     soldCount: 45600,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 54,
@@ -1779,6 +1885,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(27),
     soldCount: 18900,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 55,
@@ -1806,6 +1914,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(28),
     soldCount: 23400,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 56,
@@ -1833,6 +1943,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(28),
     soldCount: 7890,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 57,
@@ -1860,6 +1972,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(29),
     soldCount: 15600,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 58,
@@ -1887,6 +2001,8 @@ export const mockProducts = [
     isFlashDeal: true,
     createdAt: daysAgo(29),
     soldCount: 56700,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
   {
     id: 59,
@@ -1914,6 +2030,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(30),
     soldCount: 4560,
+    isBrandNew: false,
+    isFairlyUsed: true,
   },
   {
     id: 60,
@@ -1941,6 +2059,8 @@ export const mockProducts = [
     isFlashDeal: false,
     createdAt: daysAgo(30),
     soldCount: 12300,
+    isBrandNew: true,
+    isFairlyUsed: false,
   },
 ];
 

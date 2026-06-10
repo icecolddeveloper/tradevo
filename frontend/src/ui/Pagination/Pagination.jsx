@@ -6,7 +6,6 @@ import styles from './Pagination.module.css';
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const pages = Array.from({ length: totalPages }, (_, idx) => idx + 1);
 
-  console.log(totalPages);
   return (
     <nav className={styles.pagination}>
       <PrevArrow
@@ -16,36 +15,36 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         size={18}
       />
 
-      {pages.map((pageNum, idx) => {
+      {pages.map((num) => {
         // Always show page 1 and last page
-        const isFirst = pageNum === 1;
-        const isLast = pageNum === totalPages;
+        const isFirst = num === 1;
+        const isLast = num === totalPages;
 
         // Always show current page and its neighbours
         const isNearCurrent =
-          currentPage - 1 <= pageNum && currentPage + 1 >= pageNum;
+          num >= currentPage - 1 && num <= currentPage + 1;
 
         // Show left dots — first hidden page to the left of current's neighbours
-        const isLeftDots = pageNum === currentPage - 2;
+        const isLeftDots = num === currentPage - 2;
 
         // Show right dots — first hidden page to the right of current's neighbours
-        const isRightDots = pageNum === currentPage + 2;
+        const isRightDots = num === currentPage + 2;
 
         if (isFirst || isLast || isNearCurrent) {
           return (
             <button
-              key={pageNum}
-              className={`${styles.pageNum_btn} ${currentPage === pageNum ? styles.btn__active : ''}`}
-              onClick={() => onPageChange(pageNum)}
+              key={num}
+              className={`${styles.num_btn} ${currentPage === num ? styles.btn__active : ''}`}
+              onClick={() => onPageChange(num)}
             >
-              {pageNum}
+              {num}
             </button>
           );
         }
 
         if (isLeftDots || isRightDots) {
           return (
-            <span key={`dots-${pageNum}`} className={styles.ellipsis}>
+            <span key={`dots-${num}`} className={styles.ellipsis}>
               ...
             </span>
           );

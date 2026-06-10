@@ -8,7 +8,7 @@
 }
 
 .btn,
-.pageNum_btn {
+.num_btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,8 +25,8 @@
   transition: all var(--transition-fast);
 }
 
-.pageNum_btn {
-   min-width: 25px;
+.num_btn {
+  min-width: 25px;
   height: 25px;
 }
 
