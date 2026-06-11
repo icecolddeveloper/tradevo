@@ -1,6 +1,7 @@
 import { CATEGORIES, getCategoryItems } from '../../data/mockProducts';
-import { useFilter } from '../../context/FilterContext';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
+import { useFilter } from '../../context/FilterContext';
 import { useState } from 'react';
 import Slider from 'rc-slider';
 import ProductCard from '../../ui/ProductCard/ProductCard';
@@ -9,7 +10,6 @@ import styles from './Shop.module.css';
 import Pagination from '../../ui/Pagination/Pagination';
 import CloseIcon from '../../ui/icons/navigation/CloseIcon';
 import 'rc-slider/assets/index.css'; // required — imports default styles
-import { AnimatePresence, motion } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -40,14 +40,20 @@ const SORT_OPTIONS = [
 ];
 
 function Shop() {
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  // const [priceRange, setPriceRange] = useState([0, 5000]);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [isLoading] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // IMPORTANT -
+  // Whenever a filter value isn't in the URL yet, read it with .get() and use || operator
+  // to  provide a fallback default so the app always has a valid starting value.
   const sortBy = searchParams.get('sort') || 'newest';
   const category = searchParams.get('category') || '';
-
   const currentPage = Number(searchParams.get('page')) || 1;
+  const minPrice = Number(searchParams.get('minPrice')) || 0;
+  const maxPrice = Number(searchParams.get('maxPrice')) || 5000;
 
   const capitalizedCategory =
     category.charAt(0).toUpperCase() + category.slice(1);
@@ -79,7 +85,7 @@ function Shop() {
     setSearchParams((prev) => ({
       ...Object.fromEntries(prev),
       sort: e.target.value,
-      page: 1,
+      page: 1, // reset to first page on category change
     }));
   }
 
@@ -87,7 +93,24 @@ function Shop() {
     setSideBarOpen((prev) => !prev);
   }
 
-  // motion
+  function handlePriceChange(newArrRange) {
+    const [min, max] = newArrRange;
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev),
+      minPrice: min,
+      maxPrice: max,
+    }));
+  }
+
+  function handleCategoryChange(categoryId) {
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
+      page: 1, // reset to first page on category change
+      category: categoryId,
+    }));
+  }
+
+  // Motion
   const overlayVariant = {
     hidden: {
       opacity: 0,
@@ -210,6 +233,7 @@ function Shop() {
                         <button
                           key={categoryObj.id}
                           className={`${styles.filter_option} ${styles.e}`}
+                          onClick={() => handleCategoryChange(categoryObj.id)}
                         >
                           <span>{categoryObj.icon} </span>
 
@@ -225,7 +249,7 @@ function Shop() {
                       <h4 className={styles.filter_label}>Price Range </h4>
 
                       <span className={styles.filter_value}>
-                        ${priceRange[0]} - ${priceRange[1]}
+                        ${minPrice} - ${maxPrice}
                       </span>
                     </div>
 
@@ -238,8 +262,10 @@ function Shop() {
                         min={0}
                         max={5000}
                         step={10}
-                        value={priceRange}
-                        onChange={(newRange) => setPriceRange(newRange)} // [120, 400]
+                        value={[minPrice, maxPrice]}
+                        onChange={(newRangeArr) =>
+                          handlePriceChange(newRangeArr)
+                        } // [120, 400]
                       />
                     </div>
                   </div>
@@ -297,23 +323,3 @@ function Shop() {
 }
 
 export default Shop;
-
-// <input
-//   type="range"
-//   min={0}
-//   max={5000}
-//   step={10}
-//   value={0}
-//   className={styles.range_input}
-//   aria-label="Minimum price"
-// />
-
-// <input
-//   type="range"
-//   min={0}
-//   max={5000}
-//   step={10}
-//   value={0}
-//   className={styles.range_input}
-//   aria-label="Minimum price"
-// />

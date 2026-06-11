@@ -60,6 +60,10 @@ function FilterProvider({ children }) {
     dispatch({ type: 'SET_SORT', payload: sort });
   }
 
+  function setNewCategory(category) {
+    dispatch({ type: 'SET_CATEGORY', payload: category });
+  }
+
   return (
     <FilterContext.Provider value={{ ...state, setPage, setCategory, setSort }}>
       {children}
