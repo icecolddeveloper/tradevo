@@ -1,12 +1,13 @@
-function PrevArrow({ onClick, className }) {
+function PrevArrow({ onClick, className, handleDisable, size = 20 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={className}
-      aria-label="Previous slide"
+      disabled={handleDisable}
+      aria-label="Previous page"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path
           d="M15 18l-6-6 6-6"
           stroke="currentColor"

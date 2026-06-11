@@ -6,7 +6,7 @@ import styles from './Shop.module.css';
 import Pagination from '../../ui/Pagination/Pagination';
 import { useState } from 'react';
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 5;
 
 function sortProducts(categoryItems, sortBy) {
   switch (sortBy) {
@@ -40,10 +40,10 @@ function Shop() {
   const sortBy = searchParams.get('sort') || 'newest';
   const category = searchParams.get('category') || '';
 
-  const page = Number(searchParams.get('page')) || 1;
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   const capitalizedCategory =
-    category.charAt(0).toUpperCase() + category?.slice(1);
+    category.charAt(0).toUpperCase() + category.slice(1);
 
   const categoryItems = getCategoryItems(category);
 
@@ -55,16 +55,24 @@ function Shop() {
   // Page 2 → start = 20, end = 40  → slice(20, 40)
   // Page 3 → start = 40, end = 60  → slice(40, 60)
   // Pattern: start = (page - 1) * 20, end = start + 20
-  const start = (page - 1) * ITEMS_PER_PAGE;
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
 
   // Only render products that belong to the current page
   const currentPageItems = sorted.slice(start, end);
 
-  function handlePageChange(newPage) {
+  function handlePageChange(result) {
     setSearchParams((prev) => ({
       ...Object.fromEntries(prev),
-      page: newPage,
+      page: result,
+    }));
+  }
+
+  function handleSortChange(e) {
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev),
+      sort: e.target.value,
+      page: 1,
     }));
   }
 
@@ -96,7 +104,7 @@ function Shop() {
           <select
             className={styles.sort_select}
             value={sortBy}
-            onChange={(e) => setSearchParams({ sort: e.target.value })}
+            onChange={handleSortChange}
             aria-label="Sort products"
           >
             {SORT_OPTIONS.map((option) => (
@@ -114,7 +122,7 @@ function Shop() {
         </div>
 
         <Pagination
-          page={page}
+          currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
