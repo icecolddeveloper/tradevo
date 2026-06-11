@@ -60,7 +60,12 @@ function Shop() {
 
   const categoryItems = getCategoryItems(category);
 
-  const sorted = sortProducts(categoryItems, sortBy);
+  // First filter price range
+  const productsInRange = categoryItems.filter(
+    (catObj) => catObj.price >= minPrice && catObj.price <= maxPrice,
+  );
+
+  const sorted = sortProducts(productsInRange, sortBy);
 
   const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
 
@@ -95,6 +100,7 @@ function Shop() {
 
   function handlePriceChange(newArrRange) {
     const [min, max] = newArrRange;
+
     setSearchParams((prev) => ({
       ...Object.fromEntries(prev),
       minPrice: min,
@@ -264,7 +270,7 @@ function Shop() {
                         step={10}
                         value={[minPrice, maxPrice]}
                         onChange={(newRangeArr) =>
-                          handlePriceChange(newRangeArr)
+                          handlePriceChange(newRangeArr, currentPageItems)
                         } // [120, 400]
                       />
                     </div>

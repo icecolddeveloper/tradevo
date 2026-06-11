@@ -8,11 +8,7 @@
 }
 
 .btn,
-<<<<<<< HEAD
-.pageNum_btn {
-=======
 .num_btn {
->>>>>>> 49aaf9aa4d8066bd4a5b50d45cd42b3841069483
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,13 +25,8 @@
   transition: all var(--transition-fast);
 }
 
-<<<<<<< HEAD
-.pageNum_btn {
-   min-width: 25px;
-=======
 .num_btn {
   min-width: 25px;
->>>>>>> 49aaf9aa4d8066bd4a5b50d45cd42b3841069483
   height: 25px;
 }
 
