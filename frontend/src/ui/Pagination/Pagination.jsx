@@ -1,10 +1,13 @@
 import NextArrow from '../icons/common/NextArrow';
 import PrevArrow from '../icons/common/PrevArrow';
-import ReturnIcon from '../icons/common/ReturnIcon';
 import styles from './Pagination.module.css';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const pages = Array.from({ length: totalPages }, (_, idx) => idx + 1);
+
+  if (totalPages === 0) {
+    return null; // Hide pagination when totalPages === 0
+  }
 
   return (
     <nav className={styles.pagination}>
@@ -20,14 +23,13 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         const isFirst = num === 1;
         const isLast = num === totalPages;
 
-        // Always show current page and its neighbours
-        const isNearCurrent =
-          num >= currentPage - 1 && num <= currentPage + 1;
+        // Always show current page and its neighbors
+        const isNearCurrent = num >= currentPage - 1 && num <= currentPage + 1;
 
-        // Show left dots — first hidden page to the left of current's neighbours
+        // Show left dots — first hidden page to the left of current's neighbors
         const isLeftDots = num === currentPage - 2;
 
-        // Show right dots — first hidden page to the right of current's neighbours
+        // Show right dots — first hidden page to the right of current's neighbors
         const isRightDots = num === currentPage + 2;
 
         if (isFirst || isLast || isNearCurrent) {
@@ -55,7 +57,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       })}
 
       <NextArrow
-        className={`${styles.btn}`}
+        className={`${styles.btn} ${currentPage === totalPages ? styles.btn__disabled : ''}`}
         onClick={() => onPageChange(currentPage + 1)}
         handleDisable={currentPage === totalPages}
         size={18}

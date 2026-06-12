@@ -46,7 +46,7 @@ function Shop() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // IMPORTANT -
+  // IMPORTANT
   // Whenever a filter value isn't in the URL yet, read it with .get() and use || operator
   // to  provide a fallback default so the app always has a valid starting value.
   const sortBy = searchParams.get('sort') || 'newest';
@@ -54,6 +54,9 @@ function Shop() {
   const currentPage = Number(searchParams.get('page')) || 1;
   const minPrice = Number(searchParams.get('minPrice')) || 0;
   const maxPrice = Number(searchParams.get('maxPrice')) || 5000;
+  const isBrandNew = searchParams.get('isBrandNew') === 'true'; // initial: null === 'true' returns false
+  const isFairlyUsed = searchParams.get('isFairlyUsed') === 'true'; // initial: null === 'true' returns false
+  const inStock = searchParams.get('inStock') === 'true'; // initial: null === 'true' returns false
 
   const capitalizedCategory =
     category.charAt(0).toUpperCase() + category.slice(1);
@@ -65,7 +68,11 @@ function Shop() {
     (catObj) => catObj.price >= minPrice && catObj.price <= maxPrice,
   );
 
-  const sorted = sortProducts(productsInRange, sortBy);
+  // const brandNewItems = productsInRange.filter(prodObj => prodObj.isBrandNew)
+
+  // console.log(brandNewItems);
+
+  const sorted = sortProducts(categoryItems, sortBy);
 
   const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
 
@@ -109,10 +116,35 @@ function Shop() {
   }
 
   function handleCategoryChange(categoryId) {
+    const id = categoryId === 'all' ? '' : categoryId;
+
     setSearchParams((prev) => ({
       ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
       page: 1, // reset to first page on category change
-      category: categoryId,
+      category: id,
+    }));
+  }
+
+  function handleBrandNewToggle() {
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
+      page: 1, // reset to first page on category change
+      isBrandNew: !isBrandNew,
+    }));
+  }
+
+  function handleUsedToggle() {
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
+      page: 1, // reset to first page on category change
+      isFairlyUsed: !isFairlyUsed,
+    }));
+  }
+  function handleInStockToggle() {
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
+      page: 1, // reset to first page on category change
+      inStock: !inStock,
     }));
   }
 
@@ -281,17 +313,32 @@ function Shop() {
                     <h4 className={styles.filter_label}>Condition</h4>
 
                     <label className={styles.checkbox_wrapper}>
-                      <input type="checkbox" className={styles.checkbox} />
+                      <input
+                        type="checkbox"
+                        className={styles.checkbox}
+                        checked={isBrandNew}
+                        onChange={handleBrandNewToggle}
+                      />
                       <span className={styles.checkbox_label}>Brand New</span>
                     </label>
 
                     <label className={styles.checkbox_wrapper}>
-                      <input type="checkbox" className={styles.checkbox} />
+                      <input
+                        type="checkbox"
+                        className={styles.checkbox}
+                        checked={isFairlyUsed}
+                        onChange={handleUsedToggle}
+                      />
                       <span className={styles.checkbox_label}>Fairly Used</span>
                     </label>
 
                     <label className={styles.checkbox_wrapper}>
-                      <input type="checkbox" className={styles.checkbox} />
+                      <input
+                        type="checkbox"
+                        className={styles.checkbox}
+                        onChange={handleInStockToggle}
+                      />
+
                       <span className={styles.checkbox_label}>
                         In Stock Only
                       </span>
