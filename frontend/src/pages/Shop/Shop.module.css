@@ -188,6 +188,13 @@
     color var(--transition-fast);
 }
 
+
+.filter_option__active {
+  background: var(--color-brand-primary-light);
+  color: var(--color-brand-primary);
+  font-weight: var(--weight-medium);
+}
+
 .range_header {
   display: flex;
   align-items: center;
@@ -226,6 +233,17 @@
   font-weight: var(--weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.clear_filter_wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clear_filter_btn {
+  display: flex;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
 }
 
 .empty {

@@ -1,8 +1,7 @@
 import { CATEGORIES, getCategoryItems } from '../../data/mockProducts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
-import { useFilter } from '../../context/FilterContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import ProductCard from '../../ui/ProductCard/ProductCard';
 import FilterIcon from '../../ui/icons/common/FilterIcon';
@@ -68,11 +67,21 @@ function Shop() {
     (catObj) => catObj.price >= minPrice && catObj.price <= maxPrice,
   );
 
-  // const brandNewItems = productsInRange.filter(prodObj => prodObj.isBrandNew)
+  const brandNewItems = isBrandNew
+    ? productsInRange.filter((prodObj) => prodObj.isBrandNew)
+    : productsInRange;
 
-  // console.log(brandNewItems);
+  const fairlyUsedItems = isFairlyUsed
+    ? brandNewItems.filter((prodObj) => prodObj.isFairlyUsed)
+    : brandNewItems;
 
-  const sorted = sortProducts(categoryItems, sortBy);
+  const inStockItems = inStock
+    ? fairlyUsedItems.filter((prodObj) => prodObj.inStock)
+    : fairlyUsedItems;
+
+  console.log(inStockItems);
+
+  const sorted = sortProducts(inStockItems, sortBy);
 
   const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
 
@@ -148,6 +157,17 @@ function Shop() {
     }));
   }
 
+  function handleResetFilters() {
+    setSearchParams({});
+  }
+
+  useEffect(() => {
+    document.body.style.overflow = sideBarOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [sideBarOpen]);
+
   // Motion
   const overlayVariant = {
     hidden: {
@@ -180,6 +200,16 @@ function Shop() {
       x: '-100%',
       transition: {
         duration: 0.3,
+      },
+    },
+  };
+
+  const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
       },
     },
   };
@@ -235,6 +265,7 @@ function Shop() {
                 {sideBarOpen && (
                   <motion.div
                     className={styles.sidebar_overlay}
+                    onClick={() => setSideBarOpen(false)}
                     variants={overlayVariant}
                     initial="hidden"
                     animate="visible"
@@ -270,7 +301,7 @@ function Shop() {
                       {CATEGORIES.map((categoryObj) => (
                         <button
                           key={categoryObj.id}
-                          className={`${styles.filter_option} ${styles.e}`}
+                          className={`${styles.filter_option} ${categoryObj.id === category ? styles.filter_option__active : ''}`}
                           onClick={() => handleCategoryChange(categoryObj.id)}
                         >
                           <span>{categoryObj.icon} </span>
@@ -345,7 +376,15 @@ function Shop() {
                     </label>
                   </div>
 
-                  {/* discount */}
+                  {/* Clear all */}
+                  <div className={styles.clear_filter_wrap}>
+                    <button
+                      className={styles.clear_filter_btn}
+                      onClick={handleResetFilters}
+                    >
+                      Clear all
+                    </button>
+                  </div>
                 </motion.div>
               </>
             )}
@@ -358,11 +397,17 @@ function Shop() {
             <p className={styles.empty__sub}>Try adjusting your filters.</p>
           </div>
         ) : (
-          <div className={styles.grid}>
+          <motion.div
+            className={styles.grid}
+            key={category + sortBy + currentPage}
+            variants={gridVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {currentPageItems.map((prodObj) => (
               <ProductCard key={prodObj.id} productObj={prodObj} />
             ))}
-          </div>
+          </motion.div>
         )}
 
         <Pagination
