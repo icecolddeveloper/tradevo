@@ -1,36 +1,12 @@
-import { CATEGORIES, getCategoryItems } from '../../data/mockProducts';
+import { gridVariants, overlayVariant } from './ShopVariants';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Slider from 'rc-slider';
 import ProductCard from '../../ui/ProductCard/ProductCard';
 import FilterIcon from '../../ui/icons/common/FilterIcon';
-import styles from './Shop.module.css';
 import Pagination from '../../ui/Pagination/Pagination';
-import CloseIcon from '../../ui/icons/navigation/CloseIcon';
-import 'rc-slider/assets/index.css'; // required — imports default styles
-
-const ITEMS_PER_PAGE = 6;
-
-function sortProducts(categoryItems, sortBy) {
-  switch (sortBy) {
-    case 'newest': {
-      return [...categoryItems].sort((a, b) => b.createdAt - a.createdAt); // timestamp difference
-    }
-
-    case 'price-asc': {
-      return [...categoryItems].sort((a, b) => a.price - b.price);
-    }
-
-    case 'price-desc': {
-      return [...categoryItems].sort((a, b) => b.price - a.price);
-    }
-
-    default: {
-      return [...categoryItems];
-    }
-  }
-}
+import useShopFilters from '../../hooks/useShopFilters';
+import styles from './Shop.module.css';
+import ShopSidebar from './ShopSidebar';
 
 const SORT_OPTIONS = [
   { value: 'newest', label: 'Newest First' },
@@ -39,126 +15,30 @@ const SORT_OPTIONS = [
 ];
 
 function Shop() {
-  // const [priceRange, setPriceRange] = useState([0, 5000]);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [isLoading] = useState(false);
+  const {
+    // Filter values from URL
+    category,
+    sortBy,
+    currentPage,
 
-  const [searchParams, setSearchParams] = useSearchParams();
+    // Derived values
+    currentPageItems,
+    totalPages,
+    capitalizedCategory,
 
-  // IMPORTANT
-  // Whenever a filter value isn't in the URL yet, read it with .get() and use || operator
-  // to  provide a fallback default so the app always has a valid starting value.
-  const sortBy = searchParams.get('sort') || 'newest';
-  const category = searchParams.get('category') || '';
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const minPrice = Number(searchParams.get('minPrice')) || 0;
-  const maxPrice = Number(searchParams.get('maxPrice')) || 5000;
-  const isBrandNew = searchParams.get('isBrandNew') === 'true'; // initial: null === 'true' returns false
-  const isFairlyUsed = searchParams.get('isFairlyUsed') === 'true'; // initial: null === 'true' returns false
-  const inStock = searchParams.get('inStock') === 'true'; // initial: null === 'true' returns false
-
-  const capitalizedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1);
-
-  const categoryItems = getCategoryItems(category);
-
-  // First filter price range
-  const productsInRange = categoryItems.filter(
-    (catObj) => catObj.price >= minPrice && catObj.price <= maxPrice,
-  );
-
-  const brandNewItems = isBrandNew
-    ? productsInRange.filter((prodObj) => prodObj.isBrandNew)
-    : productsInRange;
-
-  const fairlyUsedItems = isFairlyUsed
-    ? brandNewItems.filter((prodObj) => prodObj.isFairlyUsed)
-    : brandNewItems;
-
-  const inStockItems = inStock
-    ? fairlyUsedItems.filter((prodObj) => prodObj.inStock)
-    : fairlyUsedItems;
-
-  console.log(inStockItems);
-
-  const sorted = sortProducts(inStockItems, sortBy);
-
-  const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
-
-  // Page 1 → start = 0,  end = 20  → slice(0, 20)
-  // Page 2 → start = 20, end = 40  → slice(20, 40)
-  // Page 3 → start = 40, end = 60  → slice(40, 60)
-  // Pattern: start = (page - 1) * 20, end = start + 20
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = start + ITEMS_PER_PAGE;
-
-  // Only render products that belong to the current page
-  const currentPageItems = sorted.slice(start, end);
-
-  function handlePageChange(result) {
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev),
-      page: result,
-    }));
-  }
-
-  function handleSortChange(e) {
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev),
-      sort: e.target.value,
-      page: 1, // reset to first page on category change
-    }));
-  }
+    // Handlers
+    handleSortChange,
+    handlePageChange,
+  } = useShopFilters();
 
   function handleSideBarToggle() {
     setSideBarOpen((prev) => !prev);
   }
 
-  function handlePriceChange(newArrRange) {
-    const [min, max] = newArrRange;
-
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev),
-      minPrice: min,
-      maxPrice: max,
-    }));
-  }
-
-  function handleCategoryChange(categoryId) {
-    const id = categoryId === 'all' ? '' : categoryId;
-
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
-      page: 1, // reset to first page on category change
-      category: id,
-    }));
-  }
-
-  function handleBrandNewToggle() {
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
-      page: 1, // reset to first page on category change
-      isBrandNew: !isBrandNew,
-    }));
-  }
-
-  function handleUsedToggle() {
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
-      page: 1, // reset to first page on category change
-      isFairlyUsed: !isFairlyUsed,
-    }));
-  }
-  function handleInStockToggle() {
-    setSearchParams((prev) => ({
-      ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
-      page: 1, // reset to first page on category change
-      inStock: !inStock,
-    }));
-  }
-
-  function handleResetFilters() {
-    setSearchParams({});
+  function closeSidebar() {
+    setSideBarOpen(false);
   }
 
   useEffect(() => {
@@ -167,52 +47,6 @@ function Shop() {
       document.body.style.overflow = '';
     };
   }, [sideBarOpen]);
-
-  // Motion
-  const overlayVariant = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-    exit: {
-      opacity: 0,
-    },
-  };
-
-  const sidebarVariant = {
-    hidden: {
-      x: '-100%',
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-    exit: {
-      x: '-100%',
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
-  const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-      },
-    },
-  };
 
   return (
     <div className={styles.shop}>
@@ -227,7 +61,7 @@ function Shop() {
             </div>
 
             <p className={styles.count}>
-              {isLoading ? '—' : `${categoryItems.length} products`}
+              {isLoading ? '—' : `${currentPageItems.length} products`}
             </p>
           </div>
 
@@ -265,7 +99,7 @@ function Shop() {
                 {sideBarOpen && (
                   <motion.div
                     className={styles.sidebar_overlay}
-                    onClick={() => setSideBarOpen(false)}
+                    onClick={closeSidebar}
                     variants={overlayVariant}
                     initial="hidden"
                     animate="visible"
@@ -274,118 +108,7 @@ function Shop() {
                 )}
 
                 {/* Sidebar */}
-                <motion.div
-                  className={styles.sidebar}
-                  variants={sidebarVariant}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
-                  {/* Sidebar header */}
-                  <div className={styles.sidebar__header}>
-                    <h3>Filters</h3>
-
-                    <button
-                      className={styles.sidebar__close}
-                      onClick={handleSideBarToggle}
-                    >
-                      <CloseIcon />
-                    </button>
-                  </div>
-
-                  {/* Category */}
-                  <div className={styles.filter_group}>
-                    <h4 className={styles.filter_label}>Category</h4>
-
-                    <div className={styles.filter_list}>
-                      {CATEGORIES.map((categoryObj) => (
-                        <button
-                          key={categoryObj.id}
-                          className={`${styles.filter_option} ${categoryObj.id === category ? styles.filter_option__active : ''}`}
-                          onClick={() => handleCategoryChange(categoryObj.id)}
-                        >
-                          <span>{categoryObj.icon} </span>
-
-                          <span>{categoryObj.label} </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Price range */}
-                  <div className={styles.filter_group}>
-                    <div className={styles.range_header}>
-                      <h4 className={styles.filter_label}>Price Range </h4>
-
-                      <span className={styles.filter_value}>
-                        ${minPrice} - ${maxPrice}
-                      </span>
-                    </div>
-
-                    <div
-                      className={styles.range_wrap}
-                      style={{ touchAction: 'none' }}
-                    >
-                      <Slider
-                        range
-                        min={0}
-                        max={5000}
-                        step={10}
-                        value={[minPrice, maxPrice]}
-                        onChange={(newRangeArr) =>
-                          handlePriceChange(newRangeArr, currentPageItems)
-                        } // [120, 400]
-                      />
-                    </div>
-                  </div>
-
-                  {/* Condition & Stock */}
-                  <div className={styles.filter_group}>
-                    <h4 className={styles.filter_label}>Condition</h4>
-
-                    <label className={styles.checkbox_wrapper}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                        checked={isBrandNew}
-                        onChange={handleBrandNewToggle}
-                      />
-                      <span className={styles.checkbox_label}>Brand New</span>
-                    </label>
-
-                    <label className={styles.checkbox_wrapper}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                        checked={isFairlyUsed}
-                        onChange={handleUsedToggle}
-                      />
-                      <span className={styles.checkbox_label}>Fairly Used</span>
-                    </label>
-
-                    <label className={styles.checkbox_wrapper}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                        onChange={handleInStockToggle}
-                      />
-
-                      <span className={styles.checkbox_label}>
-                        In Stock Only
-                      </span>
-                    </label>
-                  </div>
-
-                  {/* Clear all */}
-                  <div className={styles.clear_filter_wrap}>
-                    <button
-                      className={styles.clear_filter_btn}
-                      onClick={handleResetFilters}
-                    >
-                      Clear all
-                    </button>
-                  </div>
-                </motion.div>
+                <ShopSidebar handleSideBarToggle={handleSideBarToggle} />
               </>
             )}
           </AnimatePresence>
