@@ -31,6 +31,7 @@ function useShopFilters() {
   // to  provide a fallback default so the app always has a valid starting value.
   const sortBy = searchParams.get('sort') || 'newest';
   const category = searchParams.get('category') || '';
+  const subcategory = searchParams.get('subcategory') || '';
   const currentPage = Number(searchParams.get('page')) || 1;
   const minPrice = Number(searchParams.get('minPrice')) || 0;
   const maxPrice = Number(searchParams.get('maxPrice')) || 5000;
@@ -40,6 +41,9 @@ function useShopFilters() {
 
   const capitalizedCategory =
     category.charAt(0).toUpperCase() + category.slice(1);
+
+  const capitalizedSubCategory =
+    subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
 
   const categoryItems = getCategoryItems(category);
 
@@ -152,6 +156,7 @@ function useShopFilters() {
     currentPageItems,
     totalPages,
     capitalizedCategory,
+    capitalizedSubCategory,
 
     // Handlers
     handleSortChange,
