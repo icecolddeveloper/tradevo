@@ -45,7 +45,7 @@ function useShopFilters() {
   const capitalizedSubCategory =
     subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
 
-  const categoryItems = getCategoryItems(category);
+  const categoryItems = getCategoryItems(category, subcategory);
 
   // First filter price range
   const productsInRange = categoryItems.filter(

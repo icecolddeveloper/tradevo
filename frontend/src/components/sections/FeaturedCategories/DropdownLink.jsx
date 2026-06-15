@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styles from './FeaturedCategories.module.css';
 
-function DropdownLink({ catItem, activeId }) {
-  const catItemToLower = catItem.toLowerCase();
+function DropdownLink({ catItemObj, activeId }) {
+  const catItemToLower = catItemObj.id.toLowerCase();
 
   return (
     <Link
@@ -10,7 +10,7 @@ function DropdownLink({ catItem, activeId }) {
       className={styles.dropdown__link}
     >
       <span className={styles.dropdown__dot}></span>
-      {catItem}
+      {catItemObj.label}
     </Link>
   );
 }
