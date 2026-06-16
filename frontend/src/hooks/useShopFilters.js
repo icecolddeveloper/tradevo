@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { getCategoryItems } from '../data/mockProducts';
+import { useState } from 'react';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -25,6 +26,8 @@ function sortProducts(categoryItems, sortBy) {
 
 function useShopFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [openSection, setOpenSection] = useState('category');
 
   // IMPORTANT
   // Whenever a filter value isn't in the URL yet, read it with .get() and use || operator
@@ -140,7 +143,14 @@ function useShopFilters() {
     setSearchParams({});
   }
 
+  function handleSectionOpen(sectionName) {
+    setOpenSection(sectionName);
+  }
+
   return {
+    // State
+    openSection,
+
     // Filter values from URL
     category,
     sortBy,
@@ -167,6 +177,7 @@ function useShopFilters() {
     handleInStockToggle,
     handlePageChange,
     handleResetFilters,
+    handleSectionOpen,
   };
 }
 

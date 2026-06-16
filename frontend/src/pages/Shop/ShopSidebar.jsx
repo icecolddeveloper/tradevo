@@ -6,10 +6,14 @@ import useShopFilters from '../../hooks/useShopFilters';
 import CloseIcon from '../../ui/icons/navigation/CloseIcon';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-
+import { SUBCATEGORIES } from '../../data/mockModified';
+import { CATEGORY_DATA } from '../../data/featuredCategory';
 
 function ShopSidebar({ handleSideBarToggle }) {
   const {
+    // State
+    openSection,
+
     // Filter values from URL
     category,
     minPrice,
@@ -27,7 +31,13 @@ function ShopSidebar({ handleSideBarToggle }) {
     handleUsedToggle,
     handleInStockToggle,
     handleResetFilters,
+    handleSectionOpen,
   } = useShopFilters();
+
+  const subCategoryItems = CATEGORY_DATA.find(
+    (catObj) => catObj.id === category,
+  );
+
   return (
     <motion.div
       className={styles.sidebar}
@@ -47,21 +57,48 @@ function ShopSidebar({ handleSideBarToggle }) {
 
       {/* Category */}
       <div className={styles.filter_group}>
-        <h4 className={styles.filter_label}>Category</h4>
+        <button
+          className={styles.filter_label}
+          onClick={() => handleSectionOpen('category')}
+        >
+          Category
+        </button>
 
-        <div className={styles.filter_list}>
-          {CATEGORIES.map((categoryObj) => (
-            <button
-              key={categoryObj.id}
-              className={`${styles.filter_option} ${categoryObj.id === category ? styles.filter_option__active : ''}`}
-              onClick={() => handleCategoryChange(categoryObj.id)}
-            >
-              <span>{categoryObj.icon} </span>
+        {openSection === 'category' && (
+          <div className={styles.filter_list}>
+            {CATEGORIES.map((categoryObj) => (
+              <button
+                key={categoryObj.id}
+                className={`${styles.filter_option} ${categoryObj.id === category ? styles.filter_option__active : ''}`}
+                onClick={() => handleCategoryChange(categoryObj.id)}
+              >
+                <span>{categoryObj.icon} </span>
 
-              <span>{categoryObj.label} </span>
-            </button>
-          ))}
-        </div>
+                <span>{categoryObj.label} </span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Category */}
+      <div className={styles.filter_group}>
+        <button
+          className={styles.filter_label}
+          onClick={() => handleSectionOpen('subcategory')}
+        >
+          Subcategory
+        </button>
+
+        {openSection === 'subcategory' && subCategoryItems && (
+          <div className={styles.filter_list}>
+            {subCategoryItems.items.map((itemObj) => (
+              <button key={itemObj.id} className={styles.filter_option}>
+                <span>{itemObj.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Price range */}
@@ -136,4 +173,20 @@ function ShopSidebar({ handleSideBarToggle }) {
   );
 }
 
+function SubCategory({ itemsArr = { itemsArr } }) {
+  console.log(itemsArr);
+  // return (
+  //   <>
+  //     {itemsArr.map((itemObj) => (
+  //       <button key={itemObj.id} className={`${styles.filter_option} `}>
+  //         <span>{itemObj.label} </span>
+  //       </button>
+  //     ))}
+  //   </>
+  // );
+}
+
 export default ShopSidebar;
+{
+  /* <SubCategory key={catObj.id} itemsArr={catObj.items} /> */
+}
