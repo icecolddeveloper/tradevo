@@ -274,3 +274,12 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+.dropdown__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-border-strong);
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}

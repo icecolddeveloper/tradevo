@@ -27,7 +27,6 @@ function Shop() {
     currentPageItems,
     totalPages,
     capitalizedCategory,
-    capitalizedSubCategory,
 
     // Handlers
     handleSortChange,
@@ -42,7 +41,6 @@ function Shop() {
     setSideBarOpen(false);
   }
 
-  // Body scroll lock
   useEffect(() => {
     document.body.style.overflow = sideBarOpen ? 'hidden' : '';
     return () => {
@@ -60,7 +58,6 @@ function Shop() {
               {!category || category === 'all'
                 ? 'All Products'
                 : capitalizedCategory}
-              {capitalizedSubCategory && ` > ${capitalizedSubCategory}`}
             </div>
 
             <p className={styles.count}>

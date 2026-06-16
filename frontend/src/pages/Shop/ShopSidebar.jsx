@@ -1,4 +1,5 @@
 import { sidebarVariant } from './ShopVariants';
+import { CATEGORY_DATA } from '../../data/featuredCategory';
 import { CATEGORIES } from '../../data/mockProducts';
 import { motion } from 'framer-motion';
 import styles from './Shop.module.css';
@@ -6,8 +7,6 @@ import useShopFilters from '../../hooks/useShopFilters';
 import CloseIcon from '../../ui/icons/navigation/CloseIcon';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { SUBCATEGORIES } from '../../data/mockModified';
-import { CATEGORY_DATA } from '../../data/featuredCategory';
 
 function ShopSidebar({ handleSideBarToggle }) {
   const {
@@ -27,6 +26,7 @@ function ShopSidebar({ handleSideBarToggle }) {
     // Handlers
     handleCategoryChange,
     handlePriceChange,
+    handleSubCategoryChange,
     handleBrandNewToggle,
     handleUsedToggle,
     handleInStockToggle,
@@ -81,19 +81,24 @@ function ShopSidebar({ handleSideBarToggle }) {
         )}
       </div>
 
-      {/* Category */}
+      {/* Sub category */}
       <div className={styles.filter_group}>
         <button
           className={styles.filter_label}
           onClick={() => handleSectionOpen('subcategory')}
         >
-          Subcategory
+          {category} Subcategory
         </button>
 
         {openSection === 'subcategory' && subCategoryItems && (
           <div className={styles.filter_list}>
             {subCategoryItems.items.map((itemObj) => (
-              <button key={itemObj.id} className={styles.filter_option}>
+              <button
+                key={itemObj.id}
+                className={styles.filter_option}
+                onClick={() => handleSubCategoryChange(itemObj.id)}
+              >
+                <span className={styles.dropdown__dot}></span>
                 <span>{itemObj.label}</span>
               </button>
             ))}
@@ -173,20 +178,4 @@ function ShopSidebar({ handleSideBarToggle }) {
   );
 }
 
-function SubCategory({ itemsArr = { itemsArr } }) {
-  console.log(itemsArr);
-  // return (
-  //   <>
-  //     {itemsArr.map((itemObj) => (
-  //       <button key={itemObj.id} className={`${styles.filter_option} `}>
-  //         <span>{itemObj.label} </span>
-  //       </button>
-  //     ))}
-  //   </>
-  // );
-}
-
 export default ShopSidebar;
-{
-  /* <SubCategory key={catObj.id} itemsArr={catObj.items} /> */
-}

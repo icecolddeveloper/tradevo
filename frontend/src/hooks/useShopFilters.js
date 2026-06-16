@@ -112,7 +112,17 @@ function useShopFilters() {
     setSearchParams((prev) => ({
       ...Object.fromEntries(prev), // converts URL object to { sort: 'newest', category: 'fashion', page: '2' }
       page: 1, // reset to first page on category change
+      subcategory: '', // clear subcategory when category changes
       category: id,
+    }));
+  }
+
+  function handleSubCategoryChange(subCategoryId) {
+    console.log(subCategoryId);
+    setSearchParams((prev) => ({
+      ...Object.fromEntries(prev),
+      page: 1,
+      subcategory: subCategoryId,
     }));
   }
 
@@ -171,6 +181,7 @@ function useShopFilters() {
     // Handlers
     handleSortChange,
     handleCategoryChange,
+    handleSubCategoryChange,
     handlePriceChange,
     handleBrandNewToggle,
     handleUsedToggle,
