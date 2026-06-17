@@ -46,6 +46,7 @@ export const gridVariants = {
   },
 };
 
+// GOOD FOR DROPDOWN
 export const sectionVariants = {
   hidden: {
     height: 0,
