@@ -132,7 +132,7 @@ function ShopSidebar({ handleSideBarToggle }) {
           className={styles.range_header}
           onClick={() => handleSectionOpen('priceRange')}
         >
-          <h4 className={styles.filter_label}>Price Range </h4>
+          <p className={styles.filter_label}>Price Range </p>
 
           <span className={styles.filter_value}>
             ${minPrice} - ${maxPrice}
@@ -177,7 +177,7 @@ function ShopSidebar({ handleSideBarToggle }) {
         <AnimatePresence>
           {openSection === 'condition' && (
             <motion.div
-              className={styles.range_wrap}
+              className={styles.condition_wrap}
               key="condition"
               style={{ touchAction: 'none', overflow: 'hidden' }}
               variants={sectionVariants}

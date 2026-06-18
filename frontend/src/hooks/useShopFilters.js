@@ -172,6 +172,8 @@ function useShopFilters() {
     inStock,
 
     // Derived values
+    isBrandNew,
+    isFairlyUsed,
     categoryItems,
     currentPageItems,
     totalPages,

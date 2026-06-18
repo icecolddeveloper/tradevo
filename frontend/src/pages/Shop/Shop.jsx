@@ -24,6 +24,8 @@ function Shop() {
     currentPage,
 
     // Derived values
+    isBrandNew,
+    isFairlyUsed,
     currentPageItems,
     totalPages,
     capitalizedCategory,
@@ -47,6 +49,8 @@ function Shop() {
       document.body.style.overflow = '';
     };
   }, [sideBarOpen]);
+
+  console.log(isBrandNew, isFairlyUsed);
 
   return (
     <div className={styles.shop}>
@@ -115,10 +119,19 @@ function Shop() {
         </div>
 
         {currentPageItems.length === 0 ? (
-          <div className={styles.empty}>
-            <h3 className={styles.empty__title}>No products found</h3>
-            <p className={styles.empty__sub}>Try adjusting your filters.</p>
-          </div>
+          isBrandNew && isFairlyUsed ? (
+            <div className={styles.empty}>
+              <h3 className={styles.empty__title}>Conflicting filters</h3>
+              <p className={styles.empty__sub}>
+                Choose brand new or fairly used, not both.
+              </p>
+            </div>
+          ) : (
+            <div className={styles.empty}>
+              <h3 className={styles.empty__title}>No products found</h3>
+              <p className={styles.empty__sub}>Try adjusting your filters.</p>
+            </div>
+          )
         ) : (
           <motion.div
             className={styles.grid}

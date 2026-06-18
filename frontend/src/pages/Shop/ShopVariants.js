@@ -46,7 +46,7 @@ export const gridVariants = {
   },
 };
 
-// GOOD FOR DROPDOWN
+// Good for dropdown - height
 export const sectionVariants = {
   hidden: {
     height: 0,
