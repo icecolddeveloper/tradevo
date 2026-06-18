@@ -652,7 +652,7 @@
 
 .related__title {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   margin-bottom: var(--space-8);
 }

@@ -15,7 +15,7 @@ function ProductTabs({
             className={`${styles.tab_btn} 
                   ${tabName === activeTab ? styles.tab_btn__active : ''} 
                   ${idx === 0 ? styles.idx_1_tab_btn : ''}`}
-            onClick={(tabName) => handleTabSelect(tabName)}
+            onClick={() => handleTabSelect(tabName)}
           >
             {tabName}
           </button>

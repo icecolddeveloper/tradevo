@@ -29,6 +29,7 @@ function Shop() {
     currentPageItems,
     totalPages,
     capitalizedCategory,
+    capitalizedSubCategory,
 
     // Handlers
     handleSortChange,
@@ -50,8 +51,6 @@ function Shop() {
     };
   }, [sideBarOpen]);
 
-  console.log(isBrandNew, isFairlyUsed);
-
   return (
     <div className={styles.shop}>
       <div className="container">
@@ -62,6 +61,7 @@ function Shop() {
               {!category || category === 'all'
                 ? 'All Products'
                 : capitalizedCategory}
+              {capitalizedSubCategory && ` > ${capitalizedSubCategory}`}
             </div>
 
             <p className={styles.count}>

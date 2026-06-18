@@ -21,7 +21,7 @@ export function useProductDetail() {
   const [activeImage, setActiveImage] = useState(0);
   const [activeTab, setActiveTab] = useState('Specs');
   const [quantity, setQuantity] = useState(1);
-  const [ setImgLoaded] = useState(false);
+  const [setImgLoaded] = useState(false);
   const [isAuthenticated] = useState(true);
 
   // 4. third party hooks that depend on state/handlers
