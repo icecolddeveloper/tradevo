@@ -119,7 +119,7 @@ function Navbar() {
 
           {/* ---- Wishlist ----------- */}
           <Link
-            to="/dashboard/wishlist"
+            to="/wishlist"
             className={styles.navbar__icon_btn}
             aria-label="Wishlist"
           >

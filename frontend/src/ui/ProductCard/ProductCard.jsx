@@ -24,6 +24,10 @@ function ProductCard({ productObj }) {
     setTimeout(() => setAddedFeedback(false), 1500);
   }
 
+  function handleAddToWishlist(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className={styles.card}>
       <Link to={`/product/${productObj.slug}`} className={styles.card__link}>
@@ -72,7 +76,10 @@ function ProductCard({ productObj }) {
             )}
           </div>
 
-          <button className={`${styles.card__wishlist}`}>
+          <button
+            className={`${styles.card__wishlist}`}
+            onClick={handleAddToWishlist}
+          >
             <HeartIcon size={17} />
           </button>
 
