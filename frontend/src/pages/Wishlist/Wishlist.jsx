@@ -1,10 +1,12 @@
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Wishlist.module.css';
-import HeartIcon from '../../ui/icons/navigation/HeartIcon';
-import { motion } from 'framer-motion';
 
 function Wishlist() {
   const itemCount = 1;
+  const [multipleSelect, setMultipleSelect] = useState(true);
+  
   if (itemCount === 0) {
     return (
       <div className={styles.empty}>
@@ -24,18 +26,30 @@ function Wishlist() {
         <div className={styles.header}>
           <div>
             <h1 className={styles.title}>My Wishlist</h1>
+
             <p className={styles.sub}>
               {itemCount} saved item{itemCount > 1 ? 's' : ''}
             </p>
           </div>
 
-          <div className={styles.header__actions}>
-            <button className={styles.add_all_btn}>Add All to Cart</button>
-            <button className={styles.clear_btn}>Clear All</button>
+          {/* actions */}
+          <div className={styles.items__actions}>
+            {multipleSelect ? (
+              <>
+                <button>Select all</button>
+                <button>Remove</button>
+                <button>Cancel</button>
+              </>
+            ) : (
+              <>
+                <button>Select multiple</button>
+                <button>Clear all</button>
+              </>
+            )}
           </div>
         </div>
 
-        <motion.div className={styles.grid} layout>
+        {/* <motion.div className={styles.grid} layout>
           <AnimatePresence>
             {[].map((product) => (
               <motion.div>
@@ -43,7 +57,7 @@ function Wishlist() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
