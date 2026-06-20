@@ -8,7 +8,7 @@ import ListItem from '../../ui/ListItem/ListItem';
 
 function Wishlist() {
   const { wishListItems } = useWishlist();
-  const [multipleSelect, setMultipleSelect] = useState(false);
+  const [multipleSelect, setMultipleSelect] = useState(true);
   const [selected, setSelected] = useState([]);
 
   console.log(wishListItems);
@@ -19,11 +19,11 @@ function Wishlist() {
   }
   
   function handleCancel() {
-     setMultipleSelect(false);
+    setMultipleSelect(false);
   }
 
-  function handleSelected() {
-    
+  function handleItemSelect() {
+
   }
 
   if (itemCount === 0) {
@@ -78,8 +78,8 @@ function Wishlist() {
                   key={itemObj.id}
                   itemObj={itemObj}
                   multipleSelect={multipleSelect}
-                  // handleItemSelect={handleItemSelect}
-                  // selected={selected}
+                  handleItemSelect={handleItemSelect}
+                  selected={selected}
                   isWishlistComponent={true}
                 />
               </motion.div>
