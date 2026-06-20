@@ -35,8 +35,6 @@ function FeaturedCategories() {
     },
   };
 
-  console.log(activeCategoryObj);
-
   return (
     <section className={styles.section}>
       <div className="container">

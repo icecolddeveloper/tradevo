@@ -1,7 +1,9 @@
-import { Link, NavLink } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useWishlist } from '../../../context/WishlistContext';
 import { CATEGORIES } from '../../../data/mockProducts';
+import { useCart } from '../../../context/cartContext';
+import { Link, NavLink } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { useRef, useState } from 'react';
 import styles from './Navbar.module.css';
 import MegaMenu from './MegaMenu';
 import SearchIcon from '../../../ui/icons/navigation/SearchIcon';
@@ -11,7 +13,7 @@ import HeartIcon from '../../../ui/icons/navigation/HeartIcon';
 import CartIcon from '../../../ui/icons/navigation/CartIcon';
 import MobileMenu from './MobileMenu/MobileMenu';
 import Logo from '../../../ui/Logo/Logo';
-import { useCart } from '../../../context/cartContext';
+
 
 function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
@@ -19,12 +21,13 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState('Martins');
   const { totalItems } = useCart();
+  const { wishListItems } = useWishlist();
+
+  const itemCount = wishListItems.length;
 
   // Actual State
   const [mobileOpen, setMobileOpen] = useState(false);
   const megaTimerRef = useRef(null);
-
-  const wishListCount = 10;
 
   function handleCategoryEnter() {
     clearTimeout(megaTimerRef.current);
@@ -125,9 +128,9 @@ function Navbar() {
           >
             <HeartIcon />
 
-            {[].length > 0 && (
+            {itemCount > 0 && (
               /* ---- WishlistCount----- */
-              <span className={styles.navbar__badge}>{totalItems}</span>
+              <span className={styles.navbar__badge}>{itemCount}</span>
             )}
           </Link>
 

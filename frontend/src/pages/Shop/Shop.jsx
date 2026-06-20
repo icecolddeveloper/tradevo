@@ -141,7 +141,7 @@ function Shop() {
             animate="visible"
           >
             {currentPageItems.map((prodObj) => (
-              <ProductCard key={prodObj.id} productObj={prodObj} />
+              <ProductCard key={prodObj.id} productObj={prodObj} showWishlistIcon={true}/>
             ))}
           </motion.div>
         )}

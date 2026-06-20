@@ -6,7 +6,7 @@ import SelectCheckIcon from '../../ui/icons/common/SelectCheckIcon';
 
 function Item({ itemObj, multipleSelect, selected, handleItemSelect }) {
   const { handleDelete, handleQtyDecrease, handleQtyIncrease } = useCart();
-  const isSelected = selected.some((item) => item.itemKey === itemObj.itemKey); // true or false
+  // const isSelected = selected.some((item) => item.itemKey === itemObj.itemKey); // true or false
 
   return (
     <div className={styles.item__row_container}>

@@ -1,13 +1,31 @@
+import { useWishlist } from '../../context/WishlistContext';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import ProductCard from '../../ui/ProductCard/ProductCard';
 import styles from './Wishlist.module.css';
+import ListItem from '../../ui/ListItem/ListItem';
 
 function Wishlist() {
-  const itemCount = 1;
-  const [multipleSelect, setMultipleSelect] = useState(true);
+  const { wishListItems } = useWishlist();
+  const [multipleSelect, setMultipleSelect] = useState(false);
+  const [selected, setSelected] = useState([]);
+
+  console.log(wishListItems);
+  const itemCount = wishListItems.length;
+
+  function handleMultipleSelect() {
+    setMultipleSelect((prev) => !prev);
+  }
   
+  function handleCancel() {
+     setMultipleSelect(false);
+  }
+
+  function handleSelected() {
+    
+  }
+
   if (itemCount === 0) {
     return (
       <div className={styles.empty}>
@@ -21,44 +39,53 @@ function Wishlist() {
       </div>
     );
   }
+
   return (
     <section className={styles.page}>
       <div className="container">
         <div className={styles.header}>
-          <div>
+          <div className={styles.title_wrapper}>
             <h1 className={styles.title}>My Wishlist</h1>
 
             <p className={styles.sub}>
               {itemCount} saved item{itemCount > 1 ? 's' : ''}
             </p>
           </div>
-
-          {/* actions */}
-          <div className={styles.items__actions}>
-            {multipleSelect ? (
-              <>
-                <button>Select all</button>
-                <button>Remove</button>
-                <button>Cancel</button>
-              </>
-            ) : (
-              <>
-                <button>Select multiple</button>
-                <button>Clear all</button>
-              </>
-            )}
-          </div>
         </div>
 
-        {/* <motion.div className={styles.grid} layout>
+        {/* actions */}
+        <div className={styles.items__actions}>
+          {multipleSelect ? (
+            <>
+              <span>{selected.length} selected</span>
+              <button>Select all</button>
+              <button>Remove</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <button onClick={handleMultipleSelect}>Select multiple</button>
+              <button>Clear all</button>
+            </>
+          )}
+        </div>
+
+        <motion.div className={styles.grid} layout>
           <AnimatePresence>
-            {[].map((product) => (
+            {wishListItems.map((itemObj) => (
               <motion.div>
-                <ProductCard product={product} />
+                <ListItem
+                  key={itemObj.id}
+                  itemObj={itemObj}
+                  multipleSelect={multipleSelect}
+                  // handleItemSelect={handleItemSelect}
+                  // selected={selected}
+                  isWishlistComponent={true}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div> */}
+        </motion.div>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './Cart.module.css';
 import Summary from './Summary';
 import Item from './Item';
+import ListItem from '../../ui/ListItem/ListItem';
 
 function Cart() {
   const { items, totalItems, handleClearCart, handleDeleteSelected } =
@@ -134,12 +135,13 @@ function Cart() {
 
             {/* item list */}
             {items.map((itemObj) => (
-              <Item
+              <ListItem
                 key={itemObj.id}
                 itemObj={itemObj}
                 multipleSelect={multipleSelect}
                 handleItemSelect={handleItemSelect}
                 selected={selected}
+                isCartComponent={true}
               />
             ))}
           </div>

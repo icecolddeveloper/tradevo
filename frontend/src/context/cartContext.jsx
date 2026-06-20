@@ -139,6 +139,8 @@ function reducer(state, action) {
 function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  console.log(state.items);
+
   const totalItems = state.items.length;
 
   useEffect(() => {}, [state, totalItems]);

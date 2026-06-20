@@ -5,27 +5,30 @@ import styles from './ProductCard.module.css';
 import HeartIcon from '../icons/navigation/HeartIcon';
 import CartIcon from '../icons/navigation/CartIcon';
 import CheckIcon from '../icons/common/CheckIcon';
+import { useWishlist } from '../../context/WishlistContext';
 
 /* ============================================================
    TRADEVO — ProductCard
    The most reused component in the app. Appears on:
    Home page, Shop page, Wishlist page, Related Products.
    ============================================================ */
-function ProductCard({ productObj }) {
+function ProductCard({ productObj, showWishlistIcon }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [addedFeedback, setAddedFeedback] = useState(false);
 
   const { addToCart } = useCart();
+  const { setAddToWishlist } = useWishlist();
 
   function handleAddToCart(e) {
     e.preventDefault(); // don't navigate to product page
-    setAddedFeedback(true);
     addToCart(productObj, 1);
+    setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 1500);
   }
 
   function handleAddToWishlist(e) {
     e.preventDefault();
+    setAddToWishlist(productObj);
   }
 
   return (
@@ -76,12 +79,14 @@ function ProductCard({ productObj }) {
             )}
           </div>
 
-          <button
-            className={`${styles.card__wishlist}`}
-            onClick={handleAddToWishlist}
-          >
-            <HeartIcon size={17} />
-          </button>
+          {showWishlistIcon && (
+            <button
+              className={`${styles.card__wishlist}`}
+              onClick={handleAddToWishlist}
+            >
+              <HeartIcon size={17} />
+            </button>
+          )}
 
           {/* Out of stock overlay */}
           {!productObj.inStock && (
