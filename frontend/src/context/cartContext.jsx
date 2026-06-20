@@ -103,7 +103,6 @@ function reducer(state, action) {
       const selectedItems = action.payload;
       const selectedItemsKeys = selectedItems.map((itemObj) => itemObj.itemKey);
 
-      console.log(selectedItemsKeys);
 
       return {
         ...state,
