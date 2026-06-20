@@ -61,6 +61,7 @@
   gap: var(--space-3);
   align-items: center;
 }
+
 .add_all_btn {
   padding: var(--space-2) var(--space-5);
   background: var(--color-brand-primary);
@@ -72,9 +73,11 @@
   cursor: pointer;
   transition: background var(--transition-fast);
 }
+
 .add_all_btn:hover {
   background: var(--color-brand-primary-hover);
 }
+
 .clear_btn {
   padding: var(--space-2) var(--space-5);
   border: 1.5px solid var(--color-border-default);
@@ -86,6 +89,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
 }
+
 .clear_btn:hover {
   border-color: var(--color-error);
   color: var(--color-error);

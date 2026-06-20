@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import styles from './Wishlist.module.css';
 import HeartIcon from '../../ui/icons/navigation/HeartIcon';
-import { motion } from 'framer-motion';
 
 function Wishlist() {
   const itemCount = 1;
