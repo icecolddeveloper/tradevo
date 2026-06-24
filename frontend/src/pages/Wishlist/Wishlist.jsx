@@ -7,11 +7,9 @@ import styles from './Wishlist.module.css';
 import ListItem from '../../ui/ListItem/ListItem';
 
 function Wishlist() {
-  const { wishListItems, setRemoveFromWishlist } = useWishlist();
-  const [multipleSelect, setMultipleSelect] = useState(true);
+  const { wishListItems, setRemoveSelected, setClear } = useWishlist();
+  const [multipleSelect, setMultipleSelect] = useState(false);
   const [selected, setSelected] = useState([]);
-
-  console.log(selected);
 
   const itemCount = wishListItems?.length;
 
@@ -31,6 +29,15 @@ function Wishlist() {
     setMultipleSelect(false);
   }
 
+  function handleRemoveSelected() {
+    if (selected.length === 0) return;
+
+    setRemoveSelected(selected);
+  }
+
+  function handleClear() {
+    setClear()
+  }
 
   function handleItemSelect(itemObj) {
     setSelected((prev) => {
@@ -76,23 +83,37 @@ function Wishlist() {
           {multipleSelect ? (
             <>
               <span>{selected.length} selected</span>
-              <button onClick={handleSelectAll}>
+
+              <button
+                className={styles.select__options_btn}
+                onClick={handleSelectAll}
+              >
                 {wishListItems.length === selected.length
                   ? 'Deselect all'
                   : 'Select all'}
               </button>
-              <button>Remove</button>
-              <button onClick={handleCancel}>Cancel</button>
+
+              <button
+                className={styles.item__remove_btn}
+                onClick={handleRemoveSelected}
+              >
+                Remove
+              </button>
+
+              <button className={styles.cancel_btn} onClick={handleCancel}>
+                Cancel
+              </button>
             </>
           ) : (
             <>
-              <button onClick={handleMultipleSelect}>Select multiple</button>
-              <button>Clear all</button>
+              <button className={styles.select_multiple_btn} onClick={handleMultipleSelect}>Select multiple</button>
+
+              <button className={styles.clear_btn} onClick={handleClear}>Clear all</button>
             </>
           )}
         </div>
 
-        <motion.div className={styles.grid} layout>
+        <motion.div className={styles.items_container} layout>
           <AnimatePresence>
             {wishListItems.map((itemObj) => (
               <motion.div>

@@ -34,6 +34,25 @@ function wishlistReducer(state, action) {
       };
     }
 
+    case 'REMOVE_SELECTED': {
+      const arrOfselected = action.payload;
+      const idsOfSelected = arrOfselected.map((itemObj) => itemObj.id);
+
+      return {
+        ...state,
+        items: state.items.filter(
+          (itemObj) => !idsOfSelected.includes(itemObj.id),
+        ),
+      };
+    }
+
+    case 'CLEAR': {
+      return {
+        ...state,
+        items: [],
+      };
+    }
+
     default: {
       return state;
     }
@@ -49,8 +68,16 @@ function WishlistProvider({ children }) {
     dispatch({ type: 'ADD_ITEM', payload: productObj });
   }
 
-  function setRemoveFromWishlist(arrOfSelected) {
-    dispatch({ type: 'REMOVE_ITEM', payload: arrOfSelected });
+  function setRemoveFromWishlist(itemObj) {
+    dispatch({ type: 'REMOVE_ITEM', payload: itemObj });
+  }
+
+  function setRemoveSelected(selectedItems) {
+    dispatch({ type: 'REMOVE_SELECTED', payload: selectedItems });
+  }
+
+  function setClear() {
+    dispatch({ type: 'CLEAR' });
   }
 
   return (
@@ -59,6 +86,8 @@ function WishlistProvider({ children }) {
         wishListItems: state.items,
         setAddToWishlist,
         setRemoveFromWishlist,
+        setRemoveSelected,
+        setClear,
       }}
     >
       {children}
