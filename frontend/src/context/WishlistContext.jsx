@@ -24,6 +24,16 @@ function wishlistReducer(state, action) {
       }
     }
 
+    case 'REMOVE_ITEM': {
+      const selectedItemObj = action.payload;
+      return {
+        ...state,
+        items: state.items.filter(
+          (itemObj) => itemObj.id !== selectedItemObj.id,
+        ),
+      };
+    }
+
     default: {
       return state;
     }
@@ -35,15 +45,21 @@ const WishlistContext = createContext(null);
 function WishlistProvider({ children }) {
   const [state, dispatch] = useReducer(wishlistReducer, initialState);
 
-  console.log(state.items);
-
   function setAddToWishlist(productObj) {
     dispatch({ type: 'ADD_ITEM', payload: productObj });
   }
 
+  function setRemoveFromWishlist(arrOfSelected) {
+    dispatch({ type: 'REMOVE_ITEM', payload: arrOfSelected });
+  }
+
   return (
     <WishlistContext.Provider
-      value={{ wishListItems: state.items, setAddToWishlist }}
+      value={{
+        wishListItems: state.items,
+        setAddToWishlist,
+        setRemoveFromWishlist,
+      }}
     >
       {children}
     </WishlistContext.Provider>

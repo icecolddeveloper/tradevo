@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './ListItem.module.css';
 import DeleteIcon from '../../ui/icons/common/DeleteIcon';
 import SelectCheckIcon from '../../ui/icons/common/SelectCheckIcon';
+import { useWishlist } from '../../context/WishlistContext';
 
 function ListItem({
   itemObj,
@@ -14,12 +15,22 @@ function ListItem({
 }) {
   const { addToCart, handleDelete, handleQtyDecrease, handleQtyIncrease } =
     useCart();
-  const isSelected = selected?.some((item) => item.itemKey === itemObj.itemKey); // true or false
+  const { setRemoveFromWishlist } = useWishlist();
 
-  console.log(itemObj);
+  // const isSelected = selected?.some((item) => item.itemKey === itemObj.itemKey);
+
+  // itemKey for cart, id for wishlist (no itemKey in prodObj) — pick whichever exists
+  // ?? is the nullish coalescing operator — it picks item.itemKey if it exists, otherwise falls back to item.id.
+  const isSelected = selected?.some(
+    (item) => (item.itemKey ?? item.id) === (itemObj.itemKey ?? itemObj.id),
+  ); // true if this item is in the selected list
 
   function handleAddToCart() {
     addToCart(itemObj);
+  }
+
+  function handleRemove() {
+    setRemoveFromWishlist(itemObj);
   }
 
   return (
@@ -65,7 +76,9 @@ function ListItem({
                 Add to cart
               </button>
 
-              <button className={styles.btn_secondary}>Remove</button>
+              <button className={styles.btn_secondary} onClick={handleRemove}>
+                Remove
+              </button>
             </div>
           )}
         </div>

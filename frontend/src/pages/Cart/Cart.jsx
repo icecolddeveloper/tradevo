@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Cart.module.css';
 import Summary from './Summary';
-import Item from './Item';
 import ListItem from '../../ui/ListItem/ListItem';
 
 function Cart() {
@@ -11,8 +10,6 @@ function Cart() {
     useCart();
   const [multipleSelect, setMultipleSelect] = useState(false);
   const [selected, setSelected] = useState([]);
-
-  console.log(items, selected);
 
   function handleToggleSelectMode() {
     setMultipleSelect((prev) => !prev);

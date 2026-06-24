@@ -7,23 +7,41 @@ import styles from './Wishlist.module.css';
 import ListItem from '../../ui/ListItem/ListItem';
 
 function Wishlist() {
-  const { wishListItems } = useWishlist();
+  const { wishListItems, setRemoveFromWishlist } = useWishlist();
   const [multipleSelect, setMultipleSelect] = useState(true);
   const [selected, setSelected] = useState([]);
 
-  console.log(wishListItems);
-  const itemCount = wishListItems.length;
+  console.log(selected);
+
+  const itemCount = wishListItems?.length;
 
   function handleMultipleSelect() {
     setMultipleSelect((prev) => !prev);
   }
-  
+
+  function handleSelectAll() {
+    if (wishListItems.length > selected.length) {
+      setSelected(wishListItems);
+    } else {
+      setSelected([]);
+    }
+  }
+
   function handleCancel() {
     setMultipleSelect(false);
   }
 
-  function handleItemSelect() {
 
+  function handleItemSelect(itemObj) {
+    setSelected((prev) => {
+      const isExisting = prev.find((prodObj) => prodObj.id === itemObj.id);
+
+      if (isExisting) {
+        return prev.filter((prodObj) => prodObj.id !== itemObj.id); // remove if existing using filter
+      } else {
+        return [...prev, itemObj];
+      }
+    });
   }
 
   if (itemCount === 0) {
@@ -58,7 +76,11 @@ function Wishlist() {
           {multipleSelect ? (
             <>
               <span>{selected.length} selected</span>
-              <button>Select all</button>
+              <button onClick={handleSelectAll}>
+                {wishListItems.length === selected.length
+                  ? 'Deselect all'
+                  : 'Select all'}
+              </button>
               <button>Remove</button>
               <button onClick={handleCancel}>Cancel</button>
             </>
